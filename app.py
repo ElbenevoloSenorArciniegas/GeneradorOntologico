@@ -4,7 +4,7 @@ import AdminFuentes
 
 from markupsafe import escape
 
-from flask import Flask
+from flask import Flask,request
 
 app = Flask(__name__)
 
@@ -14,10 +14,12 @@ def hello_world():
 
 #Requiere Flask 1.1 para lo de los parámetros dentro de la ruta
 
-@app.route('/search/<keyWord>')
-def buscar(keyWord):
-    OntoGenerada = Recolector.buscar(keyWord)
-    return "Buscar( " + keyWord + ") -> " + Formateador.formatear(OntoGenerada)
+@app.route('/search')
+def buscar():
+    keyWords = request.args.get("keyWords", "")
+    keyWords = " ".join("%s*" % keyWord for keyWord in keyWords.split())
+    OntoGenerada = Recolector.buscar(keyWords)  #articles = default_world.search(label = FTS(mots_clefs))
+    return "Buscar( " + keyWords + ") -> " + Formateador.formatear(OntoGenerada)
 
 
 @app.route('/add/<path:IRI>')

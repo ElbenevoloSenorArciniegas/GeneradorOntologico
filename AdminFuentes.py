@@ -1,16 +1,11 @@
-import sys
-from owlready2 import World
+import sys, os
+from owlready2 import default_world
 
-PATH = "f:/Universidad/proyecto de grado/Proyecto/sources/"
-BASE_ONTO_PATH = PATH + "Base-onto.owl"
-
-
-# ¿Path o IRI de la base_onto?
+PATH = os.path.relpath('sources') +"/"
 
 def getWorld():
     try:
-        myWorld = World(filename=PATH + "quadstore.sqlite3")
-        return myWorld
+        default_world.set_backend(filename=PATH + "World.sqlite3")
     except IOError as e:
         return "IOError at Admin.getWorld: " + str(e)
     except:
@@ -24,58 +19,85 @@ y se necesita añadir o eliminar alguna fuente?
 ¿Cómo hago un re intentador para que espere un poquito mientras se desocupa el mundo?
 '''
 
+'''
+    Estoy seguro de cómo cerrar el mundo, pero ni idea de volver a abrirlo. Queda como objeto de pruebas para 
+    cuando esté usándose en simultáneo. No sé qué tan malo sea dejarlo abierto por siempre.
+'''
+
 
 def addFuenteLocal(file_name):
-    myWorld = getWorld()
     try:
-        # ¿Necesito trabajar con ontologías importadas o las cargo directamente en el world?
-        # tipo myWorld.get_ontology(ruta).load()    que de por sí ya se hace...
-        # baseOnto = myWorld.get_ontology("BASE_ONTO_PATH").imported_ontologies.append(myWorld.get_ontology(file_name).load())
-        myWorld.get_ontology(PATH + file_name).load()
-        myWorld.save()
-        #print(listarKeysWorld(myWorld))
+    # ¿Necesito trabajar con ontologías importadas o las cargo directamente en el world?
+    # tipo myWorld.get_ontology(ruta).load()    que de por sí ya se hace...
+    # baseOnto = myWorld.get_ontology("BASE_ONTO_PATH").imported_ontologies.append(myWorld.get_ontology(file_name).load())
+
+        getWorld()
+
+        default_world.get_ontology(PATH + file_name).load()
+        default_world.save()
+        #default_world.close()
         return "Success:"
+
     except IOError as e:
         return "IOError at Admin.addFuenteLocal: " + str(e)
     except:
         return "Failed at Admin.addFuenteLocal: " + str(sys.exc_info()[0])
+    '''
     finally:
-        myWorld.close()
-
+        try:
+            default_world.close()
+        except:
+            return "Error closing default_world"
+    '''
 
 def addFuenteExterna(IRI):
-    myWorld = getWorld()
     try:
+        getWorld()
         # Lo mismo de arriba
-        myWorld.get_ontology(IRI).load()
-        myWorld.save()
+        default_world.get_ontology(IRI).load()
+        default_world.save()
         return "Success"
     except IOError as e:
         return "IOError at Admin.addFuenteExterna: " + str(e)
     except:
         return "Failed at Admin.addFuenteExterna: " + str(sys.exc_info()[0])
-    finally:
-        myWorld.close()
+    '''
+        finally:
+            try:
+                default_world.close()
+            except:
+                return "Error closing default_world"
+    '''
 
 
 def removeFuente(IRI):
-    myWorld = getWorld()
     try:
+        getWorld()
         # remover
-        myWorld.get_ontology(IRI).destroy()
-        myWorld.save()
+        #print(myWorld.get_ontology(IRI))
+        default_world.get_ontology(IRI).destroy()
+        default_world.save()
         return "Success"
     except IOError as e:
         return "IOError at Admin.removeFuente: " + str(e)
     except:
         return "Failed at Admin.removeFuente: " + str(sys.exc_info()[0])
-    finally:
-        myWorld.close()
+    '''
+        finally:
+            try:
+                default_world.close()
+            except:
+                return "Error closing default_world"
+        '''
 
 
-def listarKeysWorld(myWorld=getWorld()):
-    keys = ""
-    for key in myWorld.ontologies.keys():
-        keys += key + "<br> "
-    myWorld.close()
-    return "Fuentes cargadas actualmente en el mundo:<br>" + keys
+def listarKeysWorld():
+    try:
+        getWorld()
+        keys = ""
+        for key in default_world.ontologies.keys():
+            keys += key + "<br> "
+        #default_world.close()
+        return "Fuentes cargadas actualmente en el mundo:<br>" + keys
+    except:
+        return "Failed at Admin.listarKeysWorld: " + str(sys.exc_info()[0])
