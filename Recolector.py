@@ -1,11 +1,18 @@
+from owlready2 import default_world
+
 import AdminFuentes
 import Generador
 
 def buscar(keyWords):
 
-    #articles = default_world.search(label = FTS(mots_clefs))
+    #default_world = AdminFuentes.getWorld()
 
-    myWorld = AdminFuentes.getWorld()
-    #Método de búsqueda
+    # Método de búsqueda
+    #articles = default_world.search(label=FTS(keyWords)) ¿Qué es FTS?
+    articles = default_world.search(label=keyWords)
+
+    for a in articles:
+        print(a)
+
     coincidencias = []
     return Generador.generarOnto(coincidencias)

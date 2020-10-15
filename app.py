@@ -16,10 +16,11 @@ def hello_world():
 
 @app.route('/search')
 def buscar():
-    keyWords = request.args.get("keyWords", "")
-    keyWords = " ".join("%s*" % keyWord for keyWord in keyWords.split())
-    OntoGenerada = Recolector.buscar(keyWords)  #articles = default_world.search(label = FTS(mots_clefs))
-    return "Buscar( " + keyWords + ") -> " + Formateador.formatear(OntoGenerada)
+    keyWords = request.args.get("keyWords", "").split("-")
+    #keyWords = " ".join("%s*" % keyWord for keyWord in keyWords.split())
+
+    OntoGenerada = Recolector.buscar(keyWords)
+    return "Buscar( ) -> " + Formateador.formatear(OntoGenerada)
 
 
 @app.route('/add/<path:IRI>')
