@@ -16,6 +16,7 @@ def buscar(keyWords):
     # has_toppings.append(onto.search(has_topping ="*" + word + "*",_case_sensitive=False))
     '''
 
+
     for word in keyWords:
         print(word)
 
@@ -23,6 +24,22 @@ def buscar(keyWords):
             print(onto_key)
             onto = default_world.get_ontology(onto_key)
 
-            coincidencias.append(onto.search(label="*"+word+"*",_case_sensitive=False))
+            labels = onto.search(label="*"+word+"*",_case_sensitive=False)
+            coincidencias.extend(labels)
+            for label in labels:
+
+    #kargs= {'k' : "has_"+word, 'v0' : "*"}
+    #things.extend(onto.search(has_Artista = "*")) Nada de esto ha servido para buscar cosas relaconadas
+                '''
+                Podría simplemente darle coincidencias.extend(onto.search(is_a=label))
+                Eso admitiría los duplicados y gastaría memoria.
+                Esta forma evita los duplicados y gasta procesamiento.
+                Toca hacer pruebas y ver qué es más crítico para elegir bien. 
+                '''
+                things = onto.search(is_a=label)
+                for thing in things:
+                    print(thing.label, coincidencias.count(thing))
+                    if coincidencias.count(thing) == 0:
+                        coincidencias.append(thing)
 
     return Generador.generarOnto(coincidencias)

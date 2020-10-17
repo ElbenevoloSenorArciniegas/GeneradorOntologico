@@ -4,9 +4,8 @@ def generarOnto(coincidencias):
     #algoritmo de mezclar
 
     text = ""
-    for set in coincidencias:
-        for label in set:
-            text += str(label) + "<br>"
+    for label in coincidencias:
+        text += str(label) + " : " + str(label.label) + "<br>"
 
     OntoGenerada = "OntoGenerada:<br>"+text
 
