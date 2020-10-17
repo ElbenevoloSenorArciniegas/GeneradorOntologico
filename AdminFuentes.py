@@ -2,15 +2,19 @@ import sys, os
 from owlready2 import default_world
 
 PATH = os.path.relpath('sources') +"/"
+default_world.set_backend(filename=PATH + "World.sqlite3")
 
 def getWorld():
     try:
-        default_world.set_backend(filename=PATH + "World.sqlite3")
         return default_world
     except IOError as e:
-        return "IOError at Admin.getWorld: " + str(e)
+        msg = "IOError at Admin.getWorld: " + str(e)
+        print(msg)
+        return msg
     except:
-        return "Failed at Admin.getWorld: " + str(sys.exc_info()[0])
+        msg = "Unespected error at Admin.getWorld: "
+        print(msg)
+        return msg
 
 
 '''

@@ -20,7 +20,8 @@ def buscar():
     #keyWords = " ".join("%s*" % keyWord for keyWord in keyWords.split())
 
     OntoGenerada = Recolector.buscar(keyWords)
-    return "Buscar( ) -> " + Formateador.formatear(OntoGenerada)
+
+    return "Buscar( "+ request.args.get("keyWords", "") +" ) <hr> " + Formateador.formatear(OntoGenerada)
 
 
 @app.route('/add/<path:IRI>')
