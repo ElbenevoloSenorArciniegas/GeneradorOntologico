@@ -5,16 +5,18 @@ from owlready2 import *
 PATH = AdminFuentes.PATH
 
 def generarOnto(mainSubject, coincidencias):
-    #algoritmo de mezclar
+    '''
+    :param mainSubject: El tema que se usará como id de la ontología
+    :param coincidencias: Arreglo de objetos seleccionados en la búsqueda, que poblarán la ontología.
+    :return: OntoGenerada:  Ontología generada y poblada a la que se le aplica el razonador.
+    '''
 
     text = ""
     for label in coincidencias:
         text += str(label) + " : " + str(label.label) + "\n"
     print(text)
 
-    OntoGenerada = get_ontology(PATH + "OntoGenerada.owl")
-    OntoGenerada.load()
-    OntoGenerada.base_iri = mainSubject + "#"
+    OntoGenerada = Ontology(world=default_world, base_iri=mainSubject + "#")
 
     with OntoGenerada:
         for class_orig in coincidencias:
@@ -41,4 +43,4 @@ def generarOnto(mainSubject, coincidencias):
 def razonar(OntoGenerada):
     with OntoGenerada:
         sync_reasoner_pellet(infer_property_values=True, infer_data_property_values=True)
-    return "Razonador dice: "+ str(OntoGenerada)
+    return OntoGenerada

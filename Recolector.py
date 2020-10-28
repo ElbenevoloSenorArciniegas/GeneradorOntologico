@@ -32,6 +32,9 @@ def buscar(keyWords):
                 Eso admitiría los duplicados y gastaría memoria.
                 Esta forma evita los duplicados y gasta procesamiento.
                 Toca hacer pruebas y ver qué es más crítico para elegir bien. 
+                
+                ¿Esto es necesario: OntoGenerada.get_children_of()? Para escoger las cosas como si fueran
+                sub-árboles donde cada raiz sea una coincidencia de keyword...
                 '''
                 things = onto.search(is_a=label)
                 #things.extend(onto.search(**{"*"+word+"*" : "*"},_case_sensitive=False)) no ha sido útil.
