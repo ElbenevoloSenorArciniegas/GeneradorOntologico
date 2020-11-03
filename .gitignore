@@ -1,3 +1,4 @@
 /sources
 /.idea
 /__pycache__
+*.bat
