@@ -4,6 +4,7 @@ import AdminFuentes
 
 from markupsafe import escape
 from flask import Flask, request, render_template
+import Generador
 
 app = Flask(__name__)
 
@@ -27,7 +28,8 @@ def buscar():
     else:
         result = Formateador.toRDF(OntoGenerada)
 
-    return "Buscar( "+ request.args.get("keyWords", "") +" ) <hr> " + result
+    Generador.cleanTempWorld(OntoGenerada)
+    return "Buscar( "+ request.args.get("keyWords", "") +" ) <hr> " + str(result)
 
 
 @app.route('/add/<path:IRI>')

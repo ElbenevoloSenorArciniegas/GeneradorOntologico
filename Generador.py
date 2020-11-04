@@ -3,6 +3,7 @@ import AdminFuentes
 from owlready2 import *
 
 PATH = AdminFuentes.PATH
+tempWorld = World()
 
 def generarOnto(mainSubject, coincidencias):
     '''
@@ -16,7 +17,8 @@ def generarOnto(mainSubject, coincidencias):
         text += str(label) + " : " + str(label.label) + "\n"
     print(text)
 
-    OntoGenerada = Ontology(world=default_world, base_iri=mainSubject + "#")
+
+    OntoGenerada = Ontology(world=tempWorld, base_iri=mainSubject + "#")
 
     with OntoGenerada:
         for class_orig in coincidencias:
@@ -44,3 +46,8 @@ def razonar(OntoGenerada):
     with OntoGenerada:
         sync_reasoner_pellet(infer_property_values=True, infer_data_property_values=True)
     return OntoGenerada
+
+def cleanTempWorld(OntoGenerada):
+
+    tempWorld.ontologies.clear()
+#    tempWorld.close()

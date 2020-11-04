@@ -25,6 +25,11 @@ def buscar(keyWords):
             onto = default_world.get_ontology(onto_key)
 
             labels = onto.search(label="*"+word+"*",_case_sensitive=False)
+
+            print("########################################################")
+            for label in labels:
+                print(str(label))
+            print("########################################################")
             coincidencias.extend(labels)
             for label in labels:
                 '''
