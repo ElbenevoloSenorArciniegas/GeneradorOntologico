@@ -16,7 +16,7 @@ def toRDF(OntoGenerada):
     RDF = BytesIO()
     OntoGenerada.save(RDF)
 
-    result = RDF.getvalue().decode('utf-8')
+    result = RDF.getvalue().decode('utf8')
 
     RDF.close()
     return result

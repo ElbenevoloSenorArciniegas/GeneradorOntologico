@@ -47,7 +47,6 @@ def razonar(OntoGenerada):
         sync_reasoner_pellet(infer_property_values=True, infer_data_property_values=True)
     return OntoGenerada
 
-def cleanTempWorld(OntoGenerada):
-
+def cleanTempWorld():
     tempWorld.ontologies.clear()
 #    tempWorld.close()

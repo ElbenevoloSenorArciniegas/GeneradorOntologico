@@ -28,8 +28,8 @@ def buscar():
     else:
         result = Formateador.toRDF(OntoGenerada)
 
-    Generador.cleanTempWorld(OntoGenerada)
-    return "Buscar( "+ request.args.get("keyWords", "") +" ) <hr> " + str(result)
+    Generador.cleanTempWorld()
+    return "Buscar( "+ request.args.get("keyWords", "") +" ) <hr> " + result
 
 
 @app.route('/add/<path:IRI>')
