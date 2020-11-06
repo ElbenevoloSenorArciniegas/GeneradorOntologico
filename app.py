@@ -21,6 +21,20 @@ def buscar():
 
     OntoGenerada = Recolector.buscar(keyWords)
 
+    # --------------------------------------------------------------------
+    #estoy mirando y probando cosas directamente, no es que esto vaya aquí
+    '''
+    world = Generador.tempWorld
+    for triple in OntoGenerada.get_triples():
+        print(triple)
+        try:
+            for x in triple:
+                print(world._unabbreviate(x))
+        except:
+            print(x)
+    '''
+    #--------------------------------------------------------------------
+
     if(formato == "json"):
         result = Formateador.toJSON_LD(OntoGenerada)
     elif (formato == "nt"):
@@ -47,6 +61,13 @@ def removeFuente(IRI):
 @app.route('/getFuentes')
 def getFuentes():
     return AdminFuentes.listarKeysWorld()
+
+##Borrar: sólo para usos de pruebas rápidas
+@app.route('/getStringSimilarity')
+def getStringSimilarity():
+    str1 = request.args.get("str1", "").lower()
+    str2 = request.args.get("str2", "").lower()
+    return str1 + " -> " +str2 +" : "+ str(Recolector.getStringSimilarity(str1, str2))
 
 
 import werkzeug.serving

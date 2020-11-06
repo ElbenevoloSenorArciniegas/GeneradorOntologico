@@ -43,8 +43,11 @@ def generarOnto(mainSubject, coincidencias):
     return razonar(OntoGenerada)
 
 def razonar(OntoGenerada):
-    with OntoGenerada:
-        sync_reasoner_pellet(infer_property_values=True, infer_data_property_values=True)
+    try:
+        with OntoGenerada:
+            sync_reasoner_pellet(infer_property_values=True, infer_data_property_values=True)
+    except:
+        print("Exception at Razonar in Generador")
     return OntoGenerada
 
 def cleanTempWorld():
