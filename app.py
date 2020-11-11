@@ -1,6 +1,7 @@
 import Recolector
 import Formateador
 import AdminFuentes
+import Comparador
 
 from markupsafe import escape
 from flask import Flask, request, render_template
@@ -67,7 +68,7 @@ def getFuentes():
 def getStringSimilarity():
     str1 = request.args.get("str1", "").lower()
     str2 = request.args.get("str2", "").lower()
-    return str1 + " -> " +str2 +" : "+ str(Recolector.getStringSimilarity(str1, str2))
+    return str1 + " -> " +str2 +" : "+ str(Comparador.getStringSimilarity(str1, str2))
 
 
 import werkzeug.serving

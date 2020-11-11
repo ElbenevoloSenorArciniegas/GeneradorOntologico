@@ -13,15 +13,16 @@ def generarOnto(mainSubject, coincidencias):
     '''
 
     text = ""
-    for label in coincidencias:
-        text += str(label) + " : " + str(label.label) + "\n"
-    print(text)
+    for coincidencia in coincidencias:
+        text += str(coincidencia["obj"]) + " : " + str(coincidencia["obj"].label) + "\n"
+    print(text,len(coincidencias))
 
 
     OntoGenerada = Ontology(world=tempWorld, base_iri=mainSubject + "#")
 
     with OntoGenerada:
-        for class_orig in coincidencias:
+        for coincidencia in coincidencias:
+            class_orig = coincidencia["obj"]
             class_dest = types.new_class(class_orig.name, (Thing,))
             class_dest.label = class_orig.label
             for parent in list(class_orig.is_a):
