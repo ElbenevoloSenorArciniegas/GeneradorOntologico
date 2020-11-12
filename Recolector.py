@@ -19,7 +19,8 @@ def buscar(keyWords):
                     "obj": label,
                     "properties": [],
                     "parents": [],
-                    "children": []
+                    "children": [],
+                    "similitudesSintacticas": []
                 }
                 coincidencias.append(obj)
             
