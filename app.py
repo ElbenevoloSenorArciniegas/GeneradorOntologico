@@ -22,20 +22,6 @@ def buscar():
 
     OntoGenerada = Recolector.buscar(keyWords)
 
-    # --------------------------------------------------------------------
-    #estoy mirando y probando cosas directamente, no es que esto vaya aquí
-    '''
-    world = Generador.tempWorld
-    for triple in OntoGenerada.get_triples():
-        print(triple)
-        try:
-            for x in triple:
-                print(world._unabbreviate(x))
-        except:
-            print(x)
-    '''
-    #--------------------------------------------------------------------
-
     if(formato == "json"):
         result = Formateador.toJSON_LD(OntoGenerada)
     elif (formato == "nt"):
@@ -69,6 +55,20 @@ def getStringSimilarity():
     str1 = request.args.get("str1", "").lower()
     str2 = request.args.get("str2", "").lower()
     return str1 + " -> " +str2 +" : "+ str(Comparador.getStringSimilarity(str1, str2))
+
+# --------------------------------------------------------------------
+    #estoy mirando y probando cosas directamente, no es que esto vaya aquí
+    '''
+    world = Generador.tempWorld
+    for triple in OntoGenerada.get_triples():
+        print(triple)
+        try:
+            for x in triple:
+                print(world._unabbreviate(x))
+        except:
+            print(x)
+    '''
+    #--------------------------------------------------------------------
 
 
 import werkzeug.serving

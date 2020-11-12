@@ -53,4 +53,6 @@ def razonar(OntoGenerada):
 
 def cleanTempWorld():
     tempWorld.ontologies.clear()
+    close_world(tempWorld)
+    close_world(AdminFuentes.default_world)
 #    tempWorld.close()
