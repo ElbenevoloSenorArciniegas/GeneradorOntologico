@@ -43,7 +43,7 @@ def compararPorTablasDeSimilitud(obj, obj2):
     arr1 = list(prepararArregloDeTerminos(obj))
     arr2 = list(prepararArregloDeTerminos(obj2))
     print(".-.-.-.-.-.-.-.-.--.-.-.-.-.-.-.-")
-    print(arr1, "\n\t #-vs-# \n",arr2)
+    print(arr1, "\n\t\t #-vs-#\n",arr2)
     print(".-.-.-.-.-.-.-.-.--.-.-.-.-.-.-.-")
 
     textTabla = ""
