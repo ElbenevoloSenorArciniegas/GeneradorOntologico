@@ -34,7 +34,9 @@ def limpiarCoincidencias(coincidencias, keywords):
             coincidencias[i]["similitudesSintacticas"][j] = valorDiferencia
             coincidencias[j]["similitudesSintacticas"][i] = valorDiferencia
     print("$$$$$$$$$$$$$$$$")
-    print(coincidencias[0])
+    for coincidencia in coincidencias:
+        #print(coincidencia["obj"].name,coincidencia["similitudesSintacticas"],"\n")
+        print(coincidencia["obj"].name, coincidencia["similitudesSintacticas"])
     print("$$$$$$$$$$$$$$$$")
     return coincidencias
 
@@ -42,9 +44,9 @@ def compararPorTablasDeSimilitud(obj, obj2):
 
     arr1 = list(prepararArregloDeTerminos(obj))
     arr2 = list(prepararArregloDeTerminos(obj2))
-    print(".-.-.-.-.-.-.-.-.--.-.-.-.-.-.-.-")
-    print(arr1, "\n\t\t #-vs-#\n",arr2)
-    print(".-.-.-.-.-.-.-.-.--.-.-.-.-.-.-.-")
+    #print(".-.-.-.-.-.-.-.-.--.-.-.-.-.-.-.-")
+    #print(arr1, "\n\t\t #-vs-#\n",arr2)
+    #print(".-.-.-.-.-.-.-.-.--.-.-.-.-.-.-.-")
 
     textTabla = ""
     tabla = [[0 for x in range(len(arr2))] for y in range(len(arr1))]
@@ -53,13 +55,13 @@ def compararPorTablasDeSimilitud(obj, obj2):
             tabla[i][j] = getStringSimilarity(arr1[i],arr2[j])
             textTabla += str(round(tabla[i][j],4))+"\t"
         textTabla += "\n"
-    print("Tabla:")
-    print(textTabla)
+    #print("Tabla:")
+    #print(textTabla)
 
     minimos = getMinimo(tabla,len(arr1),len(arr2))
     minimos.extend(getMinimo(tabla,len(arr1),len(arr2),True))
     value = sum(minimos)/len(minimos)
-    print("Value:"+ str(value)+"\n")
+    #print("Value:"+ str(value)+"\n")
 
     return value
 
@@ -70,7 +72,15 @@ def prepararArregloDeTerminos(obj):
     arr.extend(obj["children"])
     arr.extend(obj["properties"])
     for x in arr:
-        yield x.name
+        try:
+            if not x.name: pass
+            else: yield x.name
+        except:
+            pass
+            #Aquí están llegando Restricciones, pero no he identificado qué son, de dónde bienen y cómo puedo aprovecharlas.
+            #print("[Deleted object without name]",x)
+    for label in obj["labels"]:
+        yield label
 
 def getMinimo(tabla, x,y, invertirSentido= False):
     if invertirSentido:

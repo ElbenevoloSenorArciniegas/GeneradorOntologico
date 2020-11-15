@@ -1,7 +1,7 @@
 import AdminFuentes
 import Comparador
 import Generador
-from owlready2 import individual
+from owlready2 import individual, owl_restriction, owl_class
 
 
 def buscar(keyWords):
@@ -12,34 +12,39 @@ def buscar(keyWords):
 
     for word in keyWords:
 
-        labels = default_world.search(label="*" + word + "*", _case_sensitive=False)
-        for label in labels:
-            if not isinstance(label, individual.Thing):
-                obj = {
-                    "obj": label,
-                    "properties": [],
-                    "parents": [],
-                    "children": [],
-                    "similitudesSintacticas": []
-                }
-                coincidencias.append(obj)
-            
+        results = default_world.search(label="*" + word + "*", type= owl_class, _case_sensitive=False)
+        results.extend(default_world.search(name="*" + word + "*", type= owl_class, _case_sensitive=False))
+        #results.extend(default_world.search(class iri="*" + word + "*", type=owl_class, _case_sensitive=False))
+
+        for result in results:
+            #if isinstance(label, individual.Thing) :
+            obj = {
+                "obj": result,
+                "properties": [],
+                "parents": [],
+                "children": [],
+                "labels": [],
+                "similitudesSintacticas": []
+            }
+            coincidencias.append(obj)
+
         for onto_key in default_world.ontologies.keys():
             print(onto_key)
             onto = default_world.get_ontology(onto_key)
 
             print("########################################################")
             for obj in coincidencias:
-                print(obj)
                 try:
                     obj["properties"] = list(get_possible_class_properties(obj["obj"], default_world))
                     obj["parents"] = onto.get_parents_of(obj["obj"])
                     obj["children"] = onto.get_children_of(obj["obj"])
+                    obj["labels"] = obj["obj"].label
                 except:
                     pass
+                print(obj)
             print("########################################################")
 
-        print(coincidencias)
+        #print(coincidencias)
     coincidencias = Comparador.limpiarCoincidencias(coincidencias,keyWords)
 
     return Generador.generarOnto(keyWords[0],coincidencias)
@@ -54,6 +59,3 @@ def get_possible_class_properties(Class, world):
             for range in prop.range:
                 if issubclass(Class, range): yield prop
     except: pass
-        #print("Esta chingadera yo no la quiero", str(Class))
-
-#print(list(get_possible_class_properties(onto.t1)))
