@@ -3,10 +3,9 @@ import Comparador
 import Generador
 from owlready2 import individual, owl_restriction, owl_class
 
+default_world = AdminFuentes.getWorld()
 
 def buscar(keyWords):
-
-    default_world = AdminFuentes.getWorld()
 
     coincidencias = []
 
@@ -30,12 +29,8 @@ def buscar(keyWords):
                     obj["children"] = list(prepareObjects(onto.get_children_of(obj["obj"])))
                     obj["is_a"] = list(prepareObjects(list(obj["obj"].is_a)))
                     '''
-                    obj["parents"] = onto.get_parents_of(obj["obj"])
-                    obj["children"] = onto.get_children_of(obj["obj"])
-                    obj["is_a"] = list(obj["obj"].is_a)
-                    #obj["subClasses"]= list(get_subClasses(obj["obj"],default_world))
-                    obj["properties"] = list(get_possible_class_properties(obj["obj"], default_world))
-                    obj["labels"] = obj["obj"].label
+                    prepareAssociatedClasses(obj, onto, False)
+
                 except:
                     pass
                 #print(obj)
@@ -49,24 +44,60 @@ def buscar(keyWords):
 '''
 #####################################################################################
 '''
-def prepareObjects(arr):
-    for obj in arr:
-        yield prepareObject(obj)
+def prepareAssociatedClasses(obj, onto, goDeeper= True):
+    print(goDeeper,obj)
+    for parent in onto.get_parents_of(obj["obj"]):
+        if not goDeeper: #Debe hacerse en ese orden
+            o = prepareObject(parent)
+        else:
+            o = prepareDeeperObject(parent)
+            o = prepareAssociatedClasses(o, onto, False)
+        obj["parents"].append(o)
+    for child in onto.get_children_of(obj["obj"]):
+        if not goDeeper:
+            o = prepareObject(child)
+        else:
+            o = prepareDeeperObject(child)
+            o = prepareAssociatedClasses(o, onto, False)
+        obj["children"].append(o)
+    '''
+        for isA in list(obj["obj"].is_a):
+        if (goDeeper):
+            o = prepareDeeperObject(isA)
+            o = prepareAssociatedClasses(o, onto, False)
+        else:
+            o = prepareObject(isA)
+        obj["is_a"].append(o)
+         # obj["subClasses"]= list(get_subClasses(obj["obj"],default_world))
+         Estos dos diablillos (is_a y subClasses) están saturando todo y demoran demasiado el proceso.
+         Es supremamente ineficiente
+    '''
+
+    obj["properties"] = list(get_possible_class_properties(obj["obj"], default_world))
+    obj["labels"] = obj["obj"].label
+    return obj
 
 def prepareObject(result):
-    # if isinstance(label, individual.Thing) :
     obj = {
         "obj": result,
         "properties": [],
         "parents": [],
         "children": [],
         "labels": [],
-        "is_a": [],
-        "subClasses": [],
         "arregloDeTerminos": [],
         "similitudesSintacticas": [],
         "promedioSimilitudes": 0,
         "similitudAKeywords": []
+    }
+    return obj
+
+def prepareDeeperObject(result):
+    obj = {
+        "obj": result,
+        "properties": [],
+        "parents": [],
+        "children": [],
+        "labels": []
     }
     return obj
 

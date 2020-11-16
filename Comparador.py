@@ -43,13 +43,21 @@ def compararPorTablasDeSimilitud(obj1, obj2):
 
 def prepararArregloDeTerminos(obj):
     arr = []
+    otherClasses = []
     arr.append(obj["obj"])
     #Experimentalmente se ha visto que las clases suelen tener números consecutivos como nombres
-    #Las propiedades y etiquetas son más confiables para comparaciones léxicas (TODO: comentarios en un futuro)
-    arr.extend(obj["parents"])
-    arr.extend(obj["children"])
-    arr.extend(obj["is_a"])
+    #Las propiedades y etiquetas son más confiables para comparaciones léxicas (TODO: comentarios)
+    otherClasses.extend(obj["parents"])
+    otherClasses.extend(obj["children"])
+    #otherClasses.extend(obj["is_a"])
     # arr.extend(obj["subClasses"])
+    for otherClass in otherClasses:
+        arr.append(otherClass["obj"])
+        arr.extend(otherClass["parents"])
+        arr.extend(otherClass["children"])
+        #arr.extend(otherClass["is_a"])
+        obj["labels"].extend(otherClass["labels"])
+
     arr.extend(obj["properties"])
     for x in arr:
         try:
