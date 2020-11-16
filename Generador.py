@@ -41,8 +41,11 @@ def generarOnto(mainSubject, coincidencias):
         c += 1
     print(c)
 
-    return razonar(OntoGenerada)
-    #return OntoGenerada
+    try:
+        pass
+        #return razonar(OntoGenerada)
+    except:
+        return OntoGenerada
 
 def razonar(OntoGenerada):
     try:

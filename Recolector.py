@@ -11,44 +11,59 @@ def buscar(keyWords):
     coincidencias = []
 
     for word in keyWords:
-
-        results = default_world.search(label="*" + word + "*", type= owl_class, _case_sensitive=False)
-        results.extend(default_world.search(name="*" + word + "*", type= owl_class, _case_sensitive=False))
-        #results.extend(default_world.search(class iri="*" + word + "*", type=owl_class, _case_sensitive=False))
+#type= owl_class,
+        results = default_world.search(label="*" + word + "*",  _case_sensitive=False)
+        results.extend(default_world.search(name="*" + word + "*", _case_sensitive=False))
 
         for result in results:
-            #if isinstance(label, individual.Thing) :
-            obj = {
-                "obj": result,
-                "properties": [],
-                "parents": [],
-                "children": [],
-                "labels": [],
-                "similitudesSintacticas": []
-            }
-            coincidencias.append(obj)
+            coincidencias.append(prepareObject(result))
 
         for onto_key in default_world.ontologies.keys():
-            print(onto_key)
+            #print(onto_key)
             onto = default_world.get_ontology(onto_key)
 
-            print("########################################################")
+            #print("########################################################")
             for obj in coincidencias:
                 try:
+                    obj["parents"] = list(prepareObjects(onto.get_parents_of(obj["obj"])))
+                    obj["children"] = list(prepareObjects(onto.get_children_of(obj["obj"])))
+                    obj["is_a"] = list(prepareObjects(list(obj["obj"].is_a)))
+                    #obj["subClasses"]= list(get_subClasses(obj["obj"],default_world))
                     obj["properties"] = list(get_possible_class_properties(obj["obj"], default_world))
-                    obj["parents"] = onto.get_parents_of(obj["obj"])
-                    obj["children"] = onto.get_children_of(obj["obj"])
                     obj["labels"] = obj["obj"].label
                 except:
                     pass
-                print(obj)
-            print("########################################################")
+                #print(obj)
+            print(obj)
+            #print("########################################################")
 
         #print(coincidencias)
     coincidencias = Comparador.limpiarCoincidencias(coincidencias,keyWords)
 
     return Generador.generarOnto(keyWords[0],coincidencias)
+'''
+#####################################################################################
+'''
+def prepareObjects(arr):
+    for obj in arr:
+        yield prepareObject(obj)
 
+def prepareObject(result):
+    # if isinstance(label, individual.Thing) :
+    obj = {
+        "obj": result,
+        "properties": [],
+        "parents": [],
+        "children": [],
+        "labels": [],
+        "is_a": [],
+        "subClasses": [],
+        "arregloDeTerminos": [],
+        "similitudesSintacticas": [],
+        "promedioSimilitudes": [],
+        "similitudAKeywords": []
+    }
+    return obj
 
 def get_possible_class_properties(Class, world):
     try:
@@ -59,3 +74,11 @@ def get_possible_class_properties(Class, world):
             for range in prop.range:
                 if issubclass(Class, range): yield prop
     except: pass
+
+def get_subClasses(Class, world):
+    try:
+        for otherClass in world.classes():
+            if issubclass(otherClass, Class): yield otherClass
+    except:
+        pass
+
