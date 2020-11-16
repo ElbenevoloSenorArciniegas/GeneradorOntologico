@@ -12,6 +12,7 @@ def limpiarCoincidencias(coincidencias, keywords):
     for coincidencia in coincidencias:
         coincidencia["similitudesSintacticas"] = [0 for x in range(len(coincidencias))]
         coincidencia["arregloDeTerminos"] = list(prepararArregloDeTerminos(coincidencia))
+        compararConOtrosTerminosBusqueda(coincidencia, keywords)
 
     for i in range(len(coincidencias)-1):
         for j in range(i+1, len(coincidencias)):
@@ -21,26 +22,20 @@ def limpiarCoincidencias(coincidencias, keywords):
     print("$$$$$$$$$$$$$$$$")
     for coincidencia in coincidencias:
         coincidencia["promedioSimilitudes"] = sum(coincidencia["similitudesSintacticas"]) / len(coincidencia["similitudesSintacticas"])
-        compararConOtrosTerminos(coincidencia, keywords)
         print(coincidencia["obj"].name, coincidencia["similitudesSintacticas"],coincidencia["promedioSimilitudes"],coincidencia["similitudAKeywords"])
     print("$$$$$$$$$$$$$$$$")
     return coincidencias
 '''
 #####################################################################################
 '''
-def compararPorTablasDeSimilitud(obj, obj2):
+def compararPorTablasDeSimilitud(obj1, obj2):
 
-    arr1 = obj["arregloDeTerminos"]
-    arr2 = obj2["arregloDeTerminos"]
-    '''
-    print(".-.-.-.-.-.-.-.-.--.-.-.-.-.-.-.-")
-    print(arr1, "\n\t\t #-vs-#\n",arr2)
-    print(".-.-.-.-.-.-.-.-.--.-.-.-.-.-.-.-")
-    '''
-    tabla = crearTabla(arr1,arr2)
+    tabla = crearTabla(obj1,obj2)
+    len1= len(obj1["arregloDeTerminos"])
+    len2 = len(obj2["arregloDeTerminos"])
 
-    minimos = getMinimo(tabla,len(arr1),len(arr2))
-    minimos.extend(getMinimo(tabla,len(arr1),len(arr2),True))
+    minimos = getMinimo(tabla,len1,len2)
+    minimos.extend(getMinimo(tabla,len1,len2,True))
     value = sum(minimos)/len(minimos)
     #print("Value:"+ str(value)+"\n")
 
@@ -67,12 +62,14 @@ def prepararArregloDeTerminos(obj):
     for label in obj["labels"]:
         yield label
 
-def crearTabla(arr1,arr2):
+def crearTabla(obj1,obj2):
+    arr1 = obj1["arregloDeTerminos"]
+    arr2 = obj2["arregloDeTerminos"]
     #textTabla = ""
     tabla = [[0 for x in range(len(arr2))] for y in range(len(arr1))]
     for i in range(len(arr1)):
         for j in range(len(arr2)):
-            tabla[i][j] = getStringSimilarity(arr1[i], arr2[j])
+            tabla[i][j] = getStringSimilarity(arr1[i], arr2[j]) / (obj1["similitudAKeywords"] * obj2["similitudAKeywords"])
             #textTabla += str(round(tabla[i][j], 4)) + "\t"
         #textTabla += "\n"
     # print("Tabla:")
@@ -99,43 +96,22 @@ def getMinimo(tabla, x,y, invertirSentido= False):
 '''
 ######################################################################################3
 '''
-def compararConOtrosTerminos(obj, keywords):
+def compararConOtrosTerminosBusqueda(obj, keywords):
     arr = obj["arregloDeTerminos"]
-    count = 0
+    mayor = 1
     for x in arr:
         x = x.lower()
+        count = 0
         for word in keywords:
             word = word.lower()
             if x.find(word) > -1:
                 count = count + 1
-    obj["similitudAKeywords"].append(count / (len(keywords)*len(arr)))
-    '''
-    for word in keywords:
-        word = word.lower()
-        count = 0
-        for x in arr:
-            x = x.lower()
-            if x.find(word) > -1 :
-                count = count + 1
-        obj["similitudAKeywords"].append(count / len(arr))
+        #if(count == 0): count = 1 #Es un valor divisor en la fórmula siguiente. Es peligroso dejarlo en 0
+        #obj["similitudAKeywords"].append(count)
+        if count > mayor : mayor = count
+    obj["similitudAKeywords"] = mayor
+    #print(obj["obj"].name,obj["similitudAKeywords"])
 
-    for i in range(len(keywords)-1):
-        word = keywords[i].lower()
-        for j in range(i+1,len(keywords)):
-            word2 = keywords[j].lower()
-            count = 0
-            for x in arr:
-                x = x.lower()
-                if x.find(word) > -1 and x.find(word2) > -1:
-                    count = count + 10
-            obj["similitudAKeywords"].append(count/len(arr))
-    print("///////////////////////////////")
-    tabla = crearTabla(keywords, arr )
-    for i in range(len(keywords)):
-        obj["similitudAKeywords"].append(min(tabla[i]))
-    #print(obj,tabla)
-    #print("///////////////////////////////")
-    '''
     return obj
 '''
 ######################################################################################3

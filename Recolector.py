@@ -65,7 +65,7 @@ def prepareObject(result):
         "subClasses": [],
         "arregloDeTerminos": [],
         "similitudesSintacticas": [],
-        "promedioSimilitudes": [],
+        "promedioSimilitudes": 0,
         "similitudAKeywords": []
     }
     return obj
