@@ -11,7 +11,7 @@ def limpiarCoincidencias(coincidencias, keywords):
     #Llena e inicializa el arreglo con n ceros
     for coincidencia in coincidencias:
         coincidencia["similitudesSintacticas"] = [0 for x in range(len(coincidencias))]
-        coincidencia["arregloDeTerminos"] = prepararArregloDeTerminos(coincidencia)
+        coincidencia["arregloDeTerminos"] = list(prepararArregloDeTerminos(coincidencia))
 
     for i in range(len(coincidencias)-1):
         for j in range(i+1, len(coincidencias)):
@@ -32,7 +32,7 @@ def compararPorTablasDeSimilitud(obj, obj2):
 
     arr1 = obj["arregloDeTerminos"]
     arr2 = obj2["arregloDeTerminos"]
-    ''' 
+    '''
     print(".-.-.-.-.-.-.-.-.--.-.-.-.-.-.-.-")
     print(arr1, "\n\t\t #-vs-#\n",arr2)
     print(".-.-.-.-.-.-.-.-.--.-.-.-.-.-.-.-")
@@ -46,34 +46,26 @@ def compararPorTablasDeSimilitud(obj, obj2):
 
     return value
 
-def prepararArregloDeTerminos(obj, abbleToGoDeeper = True):
+def prepararArregloDeTerminos(obj):
     arr = []
-    rtn = []
-    #arr.append(obj["obj"])
+    arr.append(obj["obj"])
     #Experimentalmente se ha visto que las clases suelen tener números consecutivos como nombres
     #Las propiedades y etiquetas son más confiables para comparaciones léxicas (TODO: comentarios en un futuro)
     arr.extend(obj["parents"])
     arr.extend(obj["children"])
     arr.extend(obj["is_a"])
     # arr.extend(obj["subClasses"])
-    #print(obj, abbleToGoDeeper,"\n",arr)
-    if(abbleToGoDeeper):
-        for x in arr:
-            rtn.extend(list(prepararArregloDeTerminos(x, False)))
-    else:
-        arr.extend(obj["properties"])
-        for x in arr:
-            try:
-                if not x.name: pass
-                else: rtn.extend(x.name)
-            except:
-                pass
-                #Aquí están llegando Restricciones, pero no he identificado qué son, de dónde vienen y cómo puedo aprovecharlas.
-                #print("[Deleted object without name]",x)
+    arr.extend(obj["properties"])
+    for x in arr:
+        try:
+            if not x.name: pass
+            else: yield x.name
+        except:
+            pass
+            #Aquí están llegando Restricciones, pero no he identificado qué son, de dónde vienen y cómo puedo aprovecharlas.
+            #print("[Deleted object without name]",x)
     for label in obj["labels"]:
-        rtn.extend(label)
-    print(abbleToGoDeeper, rtn)
-    return rtn
+        yield label
 
 def crearTabla(arr1,arr2):
     #textTabla = ""

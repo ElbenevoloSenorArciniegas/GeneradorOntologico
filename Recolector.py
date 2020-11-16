@@ -11,9 +11,9 @@ def buscar(keyWords):
     coincidencias = []
 
     for word in keyWords:
-#type= owl_class,
-        results = default_world.search(label="*" + word + "*",  _case_sensitive=False)
-        results.extend(default_world.search(name="*" + word + "*", _case_sensitive=False))
+
+        results = default_world.search(label="*" + word + "*", type= owl_class, _case_sensitive=False)
+        results.extend(default_world.search(name="*" + word + "*", type= owl_class, _case_sensitive=False))
 
         for result in results:
             coincidencias.append(prepareObject(result))
@@ -25,16 +25,21 @@ def buscar(keyWords):
             #print("########################################################")
             for obj in coincidencias:
                 try:
+                    '''
                     obj["parents"] = list(prepareObjects(onto.get_parents_of(obj["obj"])))
                     obj["children"] = list(prepareObjects(onto.get_children_of(obj["obj"])))
                     obj["is_a"] = list(prepareObjects(list(obj["obj"].is_a)))
+                    '''
+                    obj["parents"] = onto.get_parents_of(obj["obj"])
+                    obj["children"] = onto.get_children_of(obj["obj"])
+                    obj["is_a"] = list(obj["obj"].is_a)
                     #obj["subClasses"]= list(get_subClasses(obj["obj"],default_world))
                     obj["properties"] = list(get_possible_class_properties(obj["obj"], default_world))
                     obj["labels"] = obj["obj"].label
                 except:
                     pass
                 #print(obj)
-            print(obj)
+            #print(obj)
             #print("########################################################")
 
         #print(coincidencias)

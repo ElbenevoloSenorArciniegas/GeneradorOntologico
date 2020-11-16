@@ -42,15 +42,16 @@ def generarOnto(mainSubject, coincidencias):
     print(c)
 
     try:
-        pass
-        #return razonar(OntoGenerada)
+        #pass
+        return razonar(OntoGenerada)
     except:
         return OntoGenerada
 
 def razonar(OntoGenerada):
     try:
         with OntoGenerada:
-            sync_reasoner_pellet(infer_property_values=True, infer_data_property_values=True)
+            #sync_reasoner_pellet(infer_property_values=True, infer_data_property_values=True)
+            sync_reasoner_hermit(infer_property_values=True)
     except:
         print("Exception at Razonar in Generador")
     return OntoGenerada
