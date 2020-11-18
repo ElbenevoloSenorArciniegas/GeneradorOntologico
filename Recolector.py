@@ -11,8 +11,12 @@ def buscar(keyWords):
 
     for word in keyWords:
 
-        results = default_world.search(label="*" + word + "*", type= owl_class, _case_sensitive=False)
-        results.extend(default_world.search(name="*" + word + "*", type= owl_class, _case_sensitive=False))
+        results = default_world.search(label="* " + word + "*", type= owl_class, _case_sensitive=False)
+        results.extend(default_world.search(label="*" + word + " *", type=owl_class, _case_sensitive=False))
+        '''
+        results.extend(default_world.search(name="* " + word + "*", type= owl_class, _case_sensitive=False))
+        results.extend(default_world.search(name="*" + word + " *", type=owl_class, _case_sensitive=False))
+        '''
 
         for result in results:
             coincidencias.append(prepareObject(result))
@@ -29,7 +33,7 @@ def buscar(keyWords):
                     obj["children"] = list(prepareObjects(onto.get_children_of(obj["obj"])))
                     obj["is_a"] = list(prepareObjects(list(obj["obj"].is_a)))
                     '''
-                    prepareAssociatedClasses(obj, onto, False)
+                    prepareAssociatedClasses(obj, onto)
 
                 except:
                     pass
@@ -45,20 +49,20 @@ def buscar(keyWords):
 #####################################################################################
 '''
 def prepareAssociatedClasses(obj, onto, goDeeper= True):
-    print(goDeeper,obj)
+    #print(goDeeper,obj)
     for parent in onto.get_parents_of(obj["obj"]):
-        if not goDeeper: #Debe hacerse en ese orden
-            o = prepareObject(parent)
-        else:
-            o = prepareDeeperObject(parent)
+        o = prepareDeeperObject(parent, onto)
+        '''
+        if not goDeeper:
             o = prepareAssociatedClasses(o, onto, False)
+        '''
         obj["parents"].append(o)
     for child in onto.get_children_of(obj["obj"]):
+        o = prepareDeeperObject(child)
+        '''
         if not goDeeper:
-            o = prepareObject(child)
-        else:
-            o = prepareDeeperObject(child)
             o = prepareAssociatedClasses(o, onto, False)
+        '''
         obj["children"].append(o)
     '''
         for isA in list(obj["obj"].is_a):
@@ -91,13 +95,13 @@ def prepareObject(result):
     }
     return obj
 
-def prepareDeeperObject(result):
+def prepareDeeperObject(result,onto):
     obj = {
         "obj": result,
-        "properties": [],
-        "parents": [],
-        "children": [],
-        "labels": []
+        "properties": list(get_possible_class_properties(result, default_world)),
+        "parents": onto.get_parents_of(result),
+        "children": onto.get_children_of(result),
+        "labels": result.label
     }
     return obj
 
