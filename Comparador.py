@@ -13,13 +13,13 @@ def limpiarCoincidencias(coincidencias, keywords):
         coincidencia["similitudesSintacticas"] = [0 for x in range(len(coincidencias))]
         coincidencia["arregloDeTerminos"] = prepararArregloDeTerminos(coincidencia)
         compararConOtrosTerminosBusqueda(coincidencia, keywords)
-        #print(coincidencia)
+        print(coincidencia)
     print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
 
     for i in range(len(coincidencias)-1):
         for j in range(i+1, len(coincidencias)):
             valorDiferencia = compararPorTablasDeSimilitud(coincidencias[i],coincidencias[j])
-            print(coincidencias[i]["labels"], " _vs_ ", coincidencias[j]["labels"], " = ", valorDiferencia)
+            #print(coincidencias[i]["labels"], " _vs_ ", coincidencias[j]["labels"], " = ", valorDiferencia)
             coincidencias[i]["similitudesSintacticas"][j] = valorDiferencia
             coincidencias[j]["similitudesSintacticas"][i] = valorDiferencia
     print("$$$$$$$$$$$$$$$$")
@@ -46,20 +46,14 @@ def compararPorTablasDeSimilitud(obj1, obj2):
 
 def prepararArregloDeTerminos(obj):
     arr = []
-    otherClasses = []
     otherLabels = []
     rtn = []
-    arr.append(obj["obj"])
+    #arr.append(obj["obj"])
     arr.extend(obj["properties"])
     #Experimentalmente se ha visto que las clases suelen tener números consecutivos como nombres
-    #Las propiedades y etiquetas son más confiables para comparaciones léxicas (TODO: comentarios)
+    #Las propiedades y etiquetas son más confiables para comparaciones léxicas (TODO: comparar comentarios)
 
-    otherClasses.extend(obj["parents"])
-    otherClasses.extend(obj["children"])
-    #otherClasses.extend(obj["is_a"])
-    # arr.extend(obj["subClasses"])
-
-    for otherClass in otherClasses:
+    for otherClass in obj["parents"] + obj["children"]:
         #arr.append(otherClass["obj"])
         arr.extend(otherClass["properties"])
         for p in otherClass["parents"]+otherClass["children"]:

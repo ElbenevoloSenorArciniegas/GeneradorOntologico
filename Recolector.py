@@ -1,7 +1,7 @@
 import AdminFuentes
 import Comparador
 import Generador
-from owlready2 import individual, owl_restriction, owl_class
+from owlready2 import owl_class
 
 default_world = AdminFuentes.getWorld()
 
@@ -12,7 +12,9 @@ def buscar(keyWords):
     for word in keyWords:
 
         results = default_world.search(label="* " + word + "*", type= owl_class, _case_sensitive=False)
-        results.extend(default_world.search(label="*" + word + " *", type=owl_class, _case_sensitive=False))
+        for result in default_world.search(label="*" + word + " *", type=owl_class, _case_sensitive=False):
+            if not result in results:
+                results.append(result)
         '''
         results.extend(default_world.search(name="* " + word + "*", type= owl_class, _case_sensitive=False))
         results.extend(default_world.search(name="*" + word + " *", type=owl_class, _case_sensitive=False))
@@ -25,21 +27,11 @@ def buscar(keyWords):
             #print(onto_key)
             onto = default_world.get_ontology(onto_key)
 
-            #print("########################################################")
             for obj in coincidencias:
                 try:
-                    '''
-                    obj["parents"] = list(prepareObjects(onto.get_parents_of(obj["obj"])))
-                    obj["children"] = list(prepareObjects(onto.get_children_of(obj["obj"])))
-                    obj["is_a"] = list(prepareObjects(list(obj["obj"].is_a)))
-                    '''
                     prepareAssociatedClasses(obj, onto)
-
                 except:
                     pass
-                #print(obj)
-            #print(obj)
-            #print("########################################################")
 
         #print(coincidencias)
     coincidencias = Comparador.limpiarCoincidencias(coincidencias,keyWords)
@@ -48,46 +40,13 @@ def buscar(keyWords):
 '''
 #####################################################################################
 '''
-def prepareAssociatedClasses(obj, onto, goDeeper= True):
-    #print(goDeeper,obj)
-    for parent in onto.get_parents_of(obj["obj"]):
-        o = prepareDeeperObject(parent, onto)
-        '''
-        if not goDeeper:
-            o = prepareAssociatedClasses(o, onto, False)
-        '''
-        obj["parents"].append(o)
-    for child in onto.get_children_of(obj["obj"]):
-        o = prepareDeeperObject(child)
-        '''
-        if not goDeeper:
-            o = prepareAssociatedClasses(o, onto, False)
-        '''
-        obj["children"].append(o)
-    '''
-        for isA in list(obj["obj"].is_a):
-        if (goDeeper):
-            o = prepareDeeperObject(isA)
-            o = prepareAssociatedClasses(o, onto, False)
-        else:
-            o = prepareObject(isA)
-        obj["is_a"].append(o)
-         # obj["subClasses"]= list(get_subClasses(obj["obj"],default_world))
-         Estos dos diablillos (is_a y subClasses) están saturando todo y demoran demasiado el proceso.
-         Es supremamente ineficiente
-    '''
-
-    obj["properties"] = list(get_possible_class_properties(obj["obj"], default_world))
-    obj["labels"] = obj["obj"].label
-    return obj
-
 def prepareObject(result):
     obj = {
         "obj": result,
-        "properties": [],
+        "properties": list(get_possible_class_properties(result, default_world)),
         "parents": [],
         "children": [],
-        "labels": [],
+        "labels": result.label,
         "arregloDeTerminos": [],
         "similitudesSintacticas": [],
         "promedioSimilitudes": 0,
@@ -95,14 +54,38 @@ def prepareObject(result):
     }
     return obj
 
+def prepareAssociatedClasses(obj, onto):
+    for parent in onto.get_parents_of(obj["obj"]):
+        o = prepareDeeperObject(parent, onto)
+        obj["parents"].append(o)
+    for child in onto.get_children_of(obj["obj"]):
+        o = prepareDeeperObject(child)
+        obj["children"].append(o)
+    '''
+        obj["obj"].is_a
+        # obj["subClasses"]= list(get_subClasses(obj["obj"],default_world))
+        Estos dos diablillos (is_a y subClasses) están saturando todo y demoran demasiado el proceso.
+        Es supremamente ineficiente
+    '''
+    return obj
+
 def prepareDeeperObject(result,onto):
-    obj = {
-        "obj": result,
-        "properties": list(get_possible_class_properties(result, default_world)),
-        "parents": onto.get_parents_of(result),
-        "children": onto.get_children_of(result),
-        "labels": result.label
-    }
+    if not result.name == "Thing":
+        obj = {
+            "obj": result,
+            "properties": list(get_possible_class_properties(result, default_world)),
+            "parents": onto.get_parents_of(result),
+            "children": onto.get_children_of(result),
+            "labels": result.label
+        }
+    else:
+        obj = {
+            "obj": result,
+            "properties": [],
+            "parents": [],
+            "children": [],
+            "labels": result.label
+        }
     return obj
 
 def get_possible_class_properties(Class, world):
