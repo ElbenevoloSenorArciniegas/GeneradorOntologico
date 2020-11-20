@@ -19,23 +19,21 @@ def buscar(keyWords):
         results.extend(default_world.search(name="* " + word + "*", type= owl_class, _case_sensitive=False))
         results.extend(default_world.search(name="*" + word + " *", type=owl_class, _case_sensitive=False))
         '''
-
         for result in results:
             coincidencias.append(prepareObject(result))
 
-        for onto_key in default_world.ontologies.keys():
-            #print(onto_key)
-            onto = default_world.get_ontology(onto_key)
+    for onto_key in default_world.ontologies.keys():
+        #print(onto_key)
+        onto = default_world.get_ontology(onto_key)
 
-            for obj in coincidencias:
-                try:
-                    prepareAssociatedClasses(obj, onto)
-                except:
-                    pass
-
+        for obj in coincidencias:
+            try:
+                tryFillObject(obj, onto)
+            except:
+                pass
         #print(coincidencias)
-    coincidencias = Comparador.limpiarCoincidencias(coincidencias,keyWords)
 
+    coincidencias = Comparador.limpiarCoincidencias(coincidencias,keyWords)
     return Generador.generarOnto(keyWords[0],coincidencias)
 '''
 #####################################################################################
@@ -43,7 +41,7 @@ def buscar(keyWords):
 def prepareObject(result):
     obj = {
         "obj": result,
-        "properties": list(get_possible_class_properties(result, default_world)),
+        "properties": [],
         "parents": [],
         "children": [],
         "labels": result.label,
@@ -52,51 +50,45 @@ def prepareObject(result):
         "promedioSimilitudes": 0,
         "similitudAKeywords": []
     }
+
     return obj
 
-def prepareAssociatedClasses(obj, onto):
-    for parent in onto.get_parents_of(obj["obj"]):
-        o = prepareDeeperObject(parent, onto)
-        obj["parents"].append(o)
-    for child in onto.get_children_of(obj["obj"]):
-        o = prepareDeeperObject(child)
-        obj["children"].append(o)
-    '''
-        obj["obj"].is_a
-        # obj["subClasses"]= list(get_subClasses(obj["obj"],default_world))
-        Estos dos diablillos (is_a y subClasses) están saturando todo y demoran demasiado el proceso.
-        Es supremamente ineficiente
-    '''
-    return obj
+def tryFillObject(obj, onto):
+    associatedClasses = []
+    obj["parents"] = onto.get_parents_of(obj["obj"])
+    obj["children"] = onto.get_children_of(obj["obj"])
+    associatedClasses.extend(obj["parents"])
+    associatedClasses.extend(obj["children"])
+    deeperClasses = []
+    for asociated in associatedClasses:
+        if not asociated.name == "Thing":
+            for deeper in onto.get_parents_of(asociated) + onto.get_children_of(asociated):
+                if not deeper in associatedClasses and not deeper in deeperClasses:
+                    deeperClasses.append(deeper)
+    associatedClasses.extend(deeperClasses)
+    for property in getPropertiesNames(associatedClasses):
+        if not property in obj["arregloDeTerminos"]:
+            obj["arregloDeTerminos"].append(property)
+    for label in obj["obj"].label:
+        if label not in obj["arregloDeTerminos"]:
+            obj["arregloDeTerminos"].append(label)
+    for asociated in associatedClasses:
+        for label in asociated.label:
+            if label not in obj["arregloDeTerminos"]:
+                obj["arregloDeTerminos"].append(label)
 
-def prepareDeeperObject(result,onto):
-    if not result.name == "Thing":
-        obj = {
-            "obj": result,
-            "properties": list(get_possible_class_properties(result, default_world)),
-            "parents": onto.get_parents_of(result),
-            "children": onto.get_children_of(result),
-            "labels": result.label
-        }
-    else:
-        obj = {
-            "obj": result,
-            "properties": [],
-            "parents": [],
-            "children": [],
-            "labels": result.label
-        }
-    return obj
-
-def get_possible_class_properties(Class, world):
-    try:
-        for prop in world.properties():
-            #print(prop, prop.domain, prop.range,Class)
-            for domain in prop.domain:
-                if issubclass(Class, domain): yield prop
-            for range in prop.range:
-                if issubclass(Class, range): yield prop
-    except: pass
+def getPropertiesNames(objetos):
+    rtn = []
+    for prop in default_world.properties():
+        #print(prop, prop.domain, prop.range,Class "obj" )
+        for obj in objetos:
+            try:
+                for domain in prop.domain:
+                    if issubclass(obj, domain) and prop.name not in rtn: rtn.append(prop.name)
+                for range in prop.range:
+                    if issubclass(obj, range) and prop.name not in rtn: rtn.append(prop.name)
+            except: pass
+    return rtn
 
 def get_subClasses(Class, world):
     try:
@@ -105,3 +97,23 @@ def get_subClasses(Class, world):
     except:
         pass
 
+'''
+######################################################################################3
+'''
+def compararConOtrosTerminosBusqueda(obj, keywords):
+    arr = obj["arregloDeTerminos"]
+    mayor = 1
+    for x in arr:
+        x = x.lower()
+        count = 0
+        for word in keywords:
+            word = word.lower()
+            if x.find(word) > -1:
+                count = count + 1
+        #if(count == 0): count = 1 #Es un valor divisor en la fórmula siguiente. Es peligroso dejarlo en 0
+        #obj["similitudAKeywords"].append(count)
+        if count > mayor : mayor = count
+    obj["similitudAKeywords"] = mayor
+    #print(obj["obj"].name,obj["similitudAKeywords"])
+
+    return obj

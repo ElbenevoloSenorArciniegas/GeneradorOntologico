@@ -11,7 +11,6 @@ def limpiarCoincidencias(coincidencias, keywords):
     #Llena e inicializa el arreglo con n ceros
     for coincidencia in coincidencias:
         coincidencia["similitudesSintacticas"] = [0 for x in range(len(coincidencias))]
-        coincidencia["arregloDeTerminos"] = prepararArregloDeTerminos(coincidencia)
         compararConOtrosTerminosBusqueda(coincidencia, keywords)
         print(coincidencia)
     print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
@@ -19,7 +18,7 @@ def limpiarCoincidencias(coincidencias, keywords):
     for i in range(len(coincidencias)-1):
         for j in range(i+1, len(coincidencias)):
             valorDiferencia = compararPorTablasDeSimilitud(coincidencias[i],coincidencias[j])
-            #print(coincidencias[i]["labels"], " _vs_ ", coincidencias[j]["labels"], " = ", valorDiferencia)
+            print(coincidencias[i]["labels"], " _vs_ ", coincidencias[j]["labels"], " = ", valorDiferencia)
             coincidencias[i]["similitudesSintacticas"][j] = valorDiferencia
             coincidencias[j]["similitudesSintacticas"][i] = valorDiferencia
     print("$$$$$$$$$$$$$$$$")
@@ -43,42 +42,6 @@ def compararPorTablasDeSimilitud(obj1, obj2):
     #print("Value:"+ str(value)+"\n")
 
     return value
-
-def prepararArregloDeTerminos(obj):
-    arr = []
-    otherLabels = []
-    rtn = []
-    #arr.append(obj["obj"])
-    arr.extend(obj["properties"])
-    #Experimentalmente se ha visto que las clases suelen tener números consecutivos como nombres
-    #Las propiedades y etiquetas son más confiables para comparaciones léxicas (TODO: comparar comentarios)
-
-    for otherClass in obj["parents"] + obj["children"]:
-        #arr.append(otherClass["obj"])
-        arr.extend(otherClass["properties"])
-        for p in otherClass["parents"]+otherClass["children"]:
-            try:
-                if not p.label: pass
-                else: otherLabels.extend(p.label)
-            except: pass
-        otherLabels.extend(otherClass["labels"])
-
-    for x in arr:
-        try:
-            if not x.name: pass
-            else:
-                #yield x.name
-                if not x.name in rtn: rtn.append(x.name)
-        except:
-            pass
-            #Aquí están llegando Restricciones, pero no he identificado qué son, de dónde vienen y cómo puedo aprovecharlas.
-            #print("[Deleted object without name]",x)
-
-    for label in obj["labels"]+otherLabels:
-        #yield label
-        if not label in rtn: rtn.append(label)
-
-    return rtn
 
 def crearTabla(obj1,obj2):
     arr1 = obj1["arregloDeTerminos"]
@@ -116,18 +79,18 @@ def getMinimo(tabla, x,y, invertirSentido= False):
 def compararConOtrosTerminosBusqueda(obj, keywords):
     arr = obj["arregloDeTerminos"]
     mayor = 1
+    countTotal = 1
     for x in arr:
         x = x.lower()
-        count = 0
+        countWords = 0
         for word in keywords:
             word = word.lower()
             if x.find(word) > -1:
-                count = count + 1
-        #if(count == 0): count = 1 #Es un valor divisor en la fórmula siguiente. Es peligroso dejarlo en 0
-        #obj["similitudAKeywords"].append(count)
-        if count > mayor : mayor = count
-    obj["similitudAKeywords"] = mayor
-    #print(obj["obj"].name,obj["similitudAKeywords"])
+                countWords = countWords + 1
+                countTotal = countTotal + 1
+        if countWords > mayor : mayor = countWords
+    if(countTotal == 0): count = 1 #Es un valor divisor en la fórmula siguiente. Es peligroso dejarlo en 0
+    obj["similitudAKeywords"] =  mayor * (1 + countTotal/(len(arr)*len(keywords)))
 
     return obj
 '''
@@ -139,7 +102,8 @@ def getStringSimilarity(str1, str2):
     Jian, N., Hu, W., Cheng, G., & Qu, Y. (2005, October). Falcon-ao: Aligning ontologies with falcon. In Proceedings of K-CAP Workshop on Integrating Ontologies (pp. 85-91).
     '''
     ed = levenshtein(str1.lower(),str2.lower())
-    return 1/2.71828 * ed/ abs(len(str1) + len(str2) - ed)
+    #return 1/2.71828 * ed/ abs(len(str1) + len(str2) - ed)
+    return ed / abs(len(str1) + len(str2) - ed)
 
 def levenshtein(str1, str2):
     '''
