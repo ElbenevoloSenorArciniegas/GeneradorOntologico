@@ -19,8 +19,10 @@ def hello_world():
 def buscar():
     keyWords = request.args.get("keyWords", "").split("-")
     formato = request.args.get("format", "").lower()
+    umbral = request.args.get("umbral", "")
+    if umbral == "": umbral = 70
 
-    OntoGenerada = Recolector.buscar(keyWords)
+    OntoGenerada = Recolector.buscar(keyWords, umbral)
 
     if(formato == "json"):
         result = Formateador.toJSON_LD(OntoGenerada)

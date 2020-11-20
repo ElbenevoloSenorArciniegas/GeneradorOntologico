@@ -5,7 +5,7 @@ from owlready2 import owl_class
 
 default_world = AdminFuentes.getWorld()
 
-def buscar(keyWords):
+def buscar(keyWords, umbral):
 
     coincidencias = []
 
@@ -33,7 +33,7 @@ def buscar(keyWords):
                 pass
         #print(coincidencias)
 
-    coincidencias = Comparador.limpiarCoincidencias(coincidencias,keyWords)
+    coincidencias = Comparador.limpiarCoincidencias(coincidencias,keyWords, umbral)
     return Generador.generarOnto(keyWords[0],coincidencias)
 '''
 #####################################################################################
@@ -59,6 +59,7 @@ def tryFillObject(obj, onto):
     obj["children"] = onto.get_children_of(obj["obj"])
     associatedClasses.extend(obj["parents"])
     associatedClasses.extend(obj["children"])
+    '''
     deeperClasses = []
     for asociated in associatedClasses:
         if not asociated.name == "Thing":
@@ -66,6 +67,7 @@ def tryFillObject(obj, onto):
                 if not deeper in associatedClasses and not deeper in deeperClasses:
                     deeperClasses.append(deeper)
     associatedClasses.extend(deeperClasses)
+    '''
     for property in getPropertiesNames(associatedClasses):
         if not property in obj["arregloDeTerminos"]:
             obj["arregloDeTerminos"].append(property)

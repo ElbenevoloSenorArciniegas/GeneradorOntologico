@@ -1,7 +1,7 @@
 import sys
 
 
-def limpiarCoincidencias(coincidencias, keywords):
+def limpiarCoincidencias(coincidencias, keywords, umbral):
     '''
 
     :param coincidencias:
@@ -20,13 +20,25 @@ def limpiarCoincidencias(coincidencias, keywords):
             valorDiferencia = compararPorTablasDeSimilitud(coincidencias[i],coincidencias[j])
             print(coincidencias[i]["labels"], " _vs_ ", coincidencias[j]["labels"], " = ", valorDiferencia)
             coincidencias[i]["similitudesSintacticas"][j] = valorDiferencia
+            coincidencias[i]["promedioSimilitudes"] += valorDiferencia
             coincidencias[j]["similitudesSintacticas"][i] = valorDiferencia
+            coincidencias[j]["promedioSimilitudes"] += valorDiferencia
+
+    mayor = 0
+    menor = 100
     print("$$$$$$$$$$$$$$$$")
     for coincidencia in coincidencias:
-        coincidencia["promedioSimilitudes"] = sum(coincidencia["similitudesSintacticas"]) / len(coincidencia["similitudesSintacticas"])
+        coincidencia["promedioSimilitudes"] = coincidencia["promedioSimilitudes"] / len(coincidencias)
+        if coincidencia["promedioSimilitudes"] < menor : menor = coincidencia["promedioSimilitudes"]
+        if coincidencia["promedioSimilitudes"] > mayor: mayor = coincidencia["promedioSimilitudes"]
         print(coincidencia["obj"].name, coincidencia["similitudesSintacticas"],coincidencia["promedioSimilitudes"],coincidencia["similitudAKeywords"])
     print("$$$$$$$$$$$$$$$$")
-    return coincidencias
+    
+    rtn = []
+    for coincidencia in coincidencias:
+        if coincidencia["promedioSimilitudes"] <= mayor - (mayor-menor)*umbral/100:
+            rtn.append(coincidencia)
+    return rtn
 '''
 #####################################################################################
 '''
