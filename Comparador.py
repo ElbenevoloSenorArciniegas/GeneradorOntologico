@@ -12,6 +12,7 @@ def limpiarCoincidencias(coincidencias, keywords, umbral):
     for coincidencia in coincidencias:
         coincidencia["similitudesSintacticas"] = [0 for x in range(len(coincidencias))]
         compararConOtrosTerminosBusqueda(coincidencia, keywords)
+        #print(coincidencia["obj"].name,":",coincidencia["obj"].label)
         print(coincidencia)
     print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
 

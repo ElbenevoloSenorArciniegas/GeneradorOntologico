@@ -2,6 +2,7 @@ import AdminFuentes
 import Comparador
 import Generador
 from owlready2 import owl_class
+import re
 
 default_world = AdminFuentes.getWorld()
 
@@ -11,10 +12,21 @@ def buscar(keyWords, umbral):
 
     for word in keyWords:
 
-        results = default_world.search(label="* " + word + "*", type= owl_class, _case_sensitive=False)
-        for result in default_world.search(label="*" + word + " *", type=owl_class, _case_sensitive=False):
-            if not result in results:
-                results.append(result)
+        results = []
+
+        arr = []
+        arr.extend(default_world.search(label="*" + word + "*", type= owl_class, _case_sensitive=False))
+
+        regex = r"^("+word+")\W|\W("+word+")\W|\W("+word+")$"
+
+        for result in arr:
+
+            test_str = result.label[0].lower()
+            matches = list(re.finditer(regex, test_str, re.MULTILINE))
+            if len(list(matches)) > 0:
+                if not result in results:
+                    results.append(result)
+                    #print(test_str, len(list(matches)))
         '''
         results.extend(default_world.search(name="* " + word + "*", type= owl_class, _case_sensitive=False))
         results.extend(default_world.search(name="*" + word + " *", type=owl_class, _case_sensitive=False))
@@ -55,8 +67,8 @@ def prepareObject(result):
 
 def tryFillObject(obj, onto):
     associatedClasses = []
-    obj["parents"] = onto.get_parents_of(obj["obj"])
-    obj["children"] = onto.get_children_of(obj["obj"])
+    obj["parents"].extend(onto.get_parents_of(obj["obj"]))
+    obj["children"].extend(onto.get_children_of(obj["obj"]))
     associatedClasses.extend(obj["parents"])
     associatedClasses.extend(obj["children"])
     '''
@@ -86,9 +98,11 @@ def getPropertiesNames(objetos):
         for obj in objetos:
             try:
                 for domain in prop.domain:
-                    if issubclass(obj, domain) and prop.name not in rtn: rtn.append(prop.name)
+                    if issubclass(obj, domain) and prop.name not in rtn: 
+                        rtn.append(prop.name)
                 for range in prop.range:
-                    if issubclass(obj, range) and prop.name not in rtn: rtn.append(prop.name)
+                    if issubclass(obj, range) and prop.name not in rtn: 
+                        rtn.append(prop.name)
             except: pass
     return rtn
 
@@ -98,24 +112,3 @@ def get_subClasses(Class, world):
             if issubclass(otherClass, Class): yield otherClass
     except:
         pass
-
-'''
-######################################################################################3
-'''
-def compararConOtrosTerminosBusqueda(obj, keywords):
-    arr = obj["arregloDeTerminos"]
-    mayor = 1
-    for x in arr:
-        x = x.lower()
-        count = 0
-        for word in keywords:
-            word = word.lower()
-            if x.find(word) > -1:
-                count = count + 1
-        #if(count == 0): count = 1 #Es un valor divisor en la fórmula siguiente. Es peligroso dejarlo en 0
-        #obj["similitudAKeywords"].append(count)
-        if count > mayor : mayor = count
-    obj["similitudAKeywords"] = mayor
-    #print(obj["obj"].name,obj["similitudAKeywords"])
-
-    return obj
