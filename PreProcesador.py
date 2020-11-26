@@ -11,15 +11,19 @@ def tokenizarWebPage():
 	text = soup.get_text(strip=True)
 	tokens = [t for t in text.split()]
 
+def tokenizar(label):
+	from nltk.tokenize import word_tokenize
+	return word_tokenize(label)  #ejemplo para oraciones: sent_tokenize(mytext,"french") 
+
 def limpiarStopWords(tokens):
 	#Limpieza de stopWords:
 	from nltk.corpus import stopwords
+	import string
 	clean_tokens = tokens[:]
 
-	sw = stopwords.words('english')
-
+	all_stops = set(stopwords.words('english')) | set(string.punctuation)
 	for token in tokens:
-	    if token in sw:
+	    if token in all_stops:
 	        clean_tokens.remove(token)
 	return clean_tokens
 
@@ -41,10 +45,10 @@ def obtenerSinonimos(keyWords):
 	for word in keyWords:
 		for syn in wordnet.synsets(word):
 			for lemma in syn.lemmas(): #ojo con los idiomas, eso va aquí 'spa'    ~/nltk_data/corpora/omw$ ls
-				sinonimo = DerivacionRegresiva(lemma.name())
+				sinonimo = DerivacionRegresiva([lemma.name()])[0]
 				if not sinonimo in synonyms + keyWords:
 					synonyms.append(sinonimo)
-	return keyWords+synonyms
+	return synonyms
 
 def lematizar(token):
 	#Palabras lematizadoras
@@ -53,14 +57,24 @@ def lematizar(token):
 	#lemmatizer.lemmatize('playing', pos="v")) Verbo, sustaNtivo, Adjetivo, adveRbio
 	return lemmatizer.lemmatize(token, pos="n")
 
-def DerivacionRegresiva(token):
+def DerivacionRegresiva(tokens):
+	rtn = []
 	#Derivación regresiva
 	from nltk.stem import SnowballStemmer
 	#Ojo con los idiomas: 'danish', 'dutch', 'english', 'finnish', 'french', 'german', 'hungarian', 'italian', 'norwegian', 'porter', 'portuguese', 'romanian', 'russian', 'spanish', 'swedish'
 	#print(SnowballStemmer.languages)
 	stemmer = SnowballStemmer('english')
-	return stemmer.stem(token)
+	for token in tokens:
+		rtn.append(stemmer.stem(token))
+	return rtn
 
-
-keyWords = obtenerSinonimos(["test"])
-print(keyWords)
+def limpiarLabels(labels):
+	rtn = []
+	for label in labels:
+		tokens = tokenizar(label.lower())
+		tokens = limpiarStopWords(tokens)
+		tokens = DerivacionRegresiva(tokens)
+		for token in tokens:
+			if not token in rtn:
+				rtn.append(token)
+	return rtn

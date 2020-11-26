@@ -1,6 +1,7 @@
 import AdminFuentes
 import Comparador
 import Generador
+import PreProcesador
 from owlready2 import owl_class
 import re
 
@@ -9,25 +10,15 @@ default_world = AdminFuentes.getWorld()
 def buscar(keyWords, umbral):
 
     coincidencias = []
+    results = []
 
+    sinonimos = PreProcesador.obtenerSinonimos(keyWords)
     for word in keyWords:
 
-        results = []
-
-        arr = []
-        arr.extend(default_world.search(label="*" + word + "*", type= owl_class, _case_sensitive=False))
-
-        regex = r"^("+word+")\W|\W("+word+")\W|\W("+word+")$"
-
+        arr = default_world.search(label="*" + word + "*", type= owl_class, _case_sensitive=False)
         for result in arr:
-
-            test_str = result.label[0].lower()
-            matches = list(re.finditer(regex, test_str, re.MULTILINE))
-            #print(result ,test_str, len(matches))
-            if len(matches) > 0:
-                if not result in results:
-                    results.append(result)
-                    
+            if not result in results:
+                results.append(result)
         for result in results:
             coincidencias.append(prepareObject(result))
 
@@ -43,7 +34,9 @@ def buscar(keyWords, umbral):
         #print(coincidencias)
     for word in keyWords:
         word = word.lower()
-    coincidencias = Comparador.limpiarCoincidencias(coincidencias,keyWords, umbral)
+    for word in sinonimos:
+        word = word.lower()
+    coincidencias = Comparador.limpiarCoincidencias(coincidencias,keyWords, sinonimos, umbral)
     return Generador.generarOnto(keyWords[0],coincidencias)
 '''
 #####################################################################################
@@ -51,56 +44,62 @@ def buscar(keyWords, umbral):
 def prepareObject(result):
     obj = {
         "obj": result,
-        "properties": [],
-        "parents": [],
-        "children": [],
         "labels": result.label,
         "arregloDeTerminos": [],
         "similitudesSintacticas": [],
         "promedioSimilitudes": 0,
         "similitudAKeywords": []
     }
-
     return obj
 
 def tryFillObject(obj, onto):
-    associatedClasses = []
-    obj["parents"].extend(onto.get_parents_of(obj["obj"]))
-    obj["children"].extend(onto.get_children_of(obj["obj"]))
-    associatedClasses.extend(obj["parents"])
-    associatedClasses.extend(obj["children"])
-    '''
-    deeperClasses = []
-    for asociated in associatedClasses:
-        if not asociated.name == "Thing":
-            for deeper in onto.get_parents_of(asociated) + onto.get_children_of(asociated):
-                if not deeper in associatedClasses and not deeper in deeperClasses:
-                    deeperClasses.append(deeper)
-    associatedClasses.extend(deeperClasses)
-    '''
-    for property in getPropertiesNames(associatedClasses):
-        if not property.lower() in obj["arregloDeTerminos"]:
-            obj["arregloDeTerminos"].append(property.lower())
-    for label in obj["obj"].label:
-        if label.lower() not in obj["arregloDeTerminos"]:
-            obj["arregloDeTerminos"].append(label.lower())
-    for asociated in associatedClasses:
-        for label in asociated.label:
-            if label.lower() not in obj["arregloDeTerminos"]:
-                obj["arregloDeTerminos"].append(label.lower())
+    if obj["arregloDeTerminos"] == []:
+        associatedClasses = [obj["obj"]]
+        associatedClasses.extend(onto.get_parents_of(obj["obj"]))
+        associatedClasses.extend(onto.get_children_of(obj["obj"]))
+        '''
+        deeperClasses = []
+        for asociated in associatedClasses:
+            if not asociated.name == "Thing":
+                for deeper in onto.get_parents_of(asociated) + onto.get_children_of(asociated):
+                    if not deeper in associatedClasses and not deeper in deeperClasses:
+                        deeperClasses.append(deeper)
+        associatedClasses.extend(deeperClasses)
+        '''
+        labels = []
 
-def getPropertiesNames(objetos):
+        for property in getProperties(associatedClasses):
+            if not property.label:
+                if not property.name.lower() in obj["arregloDeTerminos"]:
+                    obj["arregloDeTerminos"].append(property.name.lower())
+            else:
+                for label in property.label:
+                    if not label.lower() in labels:
+                        labels.append(label.lower())
+        
+        for asociated in associatedClasses:
+            for label in asociated.label:
+                if label.lower() not in labels:
+                    labels.append(label.lower())
+
+
+        for label in PreProcesador.limpiarLabels(labels):
+            if not label in obj["arregloDeTerminos"]:
+                obj["arregloDeTerminos"].append(label)
+        #print(obj["arregloDeTerminos"])
+
+def getProperties(objetos):
     rtn = []
     for prop in default_world.properties():
         #print(prop, prop.domain, prop.range,Class "obj" )
         for obj in objetos:
             try:
                 for domain in prop.domain:
-                    if issubclass(obj, domain) and prop.name not in rtn: 
-                        rtn.append(prop.name)
+                    if issubclass(obj, domain) and prop not in rtn:
+                        rtn.append(prop)
                 for range in prop.range:
-                    if issubclass(obj, range) and prop.name not in rtn: 
-                        rtn.append(prop.name)
+                    if issubclass(obj, range) and prop not in rtn:
+                        rtn.append(prop)
             except: pass
     return rtn
 

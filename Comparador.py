@@ -1,7 +1,7 @@
 import sys
 
 
-def limpiarCoincidencias(coincidencias, keywords, umbral):
+def limpiarCoincidencias(coincidencias, keywords, sinonimos, umbral):
     '''
 
     :param coincidencias:
@@ -10,28 +10,18 @@ def limpiarCoincidencias(coincidencias, keywords, umbral):
     '''
     #Llena e inicializa el arreglo con n ceros
     for coincidencia in coincidencias:
-        coincidencia["similitudesSintacticas"] = [0 for x in range(len(coincidencias))]
+        coincidencia["similitudesSintacticas"] = [0 for x in range(len(keywords+sinonimos))]
         compararConOtrosTerminosBusqueda(coincidencia, keywords)
         #print(coincidencia["obj"].name,":",coincidencia["obj"].label)
         #print(coincidencia)
     print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
-
-    for i in range(len(coincidencias)-1):
-        for j in range(i+1, len(coincidencias)):
-            valorDiferencia = compararPorTablasDeSimilitud(coincidencias[i],coincidencias[j])
-            #print(coincidencias[i]["labels"], " _vs_ ", coincidencias[j]["labels"], " = ", valorDiferencia)
-            coincidencias[i]["similitudesSintacticas"][j] = valorDiferencia
-            coincidencias[i]["promedioSimilitudes"] += valorDiferencia
-            coincidencias[j]["similitudesSintacticas"][i] = valorDiferencia
-            coincidencias[j]["promedioSimilitudes"] += valorDiferencia
+    for coincidencia in coincidencias:
+        coincidencia["promedioSimilitudes"] = compararPorTablasDeSimilitud(coincidencia,keywords+sinonimos)
 
     mayor = 0
     menor = 100
     print("$$$$$$$$$$$$$$$$")
     for coincidencia in coincidencias:
-        coincidencia["promedioSimilitudes"] = coincidencia["promedioSimilitudes"] / len(coincidencias)
-        if coincidencia["promedioSimilitudes"] < menor : menor = coincidencia["promedioSimilitudes"]
-        if coincidencia["promedioSimilitudes"] > mayor: mayor = coincidencia["promedioSimilitudes"]
         print(coincidencia["obj"].name, coincidencia["similitudesSintacticas"],coincidencia["promedioSimilitudes"],coincidencia["similitudAKeywords"])
     print("$$$$$$$$$$$$$$$$")
     
@@ -43,29 +33,34 @@ def limpiarCoincidencias(coincidencias, keywords, umbral):
 '''
 #####################################################################################
 '''
-def compararPorTablasDeSimilitud(obj1, obj2):
+def compararPorTablasDeSimilitud(obj, keywords):
 
-    tabla = crearTabla(obj1,obj2)
-    len1= len(obj1["arregloDeTerminos"])
-    len2 = len(obj2["arregloDeTerminos"])
+    tabla = crearTabla(obj,keywords)
+    len1= len(obj["arregloDeTerminos"])
+    len2 = len(keywords)
 
-    minimos = getMinimo(tabla,len1,len2)
-    minimos.extend(getMinimo(tabla,len1,len2,True))
+    #for i in xrange(len2):
+        #obj["similitudesSintacticas"] = 
+
+    #minimos = getMinimo(tabla,len1,len2)
+    minimos = getMinimo(tabla,len1,len2,True)
+    obj["similitudesSintacticas"] = minimos
     value = sum(minimos)/len(minimos)
     #print("Value:"+ str(value)+"\n")
 
     return value
 
-def crearTabla(obj1,obj2):
-    arr1 = obj1["arregloDeTerminos"]
-    arr2 = obj2["arregloDeTerminos"]
+def crearTabla(obj, keywords):
+    arr1 = obj["arregloDeTerminos"]
+    arr2 = keywords
     #textTabla = ""
     tabla = [[0 for x in range(len(arr2))] for y in range(len(arr1))]
     for i in range(len(arr1)):
         for j in range(len(arr2)):
-            tabla[i][j] = getStringSimilarity(arr1[i], arr2[j]) / (obj1["similitudAKeywords"] * obj2["similitudAKeywords"])
+            tabla[i][j] = getStringSimilarity(arr1[i], arr2[j])
             #textTabla += str(round(tabla[i][j], 4)) + "\t"
         #textTabla += "\n"
+    #print("Tabla: ",obj["labels"],arr1,arr2,"\n",textTabla)
     '''
     if obj2["obj"].name == "DOID_10154" and obj1["obj"].name == "TestResult":
         print("Tabla: ",obj1["labels"],arr1,obj2["labels"],arr2,"\n",textTabla)
@@ -90,29 +85,26 @@ def getMinimo(tabla, x,y, invertirSentido= False):
 '''
 ######################################################################################3
 '''
-def compararConOtrosTerminosBusqueda(obj, keywords):
+def compararConOtrosTerminosBusqueda(obj, keywords, sinonimos = []):
     arr = obj["arregloDeTerminos"]
-    toRemove = []
     mayor = 1
     countTotal = 0
-    for x in arr:
+    for termino in arr:
         countWords = 0
         for word in keywords:
-            if x.find(word) > -1:
+            if termino.find(word) > -1:
                 countWords = countWords + 1
                 countTotal = countTotal + 1
         if countWords > mayor : 
             mayor = countWords
-        if countWords == 0:
-            toRemove.append(x)
     
     #Es un valor divisor en la fórmula siguiente. Es peligroso dejarlo en 0
     obj["similitudAKeywords"] =  mayor * (1 + countTotal/(len(arr)*len(keywords)))
 
-    for x in toRemove:
-        obj["arregloDeTerminos"].remove(x)
-
     return obj
+
+def ponderarSegunAparicion(termino, word):
+    pass
 '''
 ######################################################################################3
 '''
