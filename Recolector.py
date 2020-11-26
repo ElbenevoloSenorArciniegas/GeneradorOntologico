@@ -23,14 +23,11 @@ def buscar(keyWords, umbral):
 
             test_str = result.label[0].lower()
             matches = list(re.finditer(regex, test_str, re.MULTILINE))
-            if len(list(matches)) > 0:
+            #print(result ,test_str, len(matches))
+            if len(matches) > 0:
                 if not result in results:
                     results.append(result)
-                    #print(test_str, len(list(matches)))
-        '''
-        results.extend(default_world.search(name="* " + word + "*", type= owl_class, _case_sensitive=False))
-        results.extend(default_world.search(name="*" + word + " *", type=owl_class, _case_sensitive=False))
-        '''
+                    
         for result in results:
             coincidencias.append(prepareObject(result))
 
@@ -44,7 +41,8 @@ def buscar(keyWords, umbral):
             except:
                 pass
         #print(coincidencias)
-
+    for word in keyWords:
+        word = word.lower()
     coincidencias = Comparador.limpiarCoincidencias(coincidencias,keyWords, umbral)
     return Generador.generarOnto(keyWords[0],coincidencias)
 '''
@@ -81,15 +79,15 @@ def tryFillObject(obj, onto):
     associatedClasses.extend(deeperClasses)
     '''
     for property in getPropertiesNames(associatedClasses):
-        if not property in obj["arregloDeTerminos"]:
-            obj["arregloDeTerminos"].append(property)
+        if not property.lower() in obj["arregloDeTerminos"]:
+            obj["arregloDeTerminos"].append(property.lower())
     for label in obj["obj"].label:
-        if label not in obj["arregloDeTerminos"]:
-            obj["arregloDeTerminos"].append(label)
+        if label.lower() not in obj["arregloDeTerminos"]:
+            obj["arregloDeTerminos"].append(label.lower())
     for asociated in associatedClasses:
         for label in asociated.label:
-            if label not in obj["arregloDeTerminos"]:
-                obj["arregloDeTerminos"].append(label)
+            if label.lower() not in obj["arregloDeTerminos"]:
+                obj["arregloDeTerminos"].append(label.lower())
 
 def getPropertiesNames(objetos):
     rtn = []

@@ -13,13 +13,13 @@ def limpiarCoincidencias(coincidencias, keywords, umbral):
         coincidencia["similitudesSintacticas"] = [0 for x in range(len(coincidencias))]
         compararConOtrosTerminosBusqueda(coincidencia, keywords)
         #print(coincidencia["obj"].name,":",coincidencia["obj"].label)
-        print(coincidencia)
+        #print(coincidencia)
     print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
 
     for i in range(len(coincidencias)-1):
         for j in range(i+1, len(coincidencias)):
             valorDiferencia = compararPorTablasDeSimilitud(coincidencias[i],coincidencias[j])
-            print(coincidencias[i]["labels"], " _vs_ ", coincidencias[j]["labels"], " = ", valorDiferencia)
+            #print(coincidencias[i]["labels"], " _vs_ ", coincidencias[j]["labels"], " = ", valorDiferencia)
             coincidencias[i]["similitudesSintacticas"][j] = valorDiferencia
             coincidencias[i]["promedioSimilitudes"] += valorDiferencia
             coincidencias[j]["similitudesSintacticas"][i] = valorDiferencia
@@ -66,14 +66,15 @@ def crearTabla(obj1,obj2):
             tabla[i][j] = getStringSimilarity(arr1[i], arr2[j]) / (obj1["similitudAKeywords"] * obj2["similitudAKeywords"])
             #textTabla += str(round(tabla[i][j], 4)) + "\t"
         #textTabla += "\n"
-    #print("Tabla: ",textTabla)
+    '''
+    if obj2["obj"].name == "DOID_10154" and obj1["obj"].name == "TestResult":
+        print("Tabla: ",obj1["labels"],arr1,obj2["labels"],arr2,"\n",textTabla)
+    '''
     return tabla
 
 def getMinimo(tabla, x,y, invertirSentido= False):
     if invertirSentido:
-        temp = x
-        x= y
-        y = temp
+        x, y = y, x
 
     arrMin = []
     for i in range(x):
@@ -91,19 +92,25 @@ def getMinimo(tabla, x,y, invertirSentido= False):
 '''
 def compararConOtrosTerminosBusqueda(obj, keywords):
     arr = obj["arregloDeTerminos"]
+    toRemove = []
     mayor = 1
-    countTotal = 1
+    countTotal = 0
     for x in arr:
-        x = x.lower()
         countWords = 0
         for word in keywords:
-            word = word.lower()
             if x.find(word) > -1:
                 countWords = countWords + 1
                 countTotal = countTotal + 1
-        if countWords > mayor : mayor = countWords
-    if(countTotal == 0): count = 1 #Es un valor divisor en la fórmula siguiente. Es peligroso dejarlo en 0
+        if countWords > mayor : 
+            mayor = countWords
+        if countWords == 0:
+            toRemove.append(x)
+    
+    #Es un valor divisor en la fórmula siguiente. Es peligroso dejarlo en 0
     obj["similitudAKeywords"] =  mayor * (1 + countTotal/(len(arr)*len(keywords)))
+
+    for x in toRemove:
+        obj["arregloDeTerminos"].remove(x)
 
     return obj
 '''

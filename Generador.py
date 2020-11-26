@@ -23,12 +23,14 @@ def generarOnto(mainSubject, coincidencias):
     with OntoGenerada:
         for coincidencia in coincidencias:
             class_orig = coincidencia["obj"]
-            class_dest = types.new_class(class_orig.name, (Thing,))
+            class_dest = types.new_class(class_orig.name, (class_orig,))
             class_dest.label = class_orig.label
+    '''
+            print(class_orig.is_a)
             for parent in list(class_orig.is_a):
                 if not isinstance(parent, Thing): class_orig.is_a.remove(parent)  # Bank node
                 class_dest.is_a.append(parent)
-    '''
+    
         for clase in objetos:
             newClass = types.new_class(clase.name, (Thing,))
         for clase in propiedades:
@@ -51,7 +53,7 @@ def razonar(OntoGenerada):
     try:
         with OntoGenerada:
             pass
-            #sync_reasoner_pellet(infer_property_values=True, infer_data_property_values=True)
+            sync_reasoner_pellet(infer_property_values=True)
             #sync_reasoner_hermit(infer_property_values=True)
     except:
         print("Exception at Razonar in Generador")
