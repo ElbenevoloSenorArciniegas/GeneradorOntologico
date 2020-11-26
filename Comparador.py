@@ -117,12 +117,8 @@ def ponderarSegunAparicion(termino, word):
 
 def buscarRegex(termino, regex):
     import re
-    matches = re.finditer(regex, termino, re.MULTILINE)
-    for matchNum, match in enumerate(matches, start=1):
-        for groupNum in range(0, len(match.groups())):
-            #print ("Group {groupNum} found at {start}-{end}: {group}".format(groupNum = groupNum, start = match.start(groupNum), end = match.end(groupNum), group = match.group(groupNum)))
-            return True
-    return False
+    matches = list(re.finditer(regex, termino, re.MULTILINE))
+    return len(matches) > 0
 
 '''
 ######################################################################################3
