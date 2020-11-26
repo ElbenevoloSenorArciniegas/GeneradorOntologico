@@ -93,8 +93,9 @@ def compararConOtrosTerminosBusqueda(obj, keywords, sinonimos = []):
         countWords = 0
         for word in keywords:
             if termino.find(word) > -1:
-                countWords = countWords + 1
-                countTotal = countTotal + 1
+                peso = ponderarSegunAparicion(termino,word)
+                countWords += peso
+                countTotal += peso
         if countWords > mayor : 
             mayor = countWords
     
@@ -104,7 +105,25 @@ def compararConOtrosTerminosBusqueda(obj, keywords, sinonimos = []):
     return obj
 
 def ponderarSegunAparicion(termino, word):
-    pass
+    peso = 0
+
+    if buscarRegex(termino, r"^("+word+")$"):
+        peso = 1
+    elif buscarRegex(termino, r"^("+word+")\w|\w("+word+")$"):
+        peso = 0.75
+    elif buscarRegex(termino, r"\w("+word+")\w"):
+        peso = 0.5
+    return peso
+
+def buscarRegex(termino, regex):
+    import re
+    matches = re.finditer(regex, termino, re.MULTILINE)
+    for matchNum, match in enumerate(matches, start=1):
+        for groupNum in range(0, len(match.groups())):
+            #print ("Group {groupNum} found at {start}-{end}: {group}".format(groupNum = groupNum, start = match.start(groupNum), end = match.end(groupNum), group = match.group(groupNum)))
+            return True
+    return False
+
 '''
 ######################################################################################3
 '''
