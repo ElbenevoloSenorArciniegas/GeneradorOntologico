@@ -13,14 +13,13 @@ def buscar(keyWords, umbral):
     results = []
 
     sinonimos = PreProcesador.obtenerSinonimos(keyWords)
-    for word in keyWords:
+    for word in keyWords+sinonimos:
 
         arr = default_world.search(label="*" + word + "*", type= owl_class, _case_sensitive=False)
         for result in arr:
             if not result in results:
                 results.append(result)
-        for result in results:
-            coincidencias.append(prepareObject(result))
+                coincidencias.append(prepareObject(result))
 
     for onto_key in default_world.ontologies.keys():
         #print(onto_key)
@@ -28,16 +27,19 @@ def buscar(keyWords, umbral):
 
         for obj in coincidencias:
             try:
+                #if hasObj(onto, obj):
                 tryFillObject(obj, onto)
             except:
                 pass
         #print(coincidencias)
+    nombre = ""
     for word in keyWords:
         word = word.lower()
+        nombre += word+"-"
     for word in sinonimos:
         word = word.lower()
     coincidencias = Comparador.limpiarCoincidencias(coincidencias,keyWords, sinonimos, umbral)
-    return Generador.generarOnto(keyWords[0],coincidencias)
+    return Generador.generarOnto(nombre[:-1],coincidencias)
 '''
 #####################################################################################
 '''
@@ -57,7 +59,7 @@ def tryFillObject(obj, onto):
         associatedClasses = [obj["obj"]]
         associatedClasses.extend(onto.get_parents_of(obj["obj"]))
         associatedClasses.extend(onto.get_children_of(obj["obj"]))
-        '''
+        
         deeperClasses = []
         for asociated in associatedClasses:
             if not asociated.name == "Thing":
@@ -65,7 +67,7 @@ def tryFillObject(obj, onto):
                     if not deeper in associatedClasses and not deeper in deeperClasses:
                         deeperClasses.append(deeper)
         associatedClasses.extend(deeperClasses)
-        '''
+        
         labels = []
 
         for property in getProperties(associatedClasses):
@@ -86,7 +88,7 @@ def tryFillObject(obj, onto):
         for label in PreProcesador.limpiarLabels(labels):
             if not label in obj["arregloDeTerminos"]:
                 obj["arregloDeTerminos"].append(label)
-        #print(obj["arregloDeTerminos"])
+        #print(obj["labels"][0]," : ",obj["arregloDeTerminos"])
 
 def getProperties(objetos):
     rtn = []

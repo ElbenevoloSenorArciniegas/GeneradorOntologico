@@ -46,6 +46,8 @@ def obtenerSinonimos(keyWords):
 		for syn in wordnet.synsets(word):
 			for lemma in syn.lemmas(): #ojo con los idiomas, eso va aquí 'spa'    ~/nltk_data/corpora/omw$ ls
 				sinonimo = DerivacionRegresiva([lemma.name()])[0]
+				if len(sinonimo) <= 3:
+					sinonimo = lemma.name()
 				if not sinonimo in synonyms + keyWords:
 					synonyms.append(sinonimo)
 	return synonyms

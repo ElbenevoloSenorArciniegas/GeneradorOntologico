@@ -12,10 +12,9 @@ def generarOnto(mainSubject, coincidencias):
     :return: OntoGenerada:  Ontología generada y poblada a la que se le aplica el razonador.
     '''
 
-    text = ""
     for coincidencia in coincidencias:
-        text += str(coincidencia["obj"]) + " : " + str(coincidencia["obj"].label) + "\n"
-    print(text,len(coincidencias))
+        print(str(coincidencia["obj"])," : ",str(coincidencia["obj"].label))
+    print(len(coincidencias))
 
 
     OntoGenerada = Ontology(world=tempWorld, base_iri=mainSubject + "#")
