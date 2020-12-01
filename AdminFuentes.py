@@ -1,5 +1,5 @@
 import sys, os
-from owlready2 import default_world
+from owlready2 import default_world, close_world
 
 PATH = os.path.relpath('sources') +"/"
 default_world.set_backend(filename=PATH + "World.sqlite3")
@@ -86,3 +86,6 @@ def listarKeysWorld():
         return "Fuentes cargadas actualmente en el mundo:<br>" + keys
     except:
         return "Failed at Admin.listarKeysWorld: " + str(sys.exc_info()[0])
+
+def closeMoK():
+    close_world(default_world)

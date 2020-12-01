@@ -4,7 +4,6 @@ import Generador
 import PreProcesador
 import Formateador
 from owlready2 import owl_class
-import re
 
 def buscar(keyWords, umbral, formato):
 
@@ -24,7 +23,10 @@ def buscar(keyWords, umbral, formato):
 
     ontoGenerada = Generador.generarOnto(nombre[:-1],coincidencias)
 
-    return Formateador.formatearOnto(ontoGenerada, formato)
+    ontoFormateada = Formateador.formatearOnto(ontoGenerada, formato)
+    AdminFuentes.closeMoK()
+    Generador.closeMoK()
+    return ontoFormateada
 '''
 #####################################################################################
 '''

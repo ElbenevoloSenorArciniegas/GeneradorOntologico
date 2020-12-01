@@ -1,6 +1,5 @@
-import os
 import AdminFuentes
-from owlready2 import *
+from owlready2 import close_world, Ontology, World, types, sync_reasoner_pellet
 
 PATH = AdminFuentes.PATH
 tempWorld = World()
@@ -51,7 +50,7 @@ def generarOnto(mainSubject, coincidencias):
 def razonar(OntoGenerada):
     try:
         with OntoGenerada:
-            pass
+            #pass
             sync_reasoner_pellet()
             #sync_reasoner_pellet(infer_property_values=True)
             #sync_reasoner_hermit(infer_property_values=True)
@@ -59,8 +58,7 @@ def razonar(OntoGenerada):
         print("Exception at Razonar in Generador")
     return OntoGenerada
 
-def cleanTempWorld():
+def closeMoK():
     tempWorld.ontologies.clear()
     close_world(tempWorld)
-    close_world(AdminFuentes.default_world)
 #    tempWorld.close()

@@ -1,9 +1,7 @@
 import Recolector
 import AdminFuentes
 
-from markupsafe import escape
 from flask import Flask, request, render_template
-import Generador
 
 app = Flask(__name__)
 
@@ -22,7 +20,6 @@ def buscar():
 
     OntoGenerada = Recolector.buscar(keyWords, umbral, formato)
 
-    Generador.cleanTempWorld()
     return "Buscar( "+ request.args.get("keyWords", "") +" ) <hr> " + OntoGenerada
 
 
