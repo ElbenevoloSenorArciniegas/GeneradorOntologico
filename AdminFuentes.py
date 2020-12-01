@@ -4,7 +4,7 @@ from owlready2 import default_world
 PATH = os.path.relpath('sources') +"/"
 default_world.set_backend(filename=PATH + "World.sqlite3")
 
-def getWorld():
+def getMoK():
     try:
         return default_world
     except IOError as e:
@@ -31,35 +31,16 @@ y se necesita añadir o eliminar alguna fuente?
 
 
 def addFuenteLocal(file_name):
-    try:
-    # ¿Necesito trabajar con ontologías importadas o las cargo directamente en el world?
-    # tipo myWorld.get_ontology(ruta).load()    que de por sí ya se hace...
-    # baseOnto = myWorld.get_ontology("BASE_ONTO_PATH").imported_ontologies.append(myWorld.get_ontology(file_name).load())
-
-        getWorld()
-
-        default_world.get_ontology(PATH + file_name).load()
-        default_world.save()
-        #default_world.close()
-        return "Success:"
-
-    except IOError as e:
-        return "IOError at Admin.addFuenteLocal: " + str(e)
-    except:
-        return "Failed at Admin.addFuenteLocal: " + str(sys.exc_info()[0])
-    '''
-    finally:
-        try:
-            default_world.close()
-        except:
-            return "Error closing default_world"
-    '''
+    #No necesitan un tratamiento distinto. Es posible que en un futuro, o con el uso de otra librería.
+   return addFuente(file_name)
 
 def addFuenteExterna(IRI):
+    return addFuente(IRI)
+
+def addFuente(fuente):
     try:
-        getWorld()
-        # Lo mismo de arriba
-        default_world.get_ontology(IRI).load()
+        default_world = getMoK()
+        default_world.get_ontology(fuente).load()
         default_world.save()
         return "Success"
     except IOError as e:
@@ -74,10 +55,9 @@ def addFuenteExterna(IRI):
                 return "Error closing default_world"
     '''
 
-
 def removeFuente(IRI):
     try:
-        getWorld()
+        default_world = getMoK()
         # remover
         #print(myWorld.get_ontology(IRI))
         default_world.get_ontology(IRI).destroy()
@@ -98,7 +78,7 @@ def removeFuente(IRI):
 
 def listarKeysWorld():
     try:
-        getWorld()
+        default_world = getMoK()
         keys = ""
         for key in default_world.ontologies.keys():
             keys += key + "<br> "

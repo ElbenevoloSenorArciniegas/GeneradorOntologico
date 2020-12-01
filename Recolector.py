@@ -2,13 +2,35 @@ import AdminFuentes
 import Comparador
 import Generador
 import PreProcesador
+import Formateador
 from owlready2 import owl_class
 import re
 
-default_world = AdminFuentes.getWorld()
+default_world = None
+sinonimos = []
 
-def buscar(keyWords, umbral):
+def buscar(keyWords, umbral, formato):
 
+    default_world = AdminFuentes.getMoK()
+
+    coincidencias = busquedaExtendida(keyWords)
+
+    nombre = ""
+    for word in keyWords:
+        word = word.lower()
+        nombre += word+"-"
+    for word in sinonimos:
+        word = word.lower()
+
+    coincidencias = Comparador.limpiarCoincidencias(coincidencias,keyWords, sinonimos, umbral)
+
+    ontoGenerada = Generador.generarOnto(nombre[:-1],coincidencias)
+
+    return Formateador.formatearOnto(ontoGenerada, formato)
+'''
+#####################################################################################
+'''
+def busquedaExtendida(keyWords):
     coincidencias = []
     results = []
 
@@ -28,21 +50,15 @@ def buscar(keyWords, umbral):
         for obj in coincidencias:
             try:
                 #if hasObj(onto, obj):
-                tryFillObject(obj, onto)
+                recolectarTerminos(obj, onto)
             except:
                 pass
         #print(coincidencias)
-    nombre = ""
-    for word in keyWords:
-        word = word.lower()
-        nombre += word+"-"
-    for word in sinonimos:
-        word = word.lower()
-    coincidencias = Comparador.limpiarCoincidencias(coincidencias,keyWords, sinonimos, umbral)
-    return Generador.generarOnto(nombre[:-1],coincidencias)
+    return coincidencias
 '''
 #####################################################################################
 '''
+
 def prepareObject(result):
     obj = {
         "obj": result,
@@ -54,9 +70,10 @@ def prepareObject(result):
     }
     return obj
 
-def tryFillObject(obj, onto):
+def recolectarTerminos(obj, onto):
     if obj["arregloDeTerminos"] == []:
-        associatedClasses = [obj["obj"]]
+        
+        associatedClasses = []
         associatedClasses.extend(onto.get_parents_of(obj["obj"]))
         associatedClasses.extend(onto.get_children_of(obj["obj"]))
         
@@ -67,7 +84,8 @@ def tryFillObject(obj, onto):
                     if not deeper in associatedClasses and not deeper in deeperClasses:
                         deeperClasses.append(deeper)
         associatedClasses.extend(deeperClasses)
-        
+        associatedClasses.append(obj["obj"])
+
         labels = []
 
         for property in getProperties(associatedClasses):
@@ -85,9 +103,9 @@ def tryFillObject(obj, onto):
                     labels.append(label.lower())
 
 
-        for label in PreProcesador.limpiarLabels(labels):
-            if not label in obj["arregloDeTerminos"]:
-                obj["arregloDeTerminos"].append(label)
+        for token in PreProcesador.limpiarLabels(labels):
+            if not token in obj["arregloDeTerminos"]:
+                obj["arregloDeTerminos"].append(token)
         #print(obj["labels"][0]," : ",obj["arregloDeTerminos"])
 
 def getProperties(objetos):

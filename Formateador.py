@@ -1,6 +1,15 @@
 from rdflib import Graph
 from io import *
 
+def formatearOnto(OntoGenerada, formato):
+    if(formato == "json"):
+        result = Formateador.toJSON_LD(OntoGenerada)
+    elif (formato == "nt"):
+        result = Formateador.toNTriples(OntoGenerada)
+    else:
+        result = Formateador.toRDF(OntoGenerada)
+    return result
+
 def toJSON_LD(OntoGenerada):
     RDF = BytesIO()
     OntoGenerada.save(RDF)

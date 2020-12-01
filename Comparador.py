@@ -9,25 +9,27 @@ def limpiarCoincidencias(coincidencias, keywords, sinonimos, umbral):
     :return:
     '''
     #Calcula la similitud con los términos de búsqueda y los sinónimos
-    coincidencias = ponderarPorBusqueda(coincidencias, keywords, sinonimos)
+    for coincidencia in coincidencias:
+        coincidencia["similitudAKeywords"] = compararConOtrosTerminosBusqueda(coincidencia["arregloDeTerminos"], keywords, sinonimos)
+    return coincidencias
     
     #Los que tengan similitud calculada mayor a 2 se tomarán como referentes
     #Los de similitud menor o igual a 1 se descartarán
     #Los que tienen apariciones de los términos de búsqueda serán comparados contra los 
-    #referentes (más cercanos) para conseguir un valor que estime qué tan similares
+    #referentes (seleccionados) para conseguir un valor que estime qué tan similares
     #son estos conceptos intermedios a los que más se acercan a la búsqueda original.
 
-    cercanos = []
-    masCercanos = []
+    candidatos = []
+    seleccionados = []
     for coincidencia in coincidencias:
         if coincidencia["similitudAKeywords"] > 2:
-            masCercanos.append(coincidencia)
+            seleccionados.append(coincidencia)
         elif coincidencia["similitudAKeywords"] > 1:
-            cercanos.append(coincidencia)
+            candidatos.append(coincidencia)
     
     terminosReferentes = []
-    for referente in masCercanos:
-        for terminoReferente in referente["arregloDeTerminos"]:
+    for seleccionado in seleccionados:
+        for terminoReferente in seleccionado["arregloDeTerminos"]:
             if terminoReferente not in terminosReferentes:
                 terminosReferentes.append(terminoReferente)
     print(terminosReferentes)
@@ -35,45 +37,45 @@ def limpiarCoincidencias(coincidencias, keywords, sinonimos, umbral):
     mayor = 0
     menor = 100
     print("$$$$$$$$$$$$$$$$")
-    for cercano in cercanos:
+    for candidato in candidatos:
         #Llena e inicializa el arreglo con n ceros
-        cercano["similitudesSintacticas"] = [0 for x in range(len(terminosReferentes))]
-        promedioSimilitudes = compararPorTablasDeSimilitud(cercano,terminosReferentes) / cercano["similitudAKeywords"]
-        cercano["promedioSimilitudes"] = promedioSimilitudes
+        candidato["similitudesSintacticas"] = [0 for x in range(len(terminosReferentes))]
+        promedioSimilitudes = compararPorTablasDeSimilitud(candidato,terminosReferentes) / candidato["similitudAKeywords"]
+        candidato["promedioSimilitudes"] = promedioSimilitudes
         if promedioSimilitudes > mayor: 
             mayor = promedioSimilitudes
         elif promedioSimilitudes < menor: 
             menor = promedioSimilitudes
-        print(cercano["labels"][0].replace(" ","_"), cercano["similitudesSintacticas"],cercano["promedioSimilitudes"],cercano["similitudAKeywords"])
+        print(candidato["labels"][0].replace(" ","_"), candidato["similitudesSintacticas"],candidato["promedioSimilitudes"],candidato["similitudAKeywords"])
     print("$$$$$$$$$$$$$$$$")
     
-    rtn = masCercanos
+    rtn = seleccionados
     valorLimite = mayor - (mayor-menor)*umbral/100
     print(valorLimite)
-    for cercano in cercanos:
-        if cercano["promedioSimilitudes"] <= valorLimite:
-            rtn.append(cercano)
+    for candidato in candidatos:
+        if candidato["promedioSimilitudes"] <= valorLimite:
+            rtn.append(candidato)
     return rtn
 '''
 #####################################################################################
 '''
-def compararPorTablasDeSimilitud(obj, keywords):
+def compararPorTablasDeSimilitud(obj, referentes):
 
-    tabla = crearTabla(obj,keywords)
+    tabla = crearTabla(obj,referentes)
     len1= len(obj["arregloDeTerminos"])
-    len2 = len(keywords)
+    len2 = len(referentes)
 
-    #minimos = getMinimo(tabla,len1,len2)
-    minimos = getMinimo(tabla,len1,len2,True)
+    #minimos = getMinimos(tabla,len1,len2)
+    minimos = getMinimos(tabla,len1,len2,True)
     obj["similitudesSintacticas"] = minimos
     value = sum(minimos)/len(minimos)
     #print("Value:"+ str(value)+"\n")
 
     return value
 
-def crearTabla(obj, keywords):
+def crearTabla(obj, referentes):
     arr1 = obj["arregloDeTerminos"]
-    arr2 = keywords
+    arr2 = referentes
     #textTabla = ""
     tabla = [[0 for x in range(len(arr2))] for y in range(len(arr1))]
     for i in range(len(arr1)):
@@ -84,7 +86,7 @@ def crearTabla(obj, keywords):
     #print("Tabla: ",obj["labels"],arr1,arr2,"\n",textTabla)
     return tabla
 
-def getMinimo(tabla, x,y, invertirSentido= False):
+def getMinimos(tabla, x,y, invertirSentido= False):
     if invertirSentido:
         x, y = y, x
 
@@ -102,17 +104,12 @@ def getMinimo(tabla, x,y, invertirSentido= False):
 '''
 ######################################################################################3
 '''
-def ponderarPorBusqueda(coincidencias, keywords, sinonimos):
-    for coincidencia in coincidencias:
-        compararConOtrosTerminosBusqueda(coincidencia, keywords, sinonimos)
-    return coincidencias
 
-def compararConOtrosTerminosBusqueda(obj, keywords, sinonimos):
-    arr = obj["arregloDeTerminos"]
+def compararConOtrosTerminosBusqueda(arregloDeTerminos, keywords, sinonimos):
     mayor = 1
     countTotal = 0
     countWords = 1
-    for termino in arr:
+    for termino in arregloDeTerminos:
         for word in keywords + sinonimos:
             if termino.find(word) > -1:
                 peso = ponderarSegunAparicion(termino,word)
@@ -121,9 +118,7 @@ def compararConOtrosTerminosBusqueda(obj, keywords, sinonimos):
                 countWords += (peso >= 0.5)
                 countTotal += peso
     #Es un valor divisor en la fórmula siguiente. Es peligroso dejarlo en 0
-    obj["similitudAKeywords"] =  countWords/len(keywords) * (1 + countTotal/(len(arr)*len(keywords)))
-
-    return obj
+    return countWords/len(keywords) * (1 + countTotal/(len(arregloDeTerminos)*len(keywords)))
 
 def ponderarSegunAparicion(termino, word):
     peso = 0.25

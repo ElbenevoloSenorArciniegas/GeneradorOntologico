@@ -52,7 +52,8 @@ def razonar(OntoGenerada):
     try:
         with OntoGenerada:
             pass
-            sync_reasoner_pellet(infer_property_values=True)
+            sync_reasoner_pellet()
+            #sync_reasoner_pellet(infer_property_values=True)
             #sync_reasoner_hermit(infer_property_values=True)
     except:
         print("Exception at Razonar in Generador")

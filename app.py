@@ -1,7 +1,5 @@
 import Recolector
-import Formateador
 import AdminFuentes
-import Comparador
 
 from markupsafe import escape
 from flask import Flask, request, render_template
@@ -19,20 +17,13 @@ def hello_world():
 def buscar():
     keyWords = request.args.get("keyWords", "").split("-")
     formato = request.args.get("format", "").lower()
-    umbral = request.args.get("umbral", "")
+    umbral = request.args.get("accept", "")
     if umbral == "": umbral = 70
 
-    OntoGenerada = Recolector.buscar(keyWords, umbral)
-
-    if(formato == "json"):
-        result = Formateador.toJSON_LD(OntoGenerada)
-    elif (formato == "nt"):
-        result = Formateador.toNTriples(OntoGenerada)
-    else:
-        result = Formateador.toRDF(OntoGenerada)
+    OntoGenerada = Recolector.buscar(keyWords, umbral, formato)
 
     Generador.cleanTempWorld()
-    return "Buscar( "+ request.args.get("keyWords", "") +" ) <hr> " + result
+    return "Buscar( "+ request.args.get("keyWords", "") +" ) <hr> " + OntoGenerada
 
 
 @app.route('/add/<path:IRI>')
@@ -50,29 +41,6 @@ def removeFuente(IRI):
 @app.route('/getFuentes')
 def getFuentes():
     return AdminFuentes.listarKeysWorld()
-
-##Borrar: sólo para usos de pruebas rápidas
-@app.route('/getStringSimilarity')
-def getStringSimilarity():
-    str1 = request.args.get("str1", "").lower()
-    str2 = request.args.get("str2", "").lower()
-    Comparador.compararPorTablasDeSimilitud(str1,str2)
-    return str1 + " -> " +str2 +" : "+ str(Comparador.getStringSimilarity(str1, str2))
-
-# --------------------------------------------------------------------
-    #estoy mirando y probando cosas directamente, no es que esto vaya aquí
-    '''
-    world = Generador.tempWorld
-    for triple in OntoGenerada.get_triples():
-        print(triple)
-        try:
-            for x in triple:
-                print(world._unabbreviate(x))
-        except:
-            print(x)
-    '''
-    #--------------------------------------------------------------------
-
 
 import werkzeug.serving
 werkzeug.serving.run_simple("localhost", 5000, app)
