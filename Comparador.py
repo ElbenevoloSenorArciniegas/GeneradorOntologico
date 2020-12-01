@@ -11,7 +11,6 @@ def limpiarCoincidencias(coincidencias, keywords, sinonimos, umbral):
     #Calcula la similitud con los términos de búsqueda y los sinónimos
     for coincidencia in coincidencias:
         coincidencia["similitudAKeywords"] = compararConOtrosTerminosBusqueda(coincidencia["arregloDeTerminos"], keywords, sinonimos)
-    return coincidencias
     
     #Los que tengan similitud calculada mayor a 2 se tomarán como referentes
     #Los de similitud menor o igual a 1 se descartarán

@@ -6,11 +6,9 @@ import Formateador
 from owlready2 import owl_class
 import re
 
-default_world = None
-sinonimos = []
-
 def buscar(keyWords, umbral, formato):
 
+    global default_world
     default_world = AdminFuentes.getMoK()
 
     coincidencias = busquedaExtendida(keyWords)
@@ -34,6 +32,7 @@ def busquedaExtendida(keyWords):
     coincidencias = []
     results = []
 
+    global sinonimos
     sinonimos = PreProcesador.obtenerSinonimos(keyWords)
     for word in keyWords+sinonimos:
 
