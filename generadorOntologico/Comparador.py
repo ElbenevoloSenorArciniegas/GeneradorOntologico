@@ -1,5 +1,3 @@
-import sys
-
 
 def limpiarCoincidencias(coincidencias, keywords, sinonimos, umbral):
     '''
@@ -91,7 +89,10 @@ def getMinimos(tabla, x,y, invertirSentido= False):
 
     arrMin = []
     for i in range(x):
-        minimo = sys.maxsize
+        #Es virtualmente improbable que la diferencia de dos cadenas supere el 1000, y si así fuera y 
+        #todas los términos de un objeto superaran esa diferencia, es definitivo que no va a ser un
+        #resultado candidato...
+        minimo = 1000 
         for j in range(y):
             if not invertirSentido:
                 minimo = min(minimo, tabla[i][j])

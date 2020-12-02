@@ -1,7 +1,5 @@
-from exploradorRecursos import AdminFuentes
 from owlready2 import close_world, Ontology, World, types, sync_reasoner_pellet
 
-PATH = AdminFuentes.PATH
 tempWorld = World()
 
 def generarOnto(mainSubject, coincidencias):
