@@ -1,8 +1,5 @@
-import AdminFuentes
-import Comparador
-import Generador
-import PreProcesador
-import Formateador
+from generadorOntologico import Comparador, Generador, Formateador, PreProcesador
+from exploradorRecursos import AdminFuentes
 from owlready2 import owl_class
 
 def buscar(keyWords, umbral, formato):

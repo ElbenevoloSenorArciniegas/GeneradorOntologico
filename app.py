@@ -1,5 +1,5 @@
-import Recolector
-import AdminFuentes
+from generadorOntologico import Recolector
+from exploradorRecursos import AdminFuentes
 
 from flask import Flask, request, render_template
 
