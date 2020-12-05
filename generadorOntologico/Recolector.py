@@ -39,6 +39,7 @@ def busquedaExtendida(keyWords):
         for result in arr:
             if not result in results:
                 results.append(result)
+                #print(result.label)
                 coincidencias.append(prepareObject(result))
 
     for onto_key in default_world.ontologies.keys():
@@ -63,7 +64,7 @@ def prepareObject(result):
         "labels": result.label,
         "arregloDeTerminos": [],
         "similitudesSintacticas": [],
-        "promedioSimilitudes": 0,
+        "promedioDistancias": 0,
         "similitudAKeywords": []
     }
     return obj
@@ -104,7 +105,7 @@ def recolectarTerminos(obj, onto):
         for token in PreProcesador.limpiarLabels(labels):
             if not token in obj["arregloDeTerminos"]:
                 obj["arregloDeTerminos"].append(token)
-        #print(obj["labels"][0]," : ",obj["arregloDeTerminos"])
+        print(obj["labels"][0]," : ",obj["arregloDeTerminos"])
 
 def getProperties(objetos):
     rtn = []

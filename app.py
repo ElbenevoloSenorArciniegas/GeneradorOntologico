@@ -24,7 +24,7 @@ def buscar():
 
 
 @app.route('/add/<path:IRI>')
-def addFuenteExterna(IRI):
+def addFuenteExterna(IRI):  
     return AdminFuentes.addFuenteExterna(IRI)
 
 @app.route('/add/local/<path:file_name>')

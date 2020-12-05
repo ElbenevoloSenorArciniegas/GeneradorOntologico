@@ -1,7 +1,7 @@
 
 def tokenizar(label):
 	from nltk.tokenize import word_tokenize
-	return word_tokenize(label)  #ejemplo para oraciones: sent_tokenize(mytext,"french") 
+	return word_tokenize(label)  #ejemplo para oraciones y/o otro idioma: sent_tokenize(mytext,"french") 
 
 def limpiarStopWords(tokens):
 	#Limpieza de stopWords:

@@ -8,7 +8,7 @@ def limpiarCoincidencias(coincidencias, keywords, sinonimos, umbral):
     '''
     #Calcula la similitud con los términos de búsqueda y los sinónimos
     for coincidencia in coincidencias:
-        coincidencia["similitudAKeywords"] = compararConOtrosTerminosBusqueda(coincidencia["arregloDeTerminos"], keywords, sinonimos)
+        coincidencia["similitudAKeywords"] = ponderarPorTerminosBusqueda(coincidencia["arregloDeTerminos"], keywords, sinonimos)
     
     #Los que tengan similitud calculada mayor a 2 se tomarán como referentes
     #Los de similitud menor o igual a 1 se descartarán
@@ -19,7 +19,7 @@ def limpiarCoincidencias(coincidencias, keywords, sinonimos, umbral):
     candidatos = []
     seleccionados = []
     for coincidencia in coincidencias:
-        if coincidencia["similitudAKeywords"] > 2:
+        if coincidencia["similitudAKeywords"] >= 2:
             seleccionados.append(coincidencia)
         elif coincidencia["similitudAKeywords"] > 1:
             candidatos.append(coincidencia)
@@ -37,26 +37,26 @@ def limpiarCoincidencias(coincidencias, keywords, sinonimos, umbral):
     for candidato in candidatos:
         #Llena e inicializa el arreglo con n ceros
         candidato["similitudesSintacticas"] = [0 for x in range(len(terminosReferentes))]
-        promedioSimilitudes = compararPorTablasDeSimilitud(candidato,terminosReferentes) / candidato["similitudAKeywords"]
-        candidato["promedioSimilitudes"] = promedioSimilitudes
-        if promedioSimilitudes > mayor: 
-            mayor = promedioSimilitudes
-        elif promedioSimilitudes < menor: 
-            menor = promedioSimilitudes
-        print(candidato["labels"][0].replace(" ","_"), candidato["similitudesSintacticas"],candidato["promedioSimilitudes"],candidato["similitudAKeywords"])
+        promedioDistancias = compararPorTablasDeDistancia(candidato,terminosReferentes) / candidato["similitudAKeywords"]
+        candidato["promedioDistancias"] = promedioDistancias
+        if promedioDistancias > mayor: 
+            mayor = promedioDistancias
+        elif promedioDistancias < menor: 
+            menor = promedioDistancias
+        print(candidato["labels"][0].replace(" ","_"), candidato["similitudesSintacticas"],candidato["promedioDistancias"],candidato["similitudAKeywords"])
     print("$$$$$$$$$$$$$$$$")
     
     rtn = seleccionados
     valorLimite = mayor - (mayor-menor)*umbral/100
     print(valorLimite)
     for candidato in candidatos:
-        if candidato["promedioSimilitudes"] <= valorLimite:
+        if candidato["promedioDistancias"] <= valorLimite:
             rtn.append(candidato)
     return rtn
 '''
 #####################################################################################
 '''
-def compararPorTablasDeSimilitud(obj, referentes):
+def compararPorTablasDeDistancia(obj, referentes):
 
     tabla = crearTabla(obj,referentes)
     len1= len(obj["arregloDeTerminos"])
@@ -105,20 +105,19 @@ def getMinimos(tabla, x,y, invertirSentido= False):
 ######################################################################################3
 '''
 
-def compararConOtrosTerminosBusqueda(arregloDeTerminos, keywords, sinonimos):
-    mayor = 1
-    countTotal = 0
-    countWords = 1
+def ponderarPorTerminosBusqueda(arregloDeTerminos, keywords, sinonimos):
+    acumulador = 0
+    contador = 1
     for termino in arregloDeTerminos:
         for word in keywords + sinonimos:
             if termino.find(word) > -1:
                 peso = ponderarSegunAparicion(termino,word)
                 if word in sinonimos:
                     peso /= 2
-                countWords += (peso >= 0.5)
-                countTotal += peso
+                contador += (peso >= 0.5)
+                acumulador += peso
     #Es un valor divisor en la fórmula siguiente. Es peligroso dejarlo en 0
-    return countWords/len(keywords) * (1 + countTotal/(len(arregloDeTerminos)*len(keywords)))
+    return contador/len(keywords) * (1 + acumulador/(len(arregloDeTerminos)*len(keywords)))
 
 def ponderarSegunAparicion(termino, word):
     peso = 0.25
