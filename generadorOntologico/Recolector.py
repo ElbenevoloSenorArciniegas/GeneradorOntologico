@@ -2,11 +2,12 @@ from generadorOntologico import Comparador, Generador, Formateador, PreProcesado
 from exploradorRecursos import AdminFuentes
 from owlready2 import owl_class
 
-def buscar(keyWords, umbral, formato):
+def buscar(keyWords, umbral, formato, lang):
 
     global default_world
     default_world = AdminFuentes.getMoK()
 
+    PreProcesador.setLanguage(lang)
     coincidencias = busquedaExtendida(keyWords)
 
     nombre = ""
