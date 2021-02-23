@@ -7,13 +7,63 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Index</title>
   <link rel="stylesheet" href='/static/style.css' />
+  <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.3.1/flatly/bootstrap.min.css">
+  <link href="/static/tagsinput.css" rel="stylesheet" type="text/css">
+
 </head>
 
 <body>
 	<header>
-	  <h1>Index</h1>
+	  <h1>Kvasir - ontologies</h1>
+      <h6>Una pequeña descripción sobre lo grandiosos que somos</h6>
 	</header>
-	<p>Sería bueno darle personalidad y apariencia propia al proyecto con un home estático; eso lo individualiza.</p>
+    <hr>
+    <div class="container">
+        <h5>Escribe unas palabras y genera una ontología referente</h5>
+        <div class="busqueda row">
+            <div class="form-group col-sm-12 col-md-6">
+                <label>Términos de búsqueda:</label>
+                <input id="keywords" type="text" data-role="tagsinput" value="covid,test" class="form-control">
+            </div>
+            <div class="form-group col-sm-6 col-md-3">
+                <label>Formatos de salida:</label>
+                <div>
+                   <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                      <label class="btn btn-secondary active">
+                        <input type="radio" name="options" id="rdf" autocomplete="off" checked> rdf/xml
+                      </label>
+                      <label class="btn btn-secondary">
+                        <input type="radio" name="options" id="n3" autocomplete="off"> n-triples
+                      </label>
+                      <label class="btn btn-secondary">
+                        <input type="radio" name="options" id="json" autocomplete="off"> json-ld
+                      </label>
+                   </div>
+                </div>
+            </div>
+            <div class="form-group col-sm-6 col-md-3">
+                <label>Porcentaje de aceptación:</label>
+                <input id="accept" type="number" min="0" max="100" value="70" class="form-control">
+            </div>
+        </div>
+        <div class="flex">
+            <button type="button" class="btn btn-info botonSubmit">Generar</button>
+        </div>
+        <hr>
+        <div class="md-form resultado">
+            <label for="resultado">Ontología generada:</label>
+            <textarea id="resultado" class="md-textarea form-control" rows="5"></textarea>
+        </div>
+    </div>
+    <footer>
+        2021
+    </footer>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
+<script src="/static/tagsinput.js"></script>
 </body>
 
 </html>

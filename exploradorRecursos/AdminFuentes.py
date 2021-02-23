@@ -32,7 +32,7 @@ y se necesita añadir o eliminar alguna fuente?
 
 def addFuenteLocal(file_name):
     #No necesitan un tratamiento distinto. Es posible que en un futuro, o con el uso de otra librería.
-   return addFuente(file_name)
+   return addFuente(PATH+file_name)
 
 def addFuenteExterna(IRI):
     return addFuente(IRI)

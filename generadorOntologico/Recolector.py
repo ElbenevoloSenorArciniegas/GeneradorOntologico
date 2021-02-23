@@ -22,8 +22,8 @@ def buscar(keyWords, umbral, formato, lang):
     ontoGenerada = Generador.generarOnto(nombre[:-1],coincidencias)
 
     ontoFormateada = Formateador.formatearOnto(ontoGenerada, formato)
-    AdminFuentes.closeMoK()
-    Generador.closeMoK()
+    #AdminFuentes.closeMoK()
+    Generador.closeMoK(nombre[:-1])
     return ontoFormateada
 '''
 #####################################################################################

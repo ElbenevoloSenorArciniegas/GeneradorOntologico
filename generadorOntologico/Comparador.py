@@ -29,11 +29,11 @@ def limpiarCoincidencias(coincidencias, keywords, sinonimos, umbral):
         for terminoReferente in seleccionado["arregloDeTerminos"]:
             if terminoReferente not in terminosReferentes:
                 terminosReferentes.append(terminoReferente)
-    print(terminosReferentes)
+    #print(terminosReferentes)
 
     mayor = 0
     menor = 100
-    print("$$$$$$$$$$$$$$$$")
+    #print("$$$$$$$$$$$$$$$$")
     for candidato in candidatos:
         #Llena e inicializa el arreglo con n ceros
         candidato["similitudesSintacticas"] = [0 for x in range(len(terminosReferentes))]
@@ -43,12 +43,12 @@ def limpiarCoincidencias(coincidencias, keywords, sinonimos, umbral):
             mayor = promedioDistancias
         elif promedioDistancias < menor: 
             menor = promedioDistancias
-        print(candidato["labels"][0].replace(" ","_"), candidato["similitudesSintacticas"],candidato["promedioDistancias"],candidato["similitudAKeywords"])
-    print("$$$$$$$$$$$$$$$$")
+        #print(candidato["labels"][0].replace(" ","_"), candidato["similitudesSintacticas"],candidato["promedioDistancias"],candidato["similitudAKeywords"])
+    #print("$$$$$$$$$$$$$$$$")
     
     rtn = seleccionados
     valorLimite = mayor - (mayor-menor)*umbral/100
-    print(valorLimite)
+    #print(valorLimite)
     for candidato in candidatos:
         if candidato["promedioDistancias"] <= valorLimite:
             rtn.append(candidato)

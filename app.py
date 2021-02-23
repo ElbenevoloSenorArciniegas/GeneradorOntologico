@@ -22,7 +22,7 @@ def buscar():
 
     OntoGenerada = Recolector.buscar(keyWords, umbral, formato, lang)
 
-    return "Buscar( "+ request.args.get("keyWords", "") +" ) <hr> " + OntoGenerada
+    return "Buscar( "+ request.args.get("keyWords", "") +" ) <hr> <textarea>" + OntoGenerada +"</textarea>"
 
 
 @app.route('/add/<path:IRI>')

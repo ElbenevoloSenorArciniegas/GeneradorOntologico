@@ -1,9 +1,52 @@
+html{
+    height: 100%;
+}
+body{
+    background: rgb(210,210,210);
+    background: linear-gradient(45deg, rgba(210,210,210,1) 0%, rgba(221,221,221,1) 35%, rgba(238,238,238,1) 68%, rgba(255,255,255,1) 100%);
+    height: 100%;
+}
 header {
-	background-color: #3399ff;
-	font-size: 36pt;
+	background: rgb(2,0,36);
+    background: linear-gradient(135deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(51,153,255,1) 68%, rgba(0,212,255,1) 100%);
+	color: white;
+	padding-left: 1em;
+	padding-top: 4em;
+	padding-bottom: 4em;
+}
+footer{
+    position: fixed;
+    bottom: 0px;
+    text-align: center;
+    width: 100%;
+}
+.container{
+    padding-left: 1em;
 }
 
-h1 {
-	font-size: 36pt;
-	/*color: white;¨*/
+span.badge{
+    font-size: 100%;
+    font-weight: lighter;
+    margin: 0.25em !important;
+}
+
+.busqueda > *{
+    margin-top: 0.5em;
+}
+
+.resultado{
+    min-height: 150px;
+}
+
+.resultado textarea{
+    min-height: 100%;
+    min-width: 100%;
+}
+
+.botonSubmit{
+    width: 30%;
+    margin: auto;
+}
+.flex{
+    display: flex;
 }

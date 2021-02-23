@@ -1,4 +1,5 @@
-from owlready2 import close_world, Ontology, World, types, sync_reasoner_pellet
+from owlready2 import close_world, Ontology, World, types, sync_reasoner_pellet, sync_reasoner
+from util import util
 
 tempWorld = World()
 
@@ -9,10 +10,11 @@ def generarOnto(mainSubject, coincidencias):
     :return: OntoGenerada:  Ontología generada y poblada a la que se le aplica el razonador.
     '''
 
-    for coincidencia in coincidencias:
-        print(str(coincidencia["obj"])," : ",str(coincidencia["obj"].label))
+    #for coincidencia in coincidencias:
+        #print(str(coincidencia["obj"])," : ",str(coincidencia["obj"].label))
     print(len(coincidencias))
 
+    print(mainSubject)
 
     OntoGenerada = Ontology(world=tempWorld, base_iri=mainSubject + "#")
 
@@ -39,24 +41,35 @@ def generarOnto(mainSubject, coincidencias):
         c += 1
     print(c)
 
-    try:
-        #pass
-        return razonar(OntoGenerada)
-    except:
-        return OntoGenerada
+    #pass
+    close_world(OntoGenerada)
+    return razonar(OntoGenerada)
 
 def razonar(OntoGenerada):
     try:
         with OntoGenerada:
-            #pass
-            sync_reasoner_pellet()
-            #sync_reasoner_pellet(infer_property_values=True)
-            #sync_reasoner_hermit(infer_property_values=True)
-    except:
-        print("Exception at Razonar in Generador")
+            sync_reasoner()
+            #sync_reasoner_pellet()
+            # sync_reasoner_pellet(infer_property_values=True)
+            # sync_reasoner(infer_property_values=True)
+            #list(tempWorld.inconsistent_classes())
+    except Exception:
+        util.printException(Exception, "Generador.razonar")
+
+    inconsistentes = list(tempWorld.inconsistent_classes())
+    print("Número de clases inconsistentes: "+ str(len(inconsistentes)))
+    for i in range(len(inconsistentes)):
+        print(inconsistentes[i])
+
     return OntoGenerada
 
-def closeMoK():
+
+
+def closeMoK(mainSubject):
+    from exploradorRecursos import AdminFuentes
+
+    default_world = AdminFuentes.getMoK()
+    default_world.get_ontology(mainSubject+"#").destroy()
+    default_world.save()
     tempWorld.ontologies.clear()
-    close_world(tempWorld)
 #    tempWorld.close()

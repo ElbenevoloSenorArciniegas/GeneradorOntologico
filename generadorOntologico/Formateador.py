@@ -1,13 +1,18 @@
 from io import BytesIO
+from util import util
 
 def formatearOnto(OntoGenerada, formato):
-    if(formato == "json"):
-        result = toJSON_LD(OntoGenerada)
-    elif (formato == "nt"):
-        result = toNTriples(OntoGenerada)
-    else:
-        result = toRDF(OntoGenerada)
-    return result
+    try:
+        if(formato == "json"):
+            result = toJSON_LD(OntoGenerada)
+        elif (formato == "nt"):
+            result = toNTriples(OntoGenerada)
+        else:
+            result = toRDF(OntoGenerada)
+        return result
+    except:
+        util.printException(Exception, "formateardor.formatearOnto")
+        return "Error al convertir la ontología al formato solicitado"
 
 def toJSON_LD(OntoGenerada):
 
