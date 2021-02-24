@@ -14,6 +14,17 @@ header {
 	padding-top: 4em;
 	padding-bottom: 4em;
 }
+.logo{
+    box-shadow: 0 0 8px 8px rgba(255,255,255,0.9);
+    border-radius: 50%;
+    margin-top: -0.25em;
+    margin-left: 1.25em;
+    margin-right: 1.25em;
+    width: 100px;
+    height: 100px;
+    float: left;
+}
+
 footer{
     position: fixed;
     bottom: 0px;
@@ -49,4 +60,38 @@ span.badge{
 }
 .flex{
     display: flex;
+}
+
+.preloader {
+  position: absolute;
+  top:-webkit-calc(50% - 35px);
+  top:-moz-calc(50% - 35px);
+  top:calc(50% - 35px);
+  left:-webkit-calc(50% - 35px);
+  left:-moz-calc(50% - 35px);
+  left:calc(50% - 35px);
+  z-index: 100;
+  display: none;
+  width: 70px;
+  height: 70px;
+  border: 10px solid #ccc;
+  border-top: 10px solid rgba(2,0,36,1);
+  border-radius: 50%;
+  animation-name: girar;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes girar {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.disabled{
+  cursor: not-allowed;
 }
