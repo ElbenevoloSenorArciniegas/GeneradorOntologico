@@ -13,7 +13,7 @@ def buscar(keyWords, umbral, formato, lang):
     nombre = ""
     for word in keyWords:
         word = word.lower()
-        nombre += word+"-"
+        nombre += word+"_"
     for word in sinonimos:
         word = word.lower()
 

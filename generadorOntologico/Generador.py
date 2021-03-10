@@ -1,7 +1,11 @@
-from owlready2 import close_world, Ontology, World, types, sync_reasoner_pellet, sync_reasoner
+from owlready2 import close_world, Ontology, World, types, sync_reasoner_pellet, sync_reasoner, set_log_level
+
+from exploradorRecursos import AdminFuentes
 from util import util
+set_log_level(9)
 
 tempWorld = World()
+default_world = AdminFuentes.getMoK()
 
 def generarOnto(mainSubject, coincidencias):
     '''
@@ -16,24 +20,16 @@ def generarOnto(mainSubject, coincidencias):
 
     print(mainSubject)
 
-    OntoGenerada = Ontology(world=tempWorld, base_iri=mainSubject + "#")
+    OntoGenerada = Ontology(world=default_world, base_iri=mainSubject + "#")
 
     with OntoGenerada:
         for coincidencia in coincidencias:
             class_orig = coincidencia["obj"]
             class_dest = types.new_class(class_orig.name, (class_orig,))
             class_dest.label = class_orig.label
-    '''
-            print(class_orig.is_a)
-            for parent in list(class_orig.is_a):
-                if not isinstance(parent, Thing): class_orig.is_a.remove(parent)  # Bank node
-                class_dest.is_a.append(parent)
-    
-        for clase in objetos:
-            newClass = types.new_class(clase.name, (Thing,))
-        for clase in propiedades:
-            newClass = types.new_class(clase.name, (DataProperty,))
-    '''
+
+    #for i in tempWorld.graph.execute("SELECT * FROM quads where s=322 or p=322 or o=322 or d=322"):
+    #    print(i)
 
     c = 0
     for clase in OntoGenerada.classes():

@@ -10,6 +10,7 @@ function enviarPeticion(){
         type:"GET",
         success: function(response){
             //datos = JSON.parse(response);
+            console.log(response);
             $("#resultado").val(response);
             $(".preloader").css("display", "none");
             $("input, label, button ").toggleClass("disabled");
