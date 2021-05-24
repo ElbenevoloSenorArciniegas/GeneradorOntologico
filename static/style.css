@@ -12,7 +12,7 @@ header {
 	color: white;
 	padding-left: 1em;
 	padding-top: 4em;
-	padding-bottom: 4em;
+	padding-bottom: 3em;
 }
 .logo{
     box-shadow: 0 0 8px 8px rgba(255,255,255,0.9);
@@ -23,6 +23,11 @@ header {
     width: 100px;
     height: 100px;
     float: left;
+    cursor: pointer;
+}
+
+#titulo{
+    cursor: pointer;
 }
 
 footer{
@@ -33,6 +38,14 @@ footer{
 }
 .container{
     padding-left: 1em;
+}
+
+.vista{
+    display: none;
+}
+
+.visible{
+    display: initial;
 }
 
 span.badge{
@@ -52,6 +65,33 @@ span.badge{
 .resultado textarea{
     min-height: 100%;
     min-width: 100%;
+}
+#guardar{
+    float: right;
+}
+
+textarea{
+    color: black;
+}
+
+#menuOpciones{
+    bottom: -2em;
+}
+
+.btn-main{
+    font-size: 1.125rem;
+}
+
+#menuOpciones > *{
+    color: inherit;
+
+    border-bottom: 1px #ddd solid;
+    border-right: 1px #ddd solid;
+    border-round: 5px;
+
+    -webkit-box-shadow: inset -25px -25px 35px -35px rgba(0,0,0,0.11);
+    -moz-box-shadow: inset -25px -25px 35px -35px rgba(0,0,0,0.11);
+    box-shadow: inset -25px -25px 35px -35px rgba(0,0,0,0.11);
 }
 
 .botonSubmit{
@@ -94,4 +134,6 @@ span.badge{
 
 .disabled{
   cursor: not-allowed;
+  pointer-events: none;
 }
+

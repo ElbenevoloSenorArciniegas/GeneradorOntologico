@@ -11,20 +11,32 @@
   <link href="/static/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="/static/tagsinput.css" rel="stylesheet" type="text/css">
   <link href='/static/style.css' rel="stylesheet" type="text/css"/>
-
+  {{ fontawesome_html() }}
 </head>
 
 <body>
 	<header>
-      <img src="/static/favicon.png" class="logo">
-      <div>
-        <h1>Kvasir - ontologies</h1>
-        <h6>Una pequeña descripción sobre lo grandiosos que somos</h6>
-      </div>
+        <img src="/static/favicon.png" class="logo" onclick="cambiarVista('principal')">
+        <div>
+            <h1 id="titulo" onclick="cambiarVista('principal')">Kvasir - ontologies</h1>
+            <h6>//Una pequeña descripción sobre lo grandiosos que somos\\</h6>
+        </div>
+        <!-- Example split button -->
+        <div id="menuOpciones" class="btn-group">
+            <button type="button" class="btn btn-main" onclick="cambiarVista('principal')" >Escribe unas palabras y genera una ontología referente</button>
+            <button type="button" class="btn dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                o también
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="javascript:cambiarVista('api')">Revisa la API de consultas</a>
+              <a class="dropdown-item" href="javascript:cambiarVista('contacto')">Contacta al administrador</a>
+            </div>
+        </div>
 	</header>
-    <hr>
     <div class="container">
-        <h5>Escribe unas palabras y genera una ontología referente</h5>
+
+        <hr>
+    <div id="principal" class="vista visible">
         <div class="busqueda row">
             <div class="form-group col-sm-12 col-md-6">
                 <label>Términos de búsqueda:</label>
@@ -57,8 +69,17 @@
         <hr>
         <div class="md-form resultado">
             <label for="resultado">Ontología generada:</label>
+            <button id="guardar" onclick="saveTextAsFile()" class="btn btn-info disabled">
+                <i class="fas fa-file-download"></i> Guardar
+            </button>
             <textarea id="resultado" class="md-textarea form-control" rows="5" readonly></textarea>
         </div>
+    </div>
+    <div id="api" class="vista">
+        api
+    </div>
+    <div id="contacto" class="vista">
+        contacto
     </div>
     <div class="preloader"></div>
     <footer>

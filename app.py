@@ -2,12 +2,15 @@ from generadorOntologico import Recolector
 from exploradorRecursos import AdminFuentes
 
 from flask import Flask, request, render_template
+from flask_fontawesome import FontAwesome
 
 app = Flask(__name__)
+fa = FontAwesome(app)
 
 @app.route('/')
 def hello_world():
     return render_template("index.html")
+
 
 #Requiere Flask 1.1 para lo de los parámetros dentro de la ruta
 
