@@ -8,18 +8,26 @@ def buscar(keyWords, umbral, formato, lang):
     default_world = AdminFuentes.getMoK()
 
     PreProcesador.setLanguage(lang)
+
+    global keyWordsOriginales
+    keyWordsOriginales = keyWords
+    for i in range(len(keyWords)):
+        keyword = keyWords[i]
+        keyWords[i] = {
+            "keyword": keyword,
+            "sinonimos": [keyword]
+        }
+
     coincidencias = busquedaExtendida(keyWords)
 
     nombre = ""
     for word in keyWords:
-        word = word.lower()
+        word = word["keyword"].lower()
         nombre += word+"_"
-    for word in sinonimos:
-        word = word.lower()
 
-    coincidencias = Comparador.limpiarCoincidencias(coincidencias,keyWords, sinonimos, umbral)
+    coincidencias = Comparador.limpiarCoincidencias(coincidencias,keyWords, umbral)
 
-    ontoGenerada = Generador.generarOnto(nombre[:-1],coincidencias)
+    ontoGenerada = Generador.generarOnto(nombre[:-1],keyWords, coincidencias)
 
     ontoFormateada = Formateador.formatearOnto(ontoGenerada, formato)
     #AdminFuentes.closeMoK()
@@ -32,16 +40,16 @@ def busquedaExtendida(keyWords):
     coincidencias = []
     results = []
 
-    global sinonimos
-    sinonimos = PreProcesador.obtenerSinonimos(keyWords)
-    for word in keyWords+sinonimos:
+    keyWords = PreProcesador.obtenerSinonimos(keyWords)
+    for keyword in keyWords:
+        for word in keyword["sinonimos"]:
 
-        arr = default_world.search(label="*" + word + "*", type= owl_class, _case_sensitive=False)
-        for result in arr:
-            if not result in results:
-                results.append(result)
-                #print(result.label)
-                coincidencias.append(prepareObject(result))
+            arr = default_world.search(label="*" + word + "*", type= owl_class, _case_sensitive=False)
+            for result in arr:
+                if not result in results:
+                    results.append(result)
+                    #print(result.label)
+                    coincidencias.append(prepareObject(result))
 
     for onto_key in default_world.ontologies.keys():
         #print(onto_key)
@@ -66,8 +74,13 @@ def prepareObject(result):
         "arregloDeTerminos": [],
         "similitudesSintacticas": [],
         "promedioDistancias": 0,
-        "similitudAKeywords": []
+        "similitudAKeywords": 0,
+        "similitud": {}
     }
+    for word in keyWordsOriginales:
+        ##obj["similitud"][word] = 0
+        pass
+
     return obj
 
 def recolectarTerminos(obj, onto):

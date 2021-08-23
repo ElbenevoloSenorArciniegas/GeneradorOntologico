@@ -2,6 +2,7 @@ from nltk.corpus import stopwords, wordnet
 from nltk.tokenize import word_tokenize
 from nltk.stem import SnowballStemmer
 import string
+import re
 
 languages = {
 	"spa" : {'name':'spanish','lgCode':'ES'},
@@ -46,23 +47,26 @@ def obtenerSinonimos_NLTK_WN(word, lemas):
 
 def obtenerSinonimos(keyWords):
 	#Sinónimos de wordnet
-	sinonimos = []
-	lemas = []
-	for word in keyWords:
+	for keyword in keyWords:
+		lemas = []
+		word = keyword["keyword"]
 		lemas.append(word)
 		lemas = obtenerSinonimos_NLTK_WN(word, lemas)
 		#sinonimos = obtenerSinonimos_WN(word, sinonimos)
 		lemas = obtenerSinonimos_BabelNet(word, lemas)
 
-	for lemma in lemas:
-		lemma = lemma.lower()
-		tokens = limpiarLabels(lemma.split("_"))
-		for token in tokens:
-			if not token in sinonimos:
-				sinonimos.append(token)
-
+		for lemma in lemas:
+			lemma = lemma.lower()
+			tokens = limpiarLabels(re.split('_|-| ', lemma))
+			objReferente = {"lemma": lemma,"tokens":[]}
+			for token in tokens:
+				token = token.lower()
+				objReferente["tokens"].append(token)
+				if not token in keyword["sinonimos"]:
+					keyword["sinonimos"].append(token)
+		#print({ "lemma": objReferente["lemma"],"tokens": tuple(objReferente["tokens"]) })
 	#print(sinonimos)
-	return sinonimos
+	return keyWords
 
 def tokenizar(label):
 	return word_tokenize(label,languages[lang]['name'])
@@ -95,3 +99,36 @@ def limpiarLabels(labels):
 			if not token in rtn:
 				rtn.append(token)
 	return rtn
+
+#Revisar esto
+# https://github.com/jackee777/babelnetpy
+# https://github.com/jmccrae/yuzu
+def buscarPalabraWordnet(words):
+	processed_words = words
+	for word in words:
+		processed_words += limpiarLabels(re.split('-', word))
+		processed_words += limpiarLabels(re.split('_', word))
+		processed_words += limpiarLabels(re.split(' ', word))
+	print(processed_words)
+	from py_babelnet.calls import BabelnetAPI
+	api = BabelnetAPI('eebba5eb-276a-44b8-87ca-555d8567e722')
+	for word in processed_words:
+		"""
+		senses = api.get_senses(lemma=word, searchLang=languages[lang]['lgCode'])
+		for sense in senses:
+			lemma = sense["properties"]["simpleLemma"]
+			id = sense["properties"]['synsetID']['id']
+			print(sense)
+			#print(word,id,lemma)
+		"""
+		synsets = api.get_synset_ids(lemma=word, searchLang=languages[lang]['lgCode'])
+		for synset in synsets:
+			synset_completo = api.get_synset(id=synset["id"])
+			senses = []
+			for sense in synset_completo["senses"]:
+				senses.append(sense["properties"]["simpleLemma"])
+
+			print(word,synset["id"],senses)
+
+
+	#return lemma

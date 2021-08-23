@@ -10,8 +10,11 @@ fa = FontAwesome(app)
 @app.route('/')
 def hello_world():
     return render_template("index.html")
-
-
+"""
+@app.route('/admin')
+def hello_world():
+    return render_template("admin.html")
+"""
 #Requiere Flask 1.1 para lo de los parámetros dentro de la ruta
 
 @app.route('/search')

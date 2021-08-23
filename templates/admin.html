@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Kvasir - onto</title>
+  <link rel="icon" type="image/png" href="/static/favicon.png" sizes="130x130">
+  <link href="/static/jquerysctipttop.css" rel="stylesheet" type="text/css">
+  <link href="/static/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="/static/tagsinput.css" rel="stylesheet" type="text/css">
+  <link href='/static/style.css' rel="stylesheet" type="text/css"/>
+  {{ fontawesome_html() }}
+</head>
+
+<body>
+	<header>
+        <img src="/static/favicon.png" class="logo" onclick="cambiarVista('principal')">
+        <div>
+            <h1 id="titulo" onclick="cambiarVista('principal')">Kvasir - ontologies</h1>
+            <h6>//Una pequeña descripción sobre lo grandiosos que somos\\</h6>
+        </div>
+        <!-- Example split button -->
+        <div id="menuOpciones" class="btn-group">
+            <button type="button" class="btn btn-main" onclick="cambiarVista('principal')" >Escribe unas palabras y genera una ontología referente</button>
+            <button type="button" class="btn dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                o también
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="javascript:cambiarVista('api')">Revisa la API de consultas</a>
+              <a class="dropdown-item" href="javascript:cambiarVista('contacto')">Contacta al administrador</a>
+            </div>
+        </div>
+	</header>
+    <div class="container">
+
+        <hr>
+    <div id="principal" class="vista visible">
+        ADMIN
+        </div>
+        <div class="flex">
+            <button type="button" class="btn btn-info botonSubmit" onclick="enviarPeticion()">Generar</button>
+        </div>
+        <hr>
+        <div class="md-form resultado">
+            <label for="resultado">Ontología generada:</label>
+            <button id="guardar" onclick="saveTextAsFile()" class="btn btn-info disabled">
+                <i class="fas fa-file-download"></i> Guardar
+            </button>
+            <textarea id="resultado" class="md-textarea form-control" rows="5" readonly></textarea>
+        </div>
+    </div>
+    <div id="api" class="vista">
+        api
+    </div>
+    <div id="contacto" class="vista">
+        contacto
+    </div>
+    <div class="preloader"></div>
+    <footer>
+        2021
+    </footer>
+<script src="/static/jquery-3.3.1.min.js"></script>
+<script src="/static/popper.min.js" ></script>
+<script src="/static/bootstrap.min.js" ></script>
+<script src="/static/typeahead.bundle.min.js"></script>
+<script src="/static/tagsinput.js"></script>
+<script src="/static/home.js"></script>
+</body>
+
+</html>
