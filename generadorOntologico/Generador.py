@@ -46,15 +46,11 @@ def generarOnto(mainSubject, keyWords, coincidencias):
             Enlazador.buscarURIEnlaceWordnet(word, clasePrincipal)
 
         for coincidencia in coincidencias:
-            '''
-            #print(coincidencia["obj"].subclasses(), coincidencia["obj"].ancestors())
-            print(coincidencia["obj"].is_a)
-            for super in coincidencia["obj"].is_a:
-                print(isinstance(super, Restriction))'''
 
             class_orig = coincidencia["obj"]
             class_dest = types.new_class(class_orig.name, (Thing,))
             class_dest.label = class_orig.label
+            class_dest.equivalent_to.append(class_orig)
 
             for padre in coincidencia["padres"]:
                 print(class_dest.label, "is a", padre.label)
@@ -67,12 +63,16 @@ def generarOnto(mainSubject, keyWords, coincidencias):
             mutex -= 1
             Enlazador.buscarURIEnlaceWordnet(coincidencia["labels"][0], class_dest)
 
-            for keyword in keyWords:
-                word = keyword["keyword"]
-                valorSimilitudTermino = coincidencia["similitud"][word]
-                if valorSimilitudTermino >= 2:
-                    clasePrincipal = keyword["clase"]
-                    class_dest.is_a.append(clasePrincipal)
+            if coincidencia["nivel"] == 2:
+                for keyword in keyWords:
+                    word = keyword["keyword"]
+                    valorSimilitudTermino = coincidencia["similitud"][word]
+                    if valorSimilitudTermino >= 2:
+                        clasePrincipal = keyword["clase"]
+                        class_dest.is_a.append(clasePrincipal)
+            elif coincidencia["nivel"] == 3:
+                for referencia in coincidencia["ReferenciadoA"]:
+                    class_dest.is_a.append(referencia["obj"])
 
     '''
     print("$$$$$$$$$$$$$$$$ FINAL $$$$$$$$$$$$$$$$$$$$")
@@ -82,10 +82,11 @@ def generarOnto(mainSubject, keyWords, coincidencias):
         c += 1
     print(c)
     '''
+    print("Esperando por peticiones")
     while mutex < 0:
         time.sleep(0.1)
         pass
-
+    print("Peticiones finalizadas")
     close_world(default_world)
     return razonar()
     # return  OntoGenerada
@@ -102,7 +103,7 @@ def enlazarConceptos(nombreConceptoDbPedia, concepto):
 def continuarProceso():
     global mutex
     mutex += 1
-    print(mutex)
+    #print(mutex)
 
 
 def razonar():

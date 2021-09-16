@@ -1,4 +1,4 @@
-from util.util import imprimirDatosSimilitudes
+from util import util
 
 
 def limpiarCoincidencias(coincidencias, keywords, umbral):
@@ -8,9 +8,12 @@ def limpiarCoincidencias(coincidencias, keywords, umbral):
     :param keywords:
     :return:
     '''
+
+    arregloKeywords = []
     #Calcula la similitud con los términos de búsqueda y los sinónimos
     for keyword in keywords:
         word = keyword["keyword"]
+        arregloKeywords.append(word)
         for coincidencia in coincidencias:
             valorSimilitud = ponderarPorTerminosBusqueda(coincidencia["arregloDeTerminos"], [word], keyword["sinonimos"])
             coincidencia["similitud"][word] = valorSimilitud
@@ -27,34 +30,39 @@ def limpiarCoincidencias(coincidencias, keywords, umbral):
     for coincidencia in coincidencias:
         coincidencia["similitudAKeywords"] /= len(keywords)
         if coincidencia["similitudAKeywords"] >= 2:
+            coincidencia["nivel"] = 2 #Nivel hace referencia a qué tan cerca de la raiz del árbol estará el término
             seleccionados.append(coincidencia)
         elif coincidencia["similitudAKeywords"] > 1:
+            coincidencia["nivel"] = 3
             candidatos.append(coincidencia)
 
     print("\n\n$$$$$$$$$$$$$$$$  SELECCIONADOS   $$$$$$$$$$$$$$\n\n")
-    imprimirDatosSimilitudes(seleccionados)
-    terminosReferentes = []
-    for seleccionado in seleccionados:
-        for terminoReferente in seleccionado["arregloDeTerminos"]:
-            if terminoReferente not in terminosReferentes:
-                terminosReferentes.append(terminoReferente)
-
-    #print(terminosReferentes)
+    util.imprimirSeleccionados(seleccionados)
 
     mayor = 0
     menor = 100
 
     for candidato in candidatos:
-        #Llena e inicializa el arreglo con n ceros
-        candidato["similitudesSintacticas"] = [0 for x in range(len(terminosReferentes))]
-        promedioDistancias = compararPorTablasDeDistancia(candidato,terminosReferentes) / candidato["similitudAKeywords"]
-        candidato["promedioDistancias"] = promedioDistancias
-        if promedioDistancias > mayor: 
-            mayor = promedioDistancias
-        elif promedioDistancias < menor: 
-            menor = promedioDistancias
+        similitudASeleccionados = 0
+        candidato["ReferenciadoA"] = []
+        for seleccionado in seleccionados:
+            label = seleccionado["obj"].label[0]
+            valorSimilitud = ponderarPorTerminosBusqueda(candidato["arregloDeTerminos"], arregloKeywords, seleccionado["arregloDeTerminos"])
+            candidato["similitud"][label] = valorSimilitud
+            similitudASeleccionados += valorSimilitud
+
+            if valorSimilitud >= 1:
+                candidato["ReferenciadoA"].append(seleccionado)
+
+        similitudASeleccionados /= len(seleccionados)
+        candidato["similitudASeleccionados"] = similitudASeleccionados
+
+        if similitudASeleccionados > mayor:
+            mayor = similitudASeleccionados
+        elif similitudASeleccionados < menor:
+            menor = similitudASeleccionados
     print("\n\n$$$$$$$$$$$$$$$$ CANDIDATOS $$$$$$$$$$$$$$$$$$$$$$$$$\n\n")
-    imprimirDatosSimilitudes(candidatos,orderBy="promedioDistancias",asc=False)
+    util.imprimirCandidatos(candidatos, detalle=False)
 
     print("\n\n$$$$$$$$$   VALOR LÍMITE  $$$$$$$\n\n")
     rtn = seleccionados
@@ -63,11 +71,11 @@ def limpiarCoincidencias(coincidencias, keywords, umbral):
 
     candidatosSeleccionados = []
     for candidato in candidatos:
-        if candidato["promedioDistancias"] <= valorLimite:
+        if candidato["similitudASeleccionados"] >= valorLimite:
             rtn.append(candidato)
             candidatosSeleccionados.append(candidato)
     print("\n\n$$$$$$$$$   CANDIDATOS SELECCIONADOS  $$$$$$$\n\n")
-    imprimirDatosSimilitudes(candidatosSeleccionados,orderBy="promedioDistancias",asc=False)
+    util.imprimirCandidatos(candidatosSeleccionados, detalle=True)
 
     return rtn
 '''

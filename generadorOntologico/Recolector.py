@@ -77,6 +77,7 @@ def prepareObject(result):
         "similitudesSintacticas": [],
         "promedioDistancias": 0,
         "similitudAKeywords": 0,
+        "similitudASeleccionados": 0,
         "similitud": {}
     }
     for word in keyWordsOriginales:
