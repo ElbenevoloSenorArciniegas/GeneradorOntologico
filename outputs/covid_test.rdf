@@ -1,0 +1,221 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xml:base="covid_test"
+         xmlns="covid_test#">
+
+<owl:Ontology rdf:about="covid_test"/>
+
+<owl:Class rdf:about="#covid">
+  <rdfs:subClassOf rdf:resource="#covid_test"/>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">covid</rdfs:label>
+</owl:Class>
+
+<owl:Class rdf:about="#test">
+  <rdfs:subClassOf rdf:resource="#covid_test"/>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">test</rdfs:label>
+</owl:Class>
+
+<owl:Class rdf:about="#covid_test">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">covid_test</rdfs:label>
+</owl:Class>
+
+<rdf:Description rdf:about="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000000">
+  <rdfs:subClassOf rdf:resource="#covid"/>
+  <rdfs:subClassOf rdf:resource="file:///C:/Users/fredi/AppData/Local/Temp/covid_test#covid"/>
+  <owl:equivalentClass rdf:resource="http://dbpedia.org/resource/MAIDS_report"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000001">
+  <rdfs:subClassOf rdf:resource="#test"/>
+  <rdfs:subClassOf rdf:resource="file:///C:/Users/fredi/AppData/Local/Temp/covid_test#test"/>
+  <rdfs:subClassOf rdf:resource="http://dbpedia.org/resource/Ricky_McCormick's_encrypted_notes"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000014">
+  <rdfs:subClassOf rdf:resource="#covid"/>
+  <rdfs:subClassOf rdf:resource="file:///C:/Users/fredi/AppData/Local/Temp/covid_test#covid"/>
+  <owl:equivalentClass rdf:resource="http://dbpedia.org/resource/Ricky_McCormick's_encrypted_notes"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000002">
+  <rdfs:subClassOf rdf:resource="http://dbpedia.org/resource/MAIDS_report"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000003">
+  <rdfs:subClassOf rdf:resource="http://dbpedia.org/resource/Ricky_McCormick's_encrypted_notes"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000004">
+  <rdfs:subClassOf rdf:resource="http://dbpedia.org/resource/Ricky_McCormick's_encrypted_notes"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000005">
+  <rdfs:subClassOf rdf:resource="http://dbpedia.org/resource/MAIDS_report"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000006">
+  <rdfs:subClassOf rdf:resource="http://dbpedia.org/resource/MAIDS_report"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000007">
+  <rdfs:subClassOf rdf:resource="#covid"/>
+  <rdfs:subClassOf rdf:resource="file:///C:/Users/fredi/AppData/Local/Temp/covid_test#covid"/>
+  <owl:equivalentClass rdf:resource="http://dbpedia.org/resource/Peter_Coad"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000008">
+  <rdfs:subClassOf rdf:resource="#test"/>
+  <rdfs:subClassOf rdf:resource="file:///C:/Users/fredi/AppData/Local/Temp/covid_test#test"/>
+  <rdfs:subClassOf rdf:resource="http://dbpedia.org/resource/Peter_Coad"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000009">
+  <rdfs:subClassOf rdf:resource="#covid"/>
+  <owl:equivalentClass rdf:resource="http://dbpedia.org/resource/CBterm"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000010">
+  <rdfs:subClassOf rdf:resource="http://dbpedia.org/resource/CBterm"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000011">
+  <rdfs:subClassOf rdf:resource="http://dbpedia.org/resource/Ricky_McCormick's_encrypted_notes"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000012">
+  <rdfs:subClassOf rdf:resource="#covid"/>
+  <rdfs:subClassOf rdf:resource="#test"/>
+  <rdfs:subClassOf rdf:resource="file:///C:/Users/fredi/AppData/Local/Temp/covid_test#test"/>
+  <rdfs:subClassOf rdf:resource="file:///C:/Users/fredi/AppData/Local/Temp/covid_test#covid"/>
+  <owl:equivalentClass rdf:resource="http://dbpedia.org/resource/Pearl_body"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000013">
+  <rdfs:subClassOf rdf:resource="#test"/>
+  <rdfs:subClassOf rdf:resource="http://dbpedia.org/resource/Pearl_body"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000015">
+  <rdfs:subClassOf rdf:resource="#test"/>
+  <rdfs:subClassOf rdf:resource="file:///C:/Users/fredi/AppData/Local/Temp/covid_test#test"/>
+  <rdfs:subClassOf rdf:resource="http://dbpedia.org/resource/Ricky_McCormick's_encrypted_notes"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000016">
+  <rdfs:subClassOf rdf:resource="http://dbpedia.org/resource/Ricky_McCormick's_encrypted_notes"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000017">
+  <rdfs:subClassOf rdf:resource="http://dbpedia.org/resource/Ricky_McCormick's_encrypted_notes"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000018">
+  <rdfs:subClassOf rdf:resource="http://dbpedia.org/resource/Ricky_McCormick's_encrypted_notes"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000019">
+  <rdfs:subClassOf rdf:resource="http://dbpedia.org/resource/Ricky_McCormick's_encrypted_notes"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000020">
+  <rdfs:subClassOf rdf:resource="http://dbpedia.org/resource/Ricky_McCormick's_encrypted_notes"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000021">
+  <rdfs:subClassOf rdf:resource="http://dbpedia.org/resource/Ricky_McCormick's_encrypted_notes"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000022">
+  <rdfs:subClassOf rdf:resource="http://dbpedia.org/resource/Ricky_McCormick's_encrypted_notes"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000023">
+  <rdfs:subClassOf rdf:resource="http://dbpedia.org/resource/Ricky_McCormick's_encrypted_notes"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000024">
+  <rdfs:subClassOf rdf:resource="http://dbpedia.org/resource/Ricky_McCormick's_encrypted_notes"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000025">
+  <rdfs:subClassOf rdf:resource="http://dbpedia.org/resource/Ricky_McCormick's_encrypted_notes"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000026">
+  <rdfs:subClassOf rdf:resource="#covid"/>
+  <rdfs:subClassOf rdf:resource="#test"/>
+  <owl:equivalentClass rdf:resource="http://dbpedia.org/resource/Maurice_Bishop"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000027">
+  <rdfs:subClassOf rdf:resource="http://dbpedia.org/resource/Maurice_Bishop"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000028">
+  <rdfs:subClassOf rdf:resource="http://dbpedia.org/resource/Maurice_Bishop"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000029">
+  <rdfs:subClassOf rdf:resource="#test"/>
+  <rdfs:subClassOf rdf:resource="http://dbpedia.org/resource/Maurice_Bishop"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000030">
+  <rdfs:subClassOf rdf:resource="http://dbpedia.org/resource/Maurice_Bishop"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000031">
+  <rdfs:subClassOf rdf:resource="#test"/>
+  <rdfs:subClassOf rdf:resource="http://dbpedia.org/resource/Maurice_Bishop"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000032">
+  <rdfs:subClassOf rdf:resource="#covid"/>
+  <rdfs:subClassOf rdf:resource="file:///C:/Users/fredi/AppData/Local/Temp/covid_test#covid"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000053">
+  <rdfs:subClassOf rdf:resource="http://dbpedia.org/resource/CBterm"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Pearl_body">
+  <owl:equivalentClass rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000012"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Maurice_Bishop">
+  <rdfs:subClassOf rdf:resource="file:///C:/Users/fredi/AppData/Local/Temp/covid_test#test"/>
+  <rdfs:subClassOf rdf:resource="file:///C:/Users/fredi/AppData/Local/Temp/covid_test#covid"/>
+  <owl:equivalentClass rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000026"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/MAIDS_report">
+  <owl:equivalentClass rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000000"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Ricky_McCormick's_encrypted_notes">
+  <owl:equivalentClass rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000014"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Peter_Coad">
+  <owl:equivalentClass rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000007"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/CBterm">
+  <rdfs:subClassOf rdf:resource="file:///C:/Users/fredi/AppData/Local/Temp/covid_test#covid"/>
+  <owl:equivalentClass rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000009"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="file:///C:/Users/fredi/AppData/Local/Temp/covid_test#covid">
+  <rdfs:subClassOf rdf:resource="file:///C:/Users/fredi/AppData/Local/Temp/covid_test#covid_test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="file:///C:/Users/fredi/AppData/Local/Temp/covid_test#test">
+  <rdfs:subClassOf rdf:resource="file:///C:/Users/fredi/AppData/Local/Temp/covid_test#covid_test"/>
+</rdf:Description>
+
+
+</rdf:RDF>

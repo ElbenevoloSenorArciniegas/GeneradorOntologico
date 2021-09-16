@@ -1,28 +1,21 @@
-import requests
 import urllib
-from owlready2 import Ontology, types, Thing
-from exploradorRecursos import AdminFuentes
+from generadorOntologico import Generador
+from util import AsyncHttp
 
-default_world = AdminFuentes.getMoK()
-OntoDbPedia = Ontology(world=default_world, base_iri="http://dbpedia.org/resource/")
-
-
-def buscarURIEnlaceWordnet(etiqueta):
+def buscarURIEnlaceWordnet(etiqueta, concepto):
     url = "https://lookup.dbpedia.org/api/search/KeywordSearch?MaxHits=1&QueryString="
-    params = urllib.parse.quote_plus(etiqueta)
-    response = requests.get(url+"%22"+params+"%22")
-    result = response.text
-    uriInicio = result.find("<URI>")
-    uriFin = result.find("</URI>")
-    if uriInicio != -1 and uriFin != -1:
-        nombreConcepto = result[uriInicio+5:uriFin]
-        nombreConcepto = nombreConcepto[nombreConcepto.rindex("/")+1:]
-        return enlazarConceptos(nombreConcepto)
-    return None
+    params = urllib.parse.quote_plus(etiqueta.replace("_", " "))
+    url = url+"%22"+params+"%22"
+    AsyncHttp.get_async(url,callback=procesarRespuesta, data=concepto)
 
-
-def enlazarConceptos(nombreConceptoDbPedia):
-    with OntoDbPedia:
-        conceptoDbPedia = types.new_class(nombreConceptoDbPedia, (Thing,))
-
-    return conceptoDbPedia
+def procesarRespuesta(response, concepto):
+    if(response is not None):
+        if(response.status_code == 200):
+            result = response.text
+            uriInicio = result.find("<URI>")
+            uriFin = result.find("</URI>")
+            if uriInicio != -1 and uriFin != -1:
+                nombreConcepto = result[uriInicio + 5:uriFin]
+                nombreConcepto = nombreConcepto[nombreConcepto.rindex("/") + 1:]
+                Generador.enlazarConceptos(nombreConcepto, concepto)
+    Generador.continuarProceso()

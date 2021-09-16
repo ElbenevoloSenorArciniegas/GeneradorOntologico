@@ -72,6 +72,8 @@ def prepareObject(result):
         "obj": result,
         "labels": result.label,
         "arregloDeTerminos": [],
+        "padres": [],
+        "hijos": [],
         "similitudesSintacticas": [],
         "promedioDistancias": 0,
         "similitudAKeywords": 0,
@@ -85,7 +87,9 @@ def prepareObject(result):
 
 def recolectarTerminos(obj, onto):
     if obj["arregloDeTerminos"] == []:
-        
+        obj["padres"] += onto.get_parents_of(obj["obj"])
+        obj["hijos"] += onto.get_children_of(obj["obj"])
+
         associatedClasses = []
         associatedClasses.extend(onto.get_parents_of(obj["obj"]))
         associatedClasses.extend(onto.get_children_of(obj["obj"]))
@@ -119,7 +123,7 @@ def recolectarTerminos(obj, onto):
         for token in PreProcesador.limpiarLabels(labels):
             if not token in obj["arregloDeTerminos"]:
                 obj["arregloDeTerminos"].append(token)
-        print(obj["labels"][0]," : ",obj["arregloDeTerminos"])
+        #print(obj["labels"][0]," : ",obj["arregloDeTerminos"])
 
 def getProperties(objetos):
     rtn = []

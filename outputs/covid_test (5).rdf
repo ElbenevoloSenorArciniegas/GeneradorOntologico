@@ -1,0 +1,1138 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xml:base="covid_test"
+         xmlns="covid_test#">
+
+<owl:Ontology rdf:about="covid_test"/>
+
+<owl:Class rdf:about="#covid">
+  <rdfs:subClassOf rdf:resource="#covid_test"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#subClassOf"/>
+      <owl:allValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Nothing"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="https://bio.scai.fraunhofer.de/ontology/COVID_0000161"/>
+      <owl:allValuesFrom>
+        <owl:Class>
+          <owl:unionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+          </owl:unionOf>
+        </owl:Class>
+      </owl:allValuesFrom>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="https://bio.scai.fraunhofer.de/ontology/COVID_0000302"/>
+      <owl:allValuesFrom rdf:resource="http://purl.obolibrary.org/obo/DOID_0080600"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="https://bio.scai.fraunhofer.de/ontology/COVID_0000400"/>
+      <owl:allValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Nothing"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="https://bio.scai.fraunhofer.de/ontology/COVID_0000403"/>
+      <owl:allValuesFrom rdf:resource="http://purl.obolibrary.org/obo/DOID_0080600"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="https://bio.scai.fraunhofer.de/ontology/COVID_0000405"/>
+      <owl:allValuesFrom>
+        <owl:Class>
+          <owl:unionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+          </owl:unionOf>
+        </owl:Class>
+      </owl:allValuesFrom>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="https://bio.scai.fraunhofer.de/ontology/COVID_0000407"/>
+      <owl:allValuesFrom rdf:resource="http://purl.obolibrary.org/obo/DOID_0080600"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="https://bio.scai.fraunhofer.de/ontology/COVID_0000409"/>
+      <owl:allValuesFrom>
+        <owl:Class>
+          <owl:unionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+          </owl:unionOf>
+        </owl:Class>
+      </owl:allValuesFrom>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="https://bio.scai.fraunhofer.de/ontology/COVID_0000411"/>
+      <owl:allValuesFrom rdf:resource="http://purl.obolibrary.org/obo/DOID_0080600"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">covid</rdfs:label>
+</owl:Class>
+
+<owl:Class rdf:about="#test">
+  <rdfs:subClassOf rdf:resource="#covid_test"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#subClassOf"/>
+      <owl:allValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Nothing"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="https://bio.scai.fraunhofer.de/ontology/COVID_0000161"/>
+      <owl:allValuesFrom>
+        <owl:Class>
+          <owl:unionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+          </owl:unionOf>
+        </owl:Class>
+      </owl:allValuesFrom>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="https://bio.scai.fraunhofer.de/ontology/COVID_0000302"/>
+      <owl:allValuesFrom>
+        <owl:Class>
+          <owl:unionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+          </owl:unionOf>
+        </owl:Class>
+      </owl:allValuesFrom>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="https://bio.scai.fraunhofer.de/ontology/COVID_0000400"/>
+      <owl:allValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Nothing"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="https://bio.scai.fraunhofer.de/ontology/COVID_0000403"/>
+      <owl:allValuesFrom>
+        <owl:Class>
+          <owl:unionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+          </owl:unionOf>
+        </owl:Class>
+      </owl:allValuesFrom>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="https://bio.scai.fraunhofer.de/ontology/COVID_0000405"/>
+      <owl:allValuesFrom>
+        <owl:Class>
+          <owl:unionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+          </owl:unionOf>
+        </owl:Class>
+      </owl:allValuesFrom>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="https://bio.scai.fraunhofer.de/ontology/COVID_0000407"/>
+      <owl:allValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Nothing"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="https://bio.scai.fraunhofer.de/ontology/COVID_0000409"/>
+      <owl:allValuesFrom>
+        <owl:Class>
+          <owl:unionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+          </owl:unionOf>
+        </owl:Class>
+      </owl:allValuesFrom>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="https://bio.scai.fraunhofer.de/ontology/COVID_0000411"/>
+      <owl:allValuesFrom>
+        <owl:Class>
+          <owl:unionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+          </owl:unionOf>
+        </owl:Class>
+      </owl:allValuesFrom>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">test</rdfs:label>
+</owl:Class>
+
+<owl:Class rdf:about="#covid_test">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#subClassOf"/>
+      <owl:allValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Nothing"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="https://bio.scai.fraunhofer.de/ontology/COVID_0000161"/>
+      <owl:allValuesFrom>
+        <owl:Class>
+          <owl:unionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+          </owl:unionOf>
+        </owl:Class>
+      </owl:allValuesFrom>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="https://bio.scai.fraunhofer.de/ontology/COVID_0000302"/>
+      <owl:allValuesFrom>
+        <owl:Class>
+          <owl:unionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+          </owl:unionOf>
+        </owl:Class>
+      </owl:allValuesFrom>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="https://bio.scai.fraunhofer.de/ontology/COVID_0000400"/>
+      <owl:allValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Nothing"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="https://bio.scai.fraunhofer.de/ontology/COVID_0000403"/>
+      <owl:allValuesFrom>
+        <owl:Class>
+          <owl:unionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+          </owl:unionOf>
+        </owl:Class>
+      </owl:allValuesFrom>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="https://bio.scai.fraunhofer.de/ontology/COVID_0000405"/>
+      <owl:allValuesFrom>
+        <owl:Class>
+          <owl:unionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+          </owl:unionOf>
+        </owl:Class>
+      </owl:allValuesFrom>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="https://bio.scai.fraunhofer.de/ontology/COVID_0000407"/>
+      <owl:allValuesFrom rdf:resource="http://purl.obolibrary.org/obo/DOID_0080600"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="https://bio.scai.fraunhofer.de/ontology/COVID_0000409"/>
+      <owl:allValuesFrom>
+        <owl:Class>
+          <owl:unionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+          </owl:unionOf>
+        </owl:Class>
+      </owl:allValuesFrom>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="https://bio.scai.fraunhofer.de/ontology/COVID_0000411"/>
+      <owl:allValuesFrom>
+        <owl:Class>
+          <owl:unionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600"/>
+          </owl:unionOf>
+        </owl:Class>
+      </owl:allValuesFrom>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">covid_test</rdfs:label>
+</owl:Class>
+
+<rdf:Description rdf:about="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000000">
+  <rdfs:subClassOf rdf:resource="#covid"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000001">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000014">
+  <rdfs:subClassOf rdf:resource="#covid"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000007">
+  <rdfs:subClassOf rdf:resource="#covid"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000008">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000009">
+  <rdfs:subClassOf rdf:resource="#covid"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000012">
+  <rdfs:subClassOf rdf:resource="#covid"/>
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000013">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000015">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000022">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000024">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000026">
+  <rdfs:subClassOf rdf:resource="#covid"/>
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000029">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000030">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000031">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000032">
+  <rdfs:subClassOf rdf:resource="#covid"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_0080600">
+  <rdfs:subClassOf rdf:resource="#covid"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/BFO_0000006">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/BFO_0000008">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/BFO_0000009">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/BFO_0000011">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/BFO_0000018">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/BFO_0000026">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/BFO_0000028">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/BFO_0000038">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/BFO_0000148">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/CL_0000492">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/CL_0000624">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/CL_0000792">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_12177">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/DOID_9352">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0000007">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0000722">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0001312">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0100287">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0100288">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0100302">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/IAO_0000027">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0000302">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0000775">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0098687">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0000779">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0000780">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0002223">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0002250">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0002283">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0002285">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0002286">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0002287">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0002292">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0002293">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0002294">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0035710">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0002440">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0002455">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0006959">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0016064">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0002460">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0002526">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0006954">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0002532">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0002534">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0002673">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0050727">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0002679">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0002696">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0050867">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0002772">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0002920">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0006970">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0006986">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0035966">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0009896">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0010744">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0010971">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_1901992">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_1902751">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0014068">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0014074">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0019730">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0030683">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0030968">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0034976">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0031331">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0032388">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0033554">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0034620">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0035967">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0035066">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_2000758">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0036498">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0039501">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0039503">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0039690">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0075528">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0042542">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0042742">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0044832">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0045732">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0045785">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0045787">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0045931">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0046635">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0051251">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0046677">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0046683">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0046730">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0046738">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0048146">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0050871">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0051222">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_1904951">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0051591">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0060139">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0060141">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0060337">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0070542">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0071294">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0071474">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0090026">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0090068">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0090316">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_1903829">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0097066">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_0099738">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_1901216">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_1901989">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_1903364">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_1905897">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/GO_2000514">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/HP_0012649">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/HP_0012647">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/NCIT_C12542">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/NCIT_C13292">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/NCIT_C142470">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/NCIT_C16087">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/NCIT_C25305">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/NCIT_C32055">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/NCIT_C35681">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/NCIT_C35682">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/OGI_0000012">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/OGMS_0000123">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/OGMS_0000083">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/OMIT_0016234">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/OMIT_0018573">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/PR_000025848">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/UBERON_0005177">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.ebi.ac.uk/efo/EFO_0010106">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://bio.scai.fraunhofer.de/ontology/COVID_0000013">
+  <rdfs:subClassOf rdf:resource="#covid"/>
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://bio.scai.fraunhofer.de/ontology/COVID_0000020">
+  <rdfs:subClassOf rdf:resource="#covid"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://bio.scai.fraunhofer.de/ontology/COVID_0000041">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://bio.scai.fraunhofer.de/ontology/COVID_0000044">
+  <rdfs:subClassOf rdf:resource="#covid"/>
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://bio.scai.fraunhofer.de/ontology/COVID_0000047">
+  <rdfs:subClassOf rdf:resource="#covid"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://bio.scai.fraunhofer.de/ontology/COVID_0000093">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://bio.scai.fraunhofer.de/ontology/COVID_0000085">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://bio.scai.fraunhofer.de/ontology/COVID_0000104">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://bio.scai.fraunhofer.de/ontology/COVID_0000109">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://bio.scai.fraunhofer.de/ontology/COVID_0000111">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://bio.scai.fraunhofer.de/ontology/COVID_0000130">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://bio.scai.fraunhofer.de/ontology/COVID_0000135">
+  <rdfs:subClassOf rdf:resource="#covid"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://bio.scai.fraunhofer.de/ontology/COVID_0000137">
+  <rdfs:subClassOf rdf:resource="#covid"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://bio.scai.fraunhofer.de/ontology/COVID_0000140">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://bio.scai.fraunhofer.de/ontology/COVID_0000207">
+  <rdfs:subClassOf rdf:resource="#covid"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://bio.scai.fraunhofer.de/ontology/COVID_0000300">
+  <rdfs:subClassOf rdf:resource="#covid"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://bio.scai.fraunhofer.de/ontology/COVID_0000402">
+  <rdfs:subClassOf rdf:resource="#covid"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://bio.scai.fraunhofer.de/ontology/COVID_0000404">
+  <rdfs:subClassOf rdf:resource="#covid"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://bio.scai.fraunhofer.de/ontology/COVID_0000406">
+  <rdfs:subClassOf rdf:resource="#covid"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://bio.scai.fraunhofer.de/ontology/COVID_0000408">
+  <rdfs:subClassOf rdf:resource="#covid"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://bio.scai.fraunhofer.de/ontology/COVID_0000410">
+  <rdfs:subClassOf rdf:resource="#covid"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.obolibrary.org/obo/CTO_0000220">
+  <rdfs:subClassOf rdf:resource="#test"/>
+</rdf:Description>
+
+
+</rdf:RDF>

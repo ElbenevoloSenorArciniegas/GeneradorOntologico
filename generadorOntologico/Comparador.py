@@ -1,3 +1,5 @@
+from util.util import imprimirDatosSimilitudes
+
 
 def limpiarCoincidencias(coincidencias, keywords, umbral):
     '''
@@ -29,10 +31,10 @@ def limpiarCoincidencias(coincidencias, keywords, umbral):
         elif coincidencia["similitudAKeywords"] > 1:
             candidatos.append(coincidencia)
 
-    print("$$$$$$$$$$$$$$$$")
+    print("\n\n$$$$$$$$$$$$$$$$  SELECCIONADOS   $$$$$$$$$$$$$$\n\n")
+    imprimirDatosSimilitudes(seleccionados)
     terminosReferentes = []
     for seleccionado in seleccionados:
-        print(seleccionado["labels"][0].replace(" ", "_"), seleccionado["similitud"],seleccionado["promedioDistancias"],seleccionado["similitudAKeywords"])
         for terminoReferente in seleccionado["arregloDeTerminos"]:
             if terminoReferente not in terminosReferentes:
                 terminosReferentes.append(terminoReferente)
@@ -41,7 +43,7 @@ def limpiarCoincidencias(coincidencias, keywords, umbral):
 
     mayor = 0
     menor = 100
-    print("$$$$$$$$$$$$$$$$")
+
     for candidato in candidatos:
         #Llena e inicializa el arreglo con n ceros
         candidato["similitudesSintacticas"] = [0 for x in range(len(terminosReferentes))]
@@ -51,15 +53,22 @@ def limpiarCoincidencias(coincidencias, keywords, umbral):
             mayor = promedioDistancias
         elif promedioDistancias < menor: 
             menor = promedioDistancias
-        print(candidato["labels"][0].replace(" ","_"), candidato["similitud"],candidato["promedioDistancias"],candidato["similitudAKeywords"])
-    print("$$$$$$$$$$$$$$$$")
-    
+    print("\n\n$$$$$$$$$$$$$$$$ CANDIDATOS $$$$$$$$$$$$$$$$$$$$$$$$$\n\n")
+    imprimirDatosSimilitudes(candidatos,orderBy="promedioDistancias",asc=False)
+
+    print("\n\n$$$$$$$$$   VALOR LÍMITE  $$$$$$$\n\n")
     rtn = seleccionados
     valorLimite = mayor - (mayor-menor)*umbral/100
-    #print(valorLimite)
+    print("Mayor: ",round(mayor,3), "Menor: ",round(menor,3), "Umbral: ",round(umbral,3),"% \tValor límite: ",round(valorLimite,3))
+
+    candidatosSeleccionados = []
     for candidato in candidatos:
         if candidato["promedioDistancias"] <= valorLimite:
             rtn.append(candidato)
+            candidatosSeleccionados.append(candidato)
+    print("\n\n$$$$$$$$$   CANDIDATOS SELECCIONADOS  $$$$$$$\n\n")
+    imprimirDatosSimilitudes(candidatosSeleccionados,orderBy="promedioDistancias",asc=False)
+
     return rtn
 '''
 #####################################################################################

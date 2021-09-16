@@ -1,12 +1,20 @@
-from owlready2 import close_world, Ontology, types, sync_reasoner, set_log_level, Thing
+import time
 
+from owlready2 import close_world, Ontology, types, sync_reasoner, set_log_level, Thing, World, Restriction
 from exploradorRecursos import AdminFuentes
 from generadorOntologico import Enlazador
 from util import util
-set_log_level(9)
 
-#tempWorld = World()
+#set_log_level(9)
+
+tempWorld = World()
 default_world = AdminFuentes.getMoK()
+
+OntoDbPedia = Ontology(world=default_world, base_iri="http://dbpedia.org/resource/")
+OntoGenerada = None
+
+mutex = 0
+
 
 def generarOnto(mainSubject, keyWords, coincidencias):
     '''
@@ -15,32 +23,49 @@ def generarOnto(mainSubject, keyWords, coincidencias):
     :return: OntoGenerada:  Ontología generada y poblada a la que se le aplica el razonador.
     '''
 
-    #for coincidencia in coincidencias:
-        #print(str(coincidencia["obj"])," : ",str(coincidencia["obj"].label))
     print(len(coincidencias))
-
     print(mainSubject)
 
+    global OntoGenerada
     OntoGenerada = Ontology(world=default_world, base_iri=mainSubject + "#")
 
     with OntoGenerada:
+        global mutex
+
         claseRaiz = types.new_class(mainSubject, (Thing,))
         claseRaiz.label = mainSubject
+        mutex -= 1
+        Enlazador.buscarURIEnlaceWordnet(mainSubject, claseRaiz)
 
         for keyword in keyWords:
             word = keyword["keyword"]
             clasePrincipal = types.new_class(word, (claseRaiz,))
             clasePrincipal.label = word
             keyword["clase"] = clasePrincipal
+            mutex -= 1
+            Enlazador.buscarURIEnlaceWordnet(word, clasePrincipal)
 
         for coincidencia in coincidencias:
+            '''
+            #print(coincidencia["obj"].subclasses(), coincidencia["obj"].ancestors())
+            print(coincidencia["obj"].is_a)
+            for super in coincidencia["obj"].is_a:
+                print(isinstance(super, Restriction))'''
+
             class_orig = coincidencia["obj"]
-            class_dest = types.new_class(class_orig.name, (class_orig,))
+            class_dest = types.new_class(class_orig.name, (Thing,))
             class_dest.label = class_orig.label
 
-            conceptoDbPedia = Enlazador.buscarURIEnlaceWordnet(coincidencia["labels"][0])
-            if conceptoDbPedia is not None:
-                class_dest.equivalent_to.append(conceptoDbPedia)
+            for padre in coincidencia["padres"]:
+                print(class_dest.label, "is a", padre.label)
+                class_dest.is_a.append(padre)
+
+            for hijo in coincidencia["hijos"]:
+                print(hijo.label, "is a", class_dest.label)
+                hijo.is_a.append(class_dest)
+
+            mutex -= 1
+            Enlazador.buscarURIEnlaceWordnet(coincidencia["labels"][0], class_dest)
 
             for keyword in keyWords:
                 word = keyword["keyword"]
@@ -49,18 +74,38 @@ def generarOnto(mainSubject, keyWords, coincidencias):
                     clasePrincipal = keyword["clase"]
                     class_dest.is_a.append(clasePrincipal)
 
-
+    '''
+    print("$$$$$$$$$$$$$$$$ FINAL $$$$$$$$$$$$$$$$$$$$")
     c = 0
     for clase in OntoGenerada.classes():
         print(clase, clase.label,clase.is_a, clase.equivalent_to)
         c += 1
     print(c)
+    '''
+    while mutex < 0:
+        time.sleep(0.1)
+        pass
 
-    #pass
-    close_world(OntoGenerada)
-    return razonar(OntoGenerada)
+    close_world(default_world)
+    return razonar()
+    # return  OntoGenerada
 
-def razonar(OntoGenerada):
+
+def enlazarConceptos(nombreConceptoDbPedia, concepto):
+    with OntoDbPedia:
+        conceptoDbPedia = types.new_class(nombreConceptoDbPedia, (Thing,))
+
+    with OntoGenerada:
+        concepto.equivalent_to.append(conceptoDbPedia)
+
+
+def continuarProceso():
+    global mutex
+    mutex += 1
+    print(mutex)
+
+
+def razonar():
     try:
         with OntoGenerada:
             sync_reasoner()
@@ -68,19 +113,18 @@ def razonar(OntoGenerada):
         util.printException(Exception, "Generador.razonar")
 
     inconsistentes = list(OntoGenerada.inconsistent_classes())
-    print("Número de clases inconsistentes: "+ str(len(inconsistentes)))
+    print("Número de clases inconsistentes: " + str(len(inconsistentes)))
     for i in range(len(inconsistentes)):
         print(inconsistentes[i])
 
     return OntoGenerada
 
 
-
 def closeMoK(mainSubject):
     from exploradorRecursos import AdminFuentes
 
     default_world = AdminFuentes.getMoK()
-    default_world.get_ontology(mainSubject+"#").destroy()
+    default_world.get_ontology(mainSubject + "#").destroy()
     default_world.save()
 #    tempWorld.ontologies.clear()
 #    tempWorld.close()
