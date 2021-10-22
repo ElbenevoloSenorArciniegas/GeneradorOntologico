@@ -23,8 +23,8 @@ def generarOnto(mainSubject, keyWords, coincidencias):
     :return: OntoGenerada:  Ontología generada y poblada a la que se le aplica el razonador.
     '''
 
-    print(len(coincidencias))
-    print(mainSubject)
+    #print(len(coincidencias))
+    #print(mainSubject)
 
     global OntoGenerada
     OntoGenerada = Ontology(world=default_world, base_iri=mainSubject + "#")
@@ -52,16 +52,24 @@ def generarOnto(mainSubject, keyWords, coincidencias):
             class_dest.label = class_orig.label
             class_dest.equivalent_to.append(class_orig)
 
-            for padre in coincidencia["padres"]:
-                print(class_dest.label, "is a", padre.label)
-                class_dest.is_a.append(padre)
+            for equivalente in coincidencia["equivalentes"]:
+                class_dest.equivalent_to.append(equivalente)
+                '''try:
+                    print(class_dest.label, " equivalent to ", equivalente.label)
+                except:
+                    pass
+                '''
 
-            for hijo in coincidencia["hijos"]:
-                print(hijo.label, "is a", class_dest.label)
-                hijo.is_a.append(class_dest)
+            for superclase in coincidencia["superclases"]:
+                class_dest.is_a.append(superclase)
+                '''try:
+                    print(class_dest.label, " is a ", superclase.label)
+                except:
+                    pass
+                '''
 
             mutex -= 1
-            Enlazador.buscarURIEnlaceWordnet(coincidencia["labels"][0], class_dest)
+            Enlazador.buscarURIEnlaceWordnet(coincidencia["label"], class_dest)
 
             if coincidencia["nivel"] == 2:
                 for keyword in keyWords:
@@ -74,19 +82,25 @@ def generarOnto(mainSubject, keyWords, coincidencias):
                 for referencia in coincidencia["ReferenciadoA"]:
                     class_dest.is_a.append(referencia["obj"])
 
-    '''
-    print("$$$$$$$$$$$$$$$$ FINAL $$$$$$$$$$$$$$$$$$$$")
-    c = 0
-    for clase in OntoGenerada.classes():
-        print(clase, clase.label,clase.is_a, clase.equivalent_to)
-        c += 1
-    print(c)
-    '''
-    print("Esperando por peticiones")
+
+    print("\n\nEsperando por peticiones")
     while mutex < 0:
         time.sleep(0.1)
         pass
     print("Peticiones finalizadas")
+
+    print("\n\n$$$$$$$$$$$$$$$$ ONTOLOGÍA GENERADA $$$$$$$$$$$$$$$$$$$$")
+    c = 0
+    for clase in OntoGenerada.classes():
+        print("\n\n", clase, "' " + clase.label[0] + " '")
+        for superclase in clase.is_a:
+            print("::::: is_a   ", superclase,"' ", superclase.label, " '")
+        for equivalente in clase.equivalent_to:
+            print("::::: equivalent_to   ", equivalente,"' ", equivalente.label, " '")
+        c += 1
+    print("\n\n", "Cantidad de clases en la ontología: ", c, "\n\n")
+
+
     close_world(default_world)
     return razonar()
     # return  OntoGenerada

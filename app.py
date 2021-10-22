@@ -21,10 +21,12 @@ def hello_world():
 def buscar():
     keyWords = request.args.get("keyWords", "").split(",")
     formato = request.args.get("format", "").lower()
+    print(formato)
     lang = request.args.get("lang", "").lower()
     if lang == "": lang = "eng"
-    umbral = int(request.args.get("accept", ""))
-    if umbral == "": umbral = 70
+    umbral = int(request.args.get("umbral", default=-1, type=int))
+    print(umbral)
+    if umbral == -1: umbral = 70
 
     OntoGenerada = Recolector.buscar(keyWords, umbral, formato, lang)
 

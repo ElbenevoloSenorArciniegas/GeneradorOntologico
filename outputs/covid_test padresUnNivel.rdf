@@ -10,16 +10,18 @@
 
 <owl:Class rdf:about="#OWLClass_0000000012">
   <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000004"/>
   <rdfs:subClassOf rdf:resource="#covid"/>
   <rdfs:subClassOf rdf:resource="#test"/>
   <owl:equivalentClass rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000012"/>
   <owl:equivalentClass rdf:resource="http://dbpedia.org/resource/Pearl_body"/>
-  <rdfs:label xml:lang="en">Otitis media caused by SARS-CoV-2 (severe acute respiratory syndrome coronavirus 2)</rdfs:label>
   <rdfs:label xml:lang="en">not detected COVID-19</rdfs:label>
+  <rdfs:label xml:lang="en">Otitis media caused by SARS-CoV-2 (severe acute respiratory syndrome coronavirus 2)</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#OWLClass_0000000026">
   <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000017"/>
   <rdfs:subClassOf rdf:resource="#covid"/>
   <rdfs:subClassOf rdf:resource="#test"/>
   <owl:equivalentClass rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000026"/>
@@ -30,10 +32,13 @@
 
 <owl:Class rdf:about="#OWLClass_0000000015">
   <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000004"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000014"/>
+  <rdfs:subClassOf rdf:resource="#covid"/>
   <rdfs:subClassOf rdf:resource="#test"/>
   <owl:equivalentClass rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000015"/>
-  <rdfs:label xml:lang="en">Detection of 2019-nCoV (novel coronavirus) using polymerase chain reaction technique</rdfs:label>
   <rdfs:label xml:lang="en">Infection of upper respiratory tract caused by severe acute respiratory syndrome coronavirus 2</rdfs:label>
+  <rdfs:label xml:lang="en">Detection of 2019-nCoV (novel coronavirus) using polymerase chain reaction technique</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#OWLClass_0000000000">
@@ -62,45 +67,38 @@
 
 <owl:Class rdf:about="#OWLClass_0000000032">
   <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000029"/>
   <rdfs:subClassOf rdf:resource="#covid"/>
+  <rdfs:subClassOf rdf:resource="#test"/>
   <owl:equivalentClass rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000032"/>
-  <rdfs:label xml:lang="en">COVID-19 excluded</rdfs:label>
   <rdfs:label xml:lang="en">isolation due to COVID-19 symptoms</rdfs:label>
+  <rdfs:label xml:lang="en">COVID-19 excluded</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#OWLClass_0000000029">
   <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
-  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000001"/>
-  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000004"/>
-  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000005"/>
-  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000006"/>
-  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000009"/>
-  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000012"/>
-  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000017"/>
-  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000018"/>
   <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000026"/>
-  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000031"/>
-  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000032"/>
-  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000033"/>
-  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000030"/>
-  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000024"/>
-  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000015"/>
+  <rdfs:subClassOf rdf:resource="#covid"/>
+  <rdfs:subClassOf rdf:resource="#test"/>
   <owl:equivalentClass rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000029"/>
-  <rdfs:label xml:lang="en">Excluded</rdfs:label>
   <rdfs:label xml:lang="en">educated about 2019-nCoV (novel coronavirus) infection</rdfs:label>
+  <rdfs:label xml:lang="en">Excluded</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#OWLClass_0000000031">
   <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000029"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000026"/>
   <rdfs:subClassOf rdf:resource="#covid"/>
   <rdfs:subClassOf rdf:resource="#test"/>
   <owl:equivalentClass rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000031"/>
-  <rdfs:label xml:lang="en">education about isolation for infection control</rdfs:label>
   <rdfs:label xml:lang="en">COVID-19 excluded by laboratory test</rdfs:label>
+  <rdfs:label xml:lang="en">education about isolation for infection control</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#OWLClass_0000000009">
   <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000004"/>
   <rdfs:subClassOf rdf:resource="#covid"/>
   <owl:equivalentClass rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000009"/>
   <owl:equivalentClass rdf:resource="http://dbpedia.org/resource/CBterm"/>
@@ -110,6 +108,8 @@
 
 <owl:Class rdf:about="#OWLClass_0000000001">
   <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000014"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000007"/>
   <rdfs:subClassOf rdf:resource="#covid"/>
   <rdfs:subClassOf rdf:resource="#test"/>
   <owl:equivalentClass rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000001"/>
@@ -119,6 +119,9 @@
 
 <owl:Class rdf:about="#OWLClass_0000000030">
   <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000029"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000026"/>
+  <rdfs:subClassOf rdf:resource="#covid"/>
   <rdfs:subClassOf rdf:resource="#test"/>
   <owl:equivalentClass rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000030"/>
   <rdfs:label xml:lang="en">education about cross infection prevention</rdfs:label>
@@ -127,23 +130,10 @@
 
 <owl:Class rdf:about="#OWLClass_0000000022">
   <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
-  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000000"/>
-  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000001"/>
-  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000004"/>
-  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000005"/>
-  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000006"/>
-  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000009"/>
-  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000012"/>
   <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000017"/>
-  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000018"/>
-  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000026"/>
-  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000031"/>
-  <rdfs:subClassOf rdf:resource="https://bio.scai.fraunhofer.de/ontology/COVID_0000013"/>
-  <rdfs:subClassOf rdf:resource="https://bio.scai.fraunhofer.de/ontology/COVID_0000044"/>
-  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/NCIT_C35682"/>
-  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000030"/>
-  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000024"/>
-  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000015"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000014"/>
+  <rdfs:subClassOf rdf:resource="#covid"/>
+  <rdfs:subClassOf rdf:resource="#test"/>
   <owl:equivalentClass rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000022"/>
   <owl:equivalentClass rdf:resource="http://dbpedia.org/resource/Throat_culture"/>
   <rdfs:label xml:lang="en">Close exposure to SARS-CoV-2 (severe acute respiratory syndrome coronavirus 2) infection</rdfs:label>
@@ -152,56 +142,43 @@
 
 <owl:Class rdf:about="#OWLClass_0000000024">
   <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000017"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000014"/>
+  <rdfs:subClassOf rdf:resource="#covid"/>
   <rdfs:subClassOf rdf:resource="#test"/>
   <owl:equivalentClass rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000024"/>
-  <rdfs:label xml:lang="en">Detection of SARS-CoV-2 (severe acute respiratory syndrome coronavirus 2) using polymerase chain reaction technique</rdfs:label>
   <rdfs:label xml:lang="en">nose swab culture positive</rdfs:label>
+  <rdfs:label xml:lang="en">Detection of SARS-CoV-2 (severe acute respiratory syndrome coronavirus 2) using polymerase chain reaction technique</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#OWLClass_0000000004">
   <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000014"/>
   <rdfs:subClassOf rdf:resource="#covid"/>
   <owl:equivalentClass rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000004"/>
-  <rdfs:label xml:lang="en">serotype 2019-nCoV (novel coronavirus)</rdfs:label>
   <rdfs:label xml:lang="en">probable COVID-19</rdfs:label>
+  <rdfs:label xml:lang="en">serotype 2019-nCoV (novel coronavirus)</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#OWLClass_0000000008">
   <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
-  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000001"/>
-  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000004"/>
-  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000005"/>
-  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000006"/>
-  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000009"/>
-  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000012"/>
-  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000017"/>
-  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000018"/>
-  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000026"/>
-  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000030"/>
-  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000024"/>
-  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000015"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000007"/>
+  <rdfs:subClassOf rdf:resource="#covid"/>
+  <rdfs:subClassOf rdf:resource="#test"/>
   <owl:equivalentClass rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000008"/>
-  <rdfs:label xml:lang="en">2019-nCoV (novel coronavirus) detected</rdfs:label>
   <rdfs:label xml:lang="en">SARS-CoV-2 (severe acute respiratory syndrome coronavirus 2) detected</rdfs:label>
+  <rdfs:label xml:lang="en">2019-nCoV (novel coronavirus) detected</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#OWLClass_0000000013">
   <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
-  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000001"/>
-  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000004"/>
-  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000005"/>
-  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000006"/>
-  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000009"/>
   <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000012"/>
-  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000017"/>
-  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000018"/>
-  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000026"/>
-  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000030"/>
-  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000024"/>
-  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000015"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000004"/>
+  <rdfs:subClassOf rdf:resource="#covid"/>
+  <rdfs:subClassOf rdf:resource="#test"/>
   <owl:equivalentClass rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000013"/>
-  <rdfs:label xml:lang="en">Pneumonia caused by SARS-CoV-2 (severe acute respiratory syndrome coronavirus 2)</rdfs:label>
   <rdfs:label xml:lang="en">2019-nCoV (novel coronavirus) not detected</rdfs:label>
+  <rdfs:label xml:lang="en">Pneumonia caused by SARS-CoV-2 (severe acute respiratory syndrome coronavirus 2)</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#covid">
@@ -224,6 +201,7 @@
 
 <owl:Class rdf:about="#DOID_0080600">
   <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/DOID_0080599"/>
   <rdfs:subClassOf rdf:resource="#covid"/>
   <owl:equivalentClass rdf:resource="http://purl.obolibrary.org/obo/DOID_0080600"/>
   <owl:equivalentClass rdf:resource="http://dbpedia.org/resource/Coronavirus_disease_2019"/>
@@ -232,21 +210,16 @@
 
 <owl:Class rdf:about="#COVID_0000013">
   <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/NCIT_C35682"/>
   <rdfs:subClassOf rdf:resource="#covid"/>
   <rdfs:subClassOf rdf:resource="#test"/>
   <owl:equivalentClass rdf:resource="https://bio.scai.fraunhofer.de/ontology/COVID_0000013"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">presumptive positive COVID-19 test</rdfs:label>
 </owl:Class>
 
-<owl:Class rdf:about="#COVID_0000020">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
-  <rdfs:subClassOf rdf:resource="#covid"/>
-  <owl:equivalentClass rdf:resource="https://bio.scai.fraunhofer.de/ontology/COVID_0000020"/>
-  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">COVID-19 suppression</rdfs:label>
-</owl:Class>
-
 <owl:Class rdf:about="#COVID_0000044">
   <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/NCIT_C35682"/>
   <rdfs:subClassOf rdf:resource="#covid"/>
   <rdfs:subClassOf rdf:resource="#test"/>
   <owl:equivalentClass rdf:resource="https://bio.scai.fraunhofer.de/ontology/COVID_0000044"/>
@@ -255,6 +228,7 @@
 
 <owl:Class rdf:about="#COVID_0000047">
   <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/PATO_0002003"/>
   <rdfs:subClassOf rdf:resource="#covid"/>
   <owl:equivalentClass rdf:resource="https://bio.scai.fraunhofer.de/ontology/COVID_0000047"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">clusters of COVID-19
@@ -263,71 +237,24 @@
 
 <owl:Class rdf:about="#COVID_0000135">
   <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/ERO_0000722"/>
   <rdfs:subClassOf rdf:resource="#covid"/>
+  <rdfs:subClassOf rdf:resource="#test"/>
   <owl:equivalentClass rdf:resource="https://bio.scai.fraunhofer.de/ontology/COVID_0000135"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">openEHR-Suspected Covid-19 assessment.v0</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#COVID_0000137">
   <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="https://bio.scai.fraunhofer.de/ontology/COVID_0000087"/>
   <rdfs:subClassOf rdf:resource="#covid"/>
   <owl:equivalentClass rdf:resource="https://bio.scai.fraunhofer.de/ontology/COVID_0000137"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C-19 COVID symptom tracker</rdfs:label>
 </owl:Class>
 
-<owl:Class rdf:about="#COVID_0000207">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
-  <rdfs:subClassOf rdf:resource="#covid"/>
-  <owl:equivalentClass rdf:resource="https://bio.scai.fraunhofer.de/ontology/COVID_0000207"/>
-  <rdfs:label xml:lang="en">COVID risk factor</rdfs:label>
-</owl:Class>
-
-<owl:Class rdf:about="#COVID_0000300">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
-  <rdfs:subClassOf rdf:resource="#covid"/>
-  <owl:equivalentClass rdf:resource="https://bio.scai.fraunhofer.de/ontology/COVID_0000300"/>
-  <rdfs:label xml:lang="en">COVID transmission process</rdfs:label>
-</owl:Class>
-
-<owl:Class rdf:about="#COVID_0000402">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
-  <rdfs:subClassOf rdf:resource="#covid"/>
-  <owl:equivalentClass rdf:resource="https://bio.scai.fraunhofer.de/ontology/COVID_0000402"/>
-  <rdfs:label xml:lang="en">COVID clinical aspect</rdfs:label>
-</owl:Class>
-
-<owl:Class rdf:about="#COVID_0000404">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
-  <rdfs:subClassOf rdf:resource="#covid"/>
-  <owl:equivalentClass rdf:resource="https://bio.scai.fraunhofer.de/ontology/COVID_0000404"/>
-  <rdfs:label xml:lang="en">COVID signs and symptoms</rdfs:label>
-</owl:Class>
-
-<owl:Class rdf:about="#COVID_0000406">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
-  <rdfs:subClassOf rdf:resource="#covid"/>
-  <owl:equivalentClass rdf:resource="https://bio.scai.fraunhofer.de/ontology/COVID_0000406"/>
-  <owl:equivalentClass rdf:resource="http://dbpedia.org/resource/Character_encoding"/>
-  <rdfs:label xml:lang="en">COVID model</rdfs:label>
-</owl:Class>
-
-<owl:Class rdf:about="#COVID_0000408">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
-  <rdfs:subClassOf rdf:resource="#covid"/>
-  <owl:equivalentClass rdf:resource="https://bio.scai.fraunhofer.de/ontology/COVID_0000408"/>
-  <owl:equivalentClass rdf:resource="http://dbpedia.org/resource/Anti-Q_RNA"/>
-  <rdfs:label xml:lang="en">COVID prevention and control</rdfs:label>
-</owl:Class>
-
-<owl:Class rdf:about="#COVID_0000410">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
-  <rdfs:subClassOf rdf:resource="#covid"/>
-  <owl:equivalentClass rdf:resource="https://bio.scai.fraunhofer.de/ontology/COVID_0000410"/>
-  <rdfs:label xml:lang="en">COVID virology</rdfs:label>
-</owl:Class>
-
 <owl:Class rdf:about="#NCIT_C16087">
   <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/NCIT_C15760"/>
   <rdfs:subClassOf rdf:resource="#test"/>
   <owl:equivalentClass rdf:resource="http://purl.obolibrary.org/obo/NCIT_C16087"/>
   <owl:equivalentClass rdf:resource="http://dbpedia.org/resource/Animal_testing"/>
@@ -336,6 +263,7 @@
 
 <owl:Class rdf:about="#NCIT_C35681">
   <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/OGMS_0000018"/>
   <rdfs:subClassOf rdf:resource="#test"/>
   <owl:equivalentClass rdf:resource="http://purl.obolibrary.org/obo/NCIT_C35681"/>
   <owl:equivalentClass rdf:resource="http://dbpedia.org/resource/Type_I_and_type_II_errors"/>
@@ -344,6 +272,7 @@
 
 <owl:Class rdf:about="#NCIT_C35682">
   <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/OGMS_0000018"/>
   <rdfs:subClassOf rdf:resource="#test"/>
   <owl:equivalentClass rdf:resource="http://purl.obolibrary.org/obo/NCIT_C35682"/>
   <owl:equivalentClass rdf:resource="http://dbpedia.org/resource/Fusobacteria"/>
@@ -352,6 +281,7 @@
 
 <owl:Class rdf:about="#COVID_0000109">
   <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/OGMS_0000073"/>
   <rdfs:subClassOf rdf:resource="#test"/>
   <owl:equivalentClass rdf:resource="https://bio.scai.fraunhofer.de/ontology/COVID_0000109"/>
   <owl:equivalentClass rdf:resource="http://dbpedia.org/resource/Ammons_Quick_Test"/>
@@ -360,6 +290,7 @@
 
 <owl:Class rdf:about="#COVID_0000140">
   <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/OGMS_0000073"/>
   <rdfs:subClassOf rdf:resource="#test"/>
   <owl:equivalentClass rdf:resource="https://bio.scai.fraunhofer.de/ontology/COVID_0000140"/>
   <owl:equivalentClass rdf:resource="http://dbpedia.org/resource/Telling_Secrets_to_Strangers"/>
@@ -369,6 +300,7 @@
 
 <owl:Class rdf:about="#OGMS_0000083">
   <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/OGMS_0000014"/>
   <rdfs:subClassOf rdf:resource="#test"/>
   <owl:equivalentClass rdf:resource="http://purl.obolibrary.org/obo/OGMS_0000083"/>
   <owl:equivalentClass rdf:resource="http://dbpedia.org/resource/Courvoisier's_law"/>
@@ -377,6 +309,7 @@
 
 <owl:Class rdf:about="#ERO_0100288">
   <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/ERO_0100287"/>
   <rdfs:subClassOf rdf:resource="#test"/>
   <owl:equivalentClass rdf:resource="http://purl.obolibrary.org/obo/ERO_0100288"/>
   <owl:equivalentClass rdf:resource="http://dbpedia.org/resource/Science_Publishing_Group"/>
@@ -385,6 +318,10 @@
 
 <owl:Class rdf:about="#GO_0002294">
   <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/GO_0002293"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/GO_0035710"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/GO_0046631"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/GO_0042110"/>
   <rdfs:subClassOf rdf:resource="#test"/>
   <owl:equivalentClass rdf:resource="http://purl.obolibrary.org/obo/GO_0002294"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CD4-positive, alpha-beta T cell differentiation involved in immune response</rdfs:label>
@@ -392,47 +329,65 @@
 
 <owl:Class rdf:about="#CL_0000792">
   <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CL_0000624"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CL_0000815"/>
   <rdfs:subClassOf rdf:resource="#test"/>
   <owl:equivalentClass rdf:resource="http://purl.obolibrary.org/obo/CL_0000792"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CD4-positive, CD25-positive, alpha-beta regulatory T cell</rdfs:label>
 </owl:Class>
 
-<owl:Class rdf:about="#ERO_0000007">
+<owl:Class rdf:about="#ERO_0100302">
   <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/ERO_0100288"/>
   <rdfs:subClassOf rdf:resource="#test"/>
-  <owl:equivalentClass rdf:resource="http://purl.obolibrary.org/obo/ERO_0000007"/>
-  <owl:equivalentClass rdf:resource="http://dbpedia.org/resource/Decca_Records"/>
-  <rdfs:label xml:lang="en">technique</rdfs:label>
+  <owl:equivalentClass rdf:resource="http://purl.obolibrary.org/obo/ERO_0100302"/>
+  <owl:equivalentClass rdf:resource="http://dbpedia.org/resource/Scientific_Research_Publishing"/>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">graph-based analysis operation</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#COVID_0000041">
   <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/ERO_0000833"/>
   <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000009"/>
   <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000012"/>
   <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000026"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000031"/>
   <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/ERO_0100288"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/ERO_0100302"/>
+  <rdfs:subClassOf rdf:resource="https://bio.scai.fraunhofer.de/ontology/COVID_0000085"/>
+  <rdfs:subClassOf rdf:resource="https://bio.scai.fraunhofer.de/ontology/COVID_0000104"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000029"/>
   <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000030"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000022"/>
   <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000024"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000008"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000013"/>
   <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000015"/>
   <owl:equivalentClass rdf:resource="https://bio.scai.fraunhofer.de/ontology/COVID_0000041"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">analysis of SARS-CoV-2 host interacting proteins</rdfs:label>
 </owl:Class>
 
-<owl:Class rdf:about="#CL_0000624">
+<owl:Class rdf:about="#COVID_0000085">
   <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
-  <rdfs:subClassOf rdf:resource="https://bio.scai.fraunhofer.de/ontology/COVID_0000013"/>
-  <rdfs:subClassOf rdf:resource="https://bio.scai.fraunhofer.de/ontology/COVID_0000044"/>
-  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/NCIT_C35682"/>
-  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/GO_0002294"/>
-  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000024"/>
-  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/CL_0000792"/>
-  <owl:equivalentClass rdf:resource="http://purl.obolibrary.org/obo/CL_0000624"/>
-  <owl:equivalentClass rdf:resource="http://dbpedia.org/resource/CD8"/>
-  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CD4-positive, alpha-beta T cell</rdfs:label>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/ERO_0100288"/>
+  <rdfs:subClassOf rdf:resource="#test"/>
+  <owl:equivalentClass rdf:resource="https://bio.scai.fraunhofer.de/ontology/COVID_0000085"/>
+  <owl:equivalentClass rdf:resource="http://dbpedia.org/resource/OMICS_Publishing_Group"/>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">computational phylogenetic analysis</rdfs:label>
 </owl:Class>
 
-<owl:Class rdf:about="#NCBITaxon_284672">
+<owl:Class rdf:about="#COVID_0000104">
   <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/ERO_0100288"/>
+  <rdfs:subClassOf rdf:resource="#test"/>
+  <owl:equivalentClass rdf:resource="https://bio.scai.fraunhofer.de/ontology/COVID_0000104"/>
+  <owl:equivalentClass rdf:resource="http://dbpedia.org/resource/Gene_ontology"/>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">gene ontology enrichment analysis</rdfs:label>
+</owl:Class>
+
+<owl:Class rdf:about="#NCIT_C13292">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/PR_000050262"/>
   <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000004"/>
   <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000005"/>
   <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000006"/>
@@ -441,8 +396,52 @@
   <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000017"/>
   <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000018"/>
   <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000026"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000031"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000032"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000033"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/DOID_0080600"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000029"/>
   <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000030"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000022"/>
   <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000024"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000008"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000013"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000015"/>
+  <owl:equivalentClass rdf:resource="http://purl.obolibrary.org/obo/NCIT_C13292"/>
+  <owl:equivalentClass rdf:resource="http://dbpedia.org/resource/Open_reading_frame"/>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Open Reading Frame</rdfs:label>
+</owl:Class>
+
+<owl:Class rdf:about="#GO_0042093">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/GO_0002294"/>
+  <rdfs:subClassOf rdf:resource="#test"/>
+  <owl:equivalentClass rdf:resource="http://purl.obolibrary.org/obo/GO_0042093"/>
+  <owl:equivalentClass rdf:resource="http://dbpedia.org/resource/CD4"/>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">T-helper cell differentiation</rdfs:label>
+</owl:Class>
+
+<owl:Class rdf:about="#NCBITaxon_284672">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/NCBITaxon_694009"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000004"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000005"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000006"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000009"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000012"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000017"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000018"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000026"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000031"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000032"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000033"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/DOID_0080600"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000029"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000030"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000022"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000024"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000008"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000013"/>
   <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000015"/>
   <owl:equivalentClass rdf:resource="http://purl.obolibrary.org/obo/NCBITaxon_284672"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SARS coronavirus TJF</rdfs:label>
@@ -450,6 +449,7 @@
 
 <owl:Class rdf:about="#NCBITaxon_421444">
   <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/NCBITaxon_694009"/>
   <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000004"/>
   <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000005"/>
   <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000006"/>
@@ -458,8 +458,16 @@
   <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000017"/>
   <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000018"/>
   <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000026"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000031"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000032"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000033"/>
+  <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/DOID_0080600"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000029"/>
   <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000030"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000022"/>
   <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000024"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000008"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000013"/>
   <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000015"/>
   <owl:equivalentClass rdf:resource="http://purl.obolibrary.org/obo/NCBITaxon_421444"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SARS coronavirus TJ01</rdfs:label>
@@ -467,6 +475,8 @@
 
 <owl:Class rdf:about="#OWLClass_0000000005">
   <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000000"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000004"/>
   <rdfs:subClassOf rdf:resource="#covid"/>
   <owl:equivalentClass rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000005"/>
   <rdfs:label xml:lang="en">close exposure to 2019-nCoV (novel coronavirus) infection</rdfs:label>
@@ -475,6 +485,8 @@
 
 <owl:Class rdf:about="#OWLClass_0000000006">
   <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000000"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000004"/>
   <rdfs:subClassOf rdf:resource="#covid"/>
   <owl:equivalentClass rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000006"/>
   <rdfs:label xml:lang="en">exposure to coronavirus infection (Non specific)</rdfs:label>
@@ -483,27 +495,33 @@
 
 <owl:Class rdf:about="#OWLClass_0000000017">
   <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000014"/>
   <rdfs:subClassOf rdf:resource="#covid"/>
   <owl:equivalentClass rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000017"/>
-  <rdfs:label xml:lang="en">possible COVID-19</rdfs:label>
   <rdfs:label xml:lang="en">Measurement of 2019-nCoV (novel coronavirus) antigen</rdfs:label>
+  <rdfs:label xml:lang="en">possible COVID-19</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#OWLClass_0000000018">
   <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000017"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000014"/>
   <rdfs:subClassOf rdf:resource="#covid"/>
   <owl:equivalentClass rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000018"/>
-  <rdfs:label xml:lang="en">Suspected COVID-19</rdfs:label>
   <rdfs:label xml:lang="en">antigen of 2019-nCoV (novel coronavirus)</rdfs:label>
+  <rdfs:label xml:lang="en">Suspected COVID-19</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#OWLClass_0000000033">
   <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000032"/>
+  <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000029"/>
   <rdfs:subClassOf rdf:resource="#covid"/>
+  <rdfs:subClassOf rdf:resource="#test"/>
   <owl:equivalentClass rdf:resource="http://www.semanticweb.org/clininf/covid19#OWLClass_0000000033"/>
   <owl:equivalentClass rdf:resource="http://dbpedia.org/resource/Quarantine"/>
-  <rdfs:label xml:lang="en">Quarantine</rdfs:label>
   <rdfs:label xml:lang="en">COVID-19 excluded using clinical diagnostic criteria</rdfs:label>
+  <rdfs:label xml:lang="en">Quarantine</rdfs:label>
 </owl:Class>
 
 

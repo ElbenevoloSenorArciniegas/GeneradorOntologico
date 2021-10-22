@@ -15,7 +15,9 @@ def limpiarCoincidencias(coincidencias, keywords, umbral):
         word = keyword["keyword"]
         arregloKeywords.append(word)
         for coincidencia in coincidencias:
-            valorSimilitud = ponderarPorTerminosBusqueda(coincidencia["arregloDeTerminos"], [word], keyword["sinonimos"])
+            valorSimilitud = 0
+            if len(coincidencia["arregloDeTerminos"]) > 0:
+                valorSimilitud = ponderarPorTerminosBusqueda(coincidencia["arregloDeTerminos"], [word], keyword["sinonimos"])
             coincidencia["similitud"][word] = valorSimilitud
             coincidencia["similitudAKeywords"] += valorSimilitud
     
@@ -47,11 +49,15 @@ def limpiarCoincidencias(coincidencias, keywords, umbral):
         candidato["ReferenciadoA"] = []
         for seleccionado in seleccionados:
             label = seleccionado["obj"].label[0]
-            valorSimilitud = ponderarPorTerminosBusqueda(candidato["arregloDeTerminos"], arregloKeywords, seleccionado["arregloDeTerminos"])
+            valorSimilitud = 0
+            if len(candidato["arregloDeTerminos"]) > 0:
+                valorSimilitud = ponderarPorTerminosBusqueda(candidato["arregloDeTerminos"], arregloKeywords, seleccionado["arregloDeTerminos"])
+                #valorTablaDistancia = compararPorTablasDeDistancia(candidato, seleccionado["arregloDeTerminos"])
             candidato["similitud"][label] = valorSimilitud
             similitudASeleccionados += valorSimilitud
 
-            if valorSimilitud >= 1:
+            #if valorSimilitud >= 1:
+            if valorSimilitud >= 2:
                 candidato["ReferenciadoA"].append(seleccionado)
 
         similitudASeleccionados /= len(seleccionados)
@@ -105,6 +111,9 @@ def crearTabla(obj, referentes):
             tabla[i][j] = getStringSimilarity(arr1[i], arr2[j])
             #textTabla += str(round(tabla[i][j], 4)) + "\t"
         #textTabla += "\n"
+    obj["tabla_arr1"] = arr1
+    obj["tabla_arr2"] = arr2
+    obj["tabla"] = tabla
     #print("Tabla: ",obj["labels"],arr1,arr2,"\n",textTabla)
     return tabla
 

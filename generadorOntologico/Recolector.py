@@ -70,10 +70,11 @@ def busquedaExtendida(keyWords):
 def prepareObject(result):
     obj = {
         "obj": result,
+        "label": (result.label)[0],
         "labels": result.label,
         "arregloDeTerminos": [],
-        "padres": [],
-        "hijos": [],
+        "equivalentes": [],
+        "superclases": [],
         "similitudesSintacticas": [],
         "promedioDistancias": 0,
         "similitudAKeywords": 0,
@@ -88,20 +89,22 @@ def prepareObject(result):
 
 def recolectarTerminos(obj, onto):
     if obj["arregloDeTerminos"] == []:
-        obj["padres"] += onto.get_parents_of(obj["obj"])
-        obj["hijos"] += onto.get_children_of(obj["obj"])
+        obj["equivalentes"] += obj["obj"].equivalent_to
+        obj["superclases"] += obj["obj"].is_a
 
         associatedClasses = []
-        associatedClasses.extend(onto.get_parents_of(obj["obj"]))
-        associatedClasses.extend(onto.get_children_of(obj["obj"]))
-        
+        associatedClasses.extend(obj["equivalentes"])
+        associatedClasses.extend(obj["superclases"])
+
+        '''
         deeperClasses = []
         for asociated in associatedClasses:
             if not asociated.name == "Thing":
-                for deeper in onto.get_parents_of(asociated) + onto.get_children_of(asociated):
+                for deeper in asociated.equivalent_to + asociated.is_a:
                     if not deeper in associatedClasses and not deeper in deeperClasses:
                         deeperClasses.append(deeper)
         associatedClasses.extend(deeperClasses)
+        '''
         associatedClasses.append(obj["obj"])
 
         labels = []
@@ -124,7 +127,7 @@ def recolectarTerminos(obj, onto):
         for token in PreProcesador.limpiarLabels(labels):
             if not token in obj["arregloDeTerminos"]:
                 obj["arregloDeTerminos"].append(token)
-        #print(obj["labels"][0]," : ",obj["arregloDeTerminos"])
+        #print(obj["label"]," : ",obj["arregloDeTerminos"])
 
 def getProperties(objetos):
     rtn = []
