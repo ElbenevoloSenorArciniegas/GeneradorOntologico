@@ -17,7 +17,7 @@ def limpiarCoincidencias(coincidencias, keywords, umbral):
         for coincidencia in coincidencias:
             valorSimilitud = 0
             if len(coincidencia["arregloDeTerminos"]) > 0:
-                valorSimilitud = ponderarPorTerminosBusqueda(coincidencia["arregloDeTerminos"], [word], keyword["sinonimos"])
+                valorSimilitud = ponderarAparicionEnArregloDeTerminos(coincidencia["arregloDeTerminos"], [word], keyword["sinonimos"])
             coincidencia["similitud"][word] = valorSimilitud
             coincidencia["similitudAKeywords"] += valorSimilitud
     
@@ -51,7 +51,7 @@ def limpiarCoincidencias(coincidencias, keywords, umbral):
             label = seleccionado["obj"].label[0]
             valorSimilitud = 0
             if len(candidato["arregloDeTerminos"]) > 0:
-                valorSimilitud = ponderarPorTerminosBusqueda(candidato["arregloDeTerminos"], arregloKeywords, seleccionado["arregloDeTerminos"])
+                valorSimilitud = ponderarAparicionEnArregloDeTerminos(candidato["arregloDeTerminos"], arregloKeywords, seleccionado["arregloDeTerminos"])
                 #valorTablaDistancia = compararPorTablasDeDistancia(candidato, seleccionado["arregloDeTerminos"])
             candidato["similitud"][label] = valorSimilitud
             similitudASeleccionados += valorSimilitud
@@ -139,7 +139,7 @@ def getMinimos(tabla, x,y, invertirSentido= False):
 ######################################################################################3
 '''
 
-def ponderarPorTerminosBusqueda(arregloDeTerminos, keywords, sinonimos):
+def ponderarAparicionEnArregloDeTerminos(arregloDeTerminos, keywords, sinonimos):
     acumulador = 0
     contador = 1
     for termino in arregloDeTerminos:

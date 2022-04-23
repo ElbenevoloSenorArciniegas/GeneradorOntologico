@@ -1,0 +1,11 @@
+pip install Flask
+pip install Flask-FontAwesome
+pip install Flask-Cors
+
+pip install Owlready2
+pip install Cython
+pip install nltk
+pip install rdflib
+pip install rdflib-jsonld
+pip install regex
+pip install py-babelnet

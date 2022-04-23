@@ -2,9 +2,9 @@ import sys, os
 from owlready2 import default_world, close_world
 
 PATH = os.path.relpath('sources') +"/"
-default_world.set_backend(filename=PATH + "World.sqlite3")
+default_world.set_backend(filename=PATH + "BDO.sqlite3")
 
-def getMoK():
+def getBDO():
     try:
         return default_world
     except IOError as e:
@@ -39,7 +39,7 @@ def addFuenteExterna(IRI):
 
 def addFuente(fuente):
     try:
-        default_world = getMoK()
+        default_world = getBDO()
         default_world.get_ontology(fuente).load()
         default_world.save()
         return "Success"
@@ -57,7 +57,7 @@ def addFuente(fuente):
 
 def removeFuente(IRI):
     try:
-        default_world = getMoK()
+        default_world = getBDO()
         # remover
         #print(myWorld.get_ontology(IRI))
         default_world.get_ontology(IRI).destroy()
@@ -78,7 +78,7 @@ def removeFuente(IRI):
 
 def listarKeysWorld():
     try:
-        default_world = getMoK()
+        default_world = getBDO()
         keys = ""
         for key in default_world.ontologies.keys():
             keys += key + "<br> "

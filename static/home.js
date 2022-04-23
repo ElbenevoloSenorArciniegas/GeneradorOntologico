@@ -3,8 +3,8 @@ var HOST = "localhost:5000";
 function enviarPeticion(){
     var keyWords = $("#keywords").val();
     var format = $("input:radio[name='format']:checked").val();
-    var accept = $("#accept").val();
-    var url = "/search?keyWords="+keyWords+"&format="+format+"&accept="+accept;
+    var umbral = $("#umbral").val();
+    var url = "/search?keyWords="+keyWords+"&format="+format+"&umbral="+umbral;
     $.ajax({
         url: url,
         type:"GET",

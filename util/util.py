@@ -76,3 +76,16 @@ def imprimirDetalleCandidatos(arregloClases):
 
     print("\n\nTABLA DE SIMILITUD CANDIDATOS vs SELECCIONADOS\n\n")
     print(tabulate(arregloSimilitudes, headers=arregloLabels))
+
+
+def imprimirOntoGenerada(OntoGenerada):
+    print("\n\n$$$$$$$$$$$$$$$$ ONTOLOGÍA GENERADA $$$$$$$$$$$$$$$$$$$$")
+    c = 0
+    for clase in OntoGenerada.classes():
+        print("\n\n", clase, "' " + clase.label[0] + " '")
+        for superclase in clase.is_a:
+            print("::::: is_a   ", superclase, "' ", superclase.label, " '")
+        for equivalente in clase.equivalent_to:
+            print("::::: equivalent_to   ", equivalente, "' ", equivalente.label, " '")
+        c += 1
+    print("\n\n", "Cantidad de clases en la ontología: ", c, "\n\n")

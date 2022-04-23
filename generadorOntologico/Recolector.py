@@ -5,7 +5,7 @@ from owlready2 import owl_class
 def buscar(keyWords, umbral, formato, lang):
 
     global default_world
-    default_world = AdminFuentes.getMoK()
+    default_world = AdminFuentes.getBDO()
 
     PreProcesador.setLanguage(lang)
 
@@ -30,8 +30,8 @@ def buscar(keyWords, umbral, formato, lang):
     ontoGenerada = Generador.generarOnto(nombre[:-1],keyWords, coincidencias)
 
     ontoFormateada = Formateador.formatearOnto(ontoGenerada, formato)
-    #AdminFuentes.closeMoK()
-    Generador.closeMoK(nombre[:-1])
+    #AdminFuentes.closeBDO()
+    Generador.closeOnto(nombre[:-1])
     return ontoFormateada
 '''
 #####################################################################################
@@ -51,16 +51,12 @@ def busquedaExtendida(keyWords):
                     #print(result.label)
                     coincidencias.append(prepareObject(result))
 
-    for onto_key in default_world.ontologies.keys():
-        #print(onto_key)
-        onto = default_world.get_ontology(onto_key)
+    for obj in coincidencias:
+        try:
+            recolectarTerminos(obj)
+        except:
+            pass
 
-        for obj in coincidencias:
-            try:
-                #if hasObj(onto, obj):
-                recolectarTerminos(obj, onto)
-            except:
-                pass
         #print(coincidencias)
     return coincidencias
 '''
@@ -81,13 +77,10 @@ def prepareObject(result):
         "similitudASeleccionados": 0,
         "similitud": {}
     }
-    for word in keyWordsOriginales:
-        ##obj["similitud"][word] = 0
-        pass
 
     return obj
 
-def recolectarTerminos(obj, onto):
+def recolectarTerminos(obj):
     if obj["arregloDeTerminos"] == []:
         obj["equivalentes"] += obj["obj"].equivalent_to
         obj["superclases"] += obj["obj"].is_a
@@ -96,15 +89,6 @@ def recolectarTerminos(obj, onto):
         associatedClasses.extend(obj["equivalentes"])
         associatedClasses.extend(obj["superclases"])
 
-        '''
-        deeperClasses = []
-        for asociated in associatedClasses:
-            if not asociated.name == "Thing":
-                for deeper in asociated.equivalent_to + asociated.is_a:
-                    if not deeper in associatedClasses and not deeper in deeperClasses:
-                        deeperClasses.append(deeper)
-        associatedClasses.extend(deeperClasses)
-        '''
         associatedClasses.append(obj["obj"])
 
         labels = []

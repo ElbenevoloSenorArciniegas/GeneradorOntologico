@@ -1,16 +1,13 @@
 import time
 
-from owlready2 import close_world, Ontology, types, sync_reasoner, set_log_level, Thing, World, Restriction
+from owlready2 import close_world, Ontology, types, sync_reasoner, set_log_level, Thing, World
 from exploradorRecursos import AdminFuentes
 from generadorOntologico import Enlazador
 from util import util
 
 #set_log_level(9)
 
-tempWorld = World()
-default_world = AdminFuentes.getMoK()
-
-OntoDbPedia = Ontology(world=default_world, base_iri="http://dbpedia.org/resource/")
+default_world = AdminFuentes.getBDO()
 OntoGenerada = None
 
 mutex = 0
@@ -27,15 +24,14 @@ def generarOnto(mainSubject, keyWords, coincidencias):
     #print(mainSubject)
 
     global OntoGenerada
+    global mutex
     OntoGenerada = Ontology(world=default_world, base_iri=mainSubject + "#")
 
     with OntoGenerada:
-        global mutex
-
         claseRaiz = types.new_class(mainSubject, (Thing,))
         claseRaiz.label = mainSubject
         mutex -= 1
-        Enlazador.buscarURIEnlaceWordnet(mainSubject, claseRaiz)
+        Enlazador.enlazarConDbPedia(mainSubject, claseRaiz)
 
         for keyword in keyWords:
             word = keyword["keyword"]
@@ -43,45 +39,9 @@ def generarOnto(mainSubject, keyWords, coincidencias):
             clasePrincipal.label = word
             keyword["clase"] = clasePrincipal
             mutex -= 1
-            Enlazador.buscarURIEnlaceWordnet(word, clasePrincipal)
+            Enlazador.enlazarConDbPedia(word, clasePrincipal)
 
-        for coincidencia in coincidencias:
-
-            class_orig = coincidencia["obj"]
-            class_dest = types.new_class(class_orig.name, (Thing,))
-            class_dest.label = class_orig.label
-            class_dest.equivalent_to.append(class_orig)
-
-            for equivalente in coincidencia["equivalentes"]:
-                class_dest.equivalent_to.append(equivalente)
-                '''try:
-                    print(class_dest.label, " equivalent to ", equivalente.label)
-                except:
-                    pass
-                '''
-
-            for superclase in coincidencia["superclases"]:
-                class_dest.is_a.append(superclase)
-                '''try:
-                    print(class_dest.label, " is a ", superclase.label)
-                except:
-                    pass
-                '''
-
-            mutex -= 1
-            Enlazador.buscarURIEnlaceWordnet(coincidencia["label"], class_dest)
-
-            if coincidencia["nivel"] == 2:
-                for keyword in keyWords:
-                    word = keyword["keyword"]
-                    valorSimilitudTermino = coincidencia["similitud"][word]
-                    if valorSimilitudTermino >= 2:
-                        clasePrincipal = keyword["clase"]
-                        class_dest.is_a.append(clasePrincipal)
-            elif coincidencia["nivel"] == 3:
-                for referencia in coincidencia["ReferenciadoA"]:
-                    class_dest.is_a.append(referencia["obj"])
-
+    poblarOnto(coincidencias, keyWords)
 
     print("\n\nEsperando por peticiones")
     while mutex < 0:
@@ -89,29 +49,35 @@ def generarOnto(mainSubject, keyWords, coincidencias):
         pass
     print("Peticiones finalizadas")
 
-    print("\n\n$$$$$$$$$$$$$$$$ ONTOLOGÍA GENERADA $$$$$$$$$$$$$$$$$$$$")
-    c = 0
-    for clase in OntoGenerada.classes():
-        print("\n\n", clase, "' " + clase.label[0] + " '")
-        for superclase in clase.is_a:
-            print("::::: is_a   ", superclase,"' ", superclase.label, " '")
-        for equivalente in clase.equivalent_to:
-            print("::::: equivalent_to   ", equivalente,"' ", equivalente.label, " '")
-        c += 1
-    print("\n\n", "Cantidad de clases en la ontología: ", c, "\n\n")
-
+    util.imprimirOntoGenerada(OntoGenerada)
 
     close_world(default_world)
     return razonar()
     # return  OntoGenerada
 
 
-def enlazarConceptos(nombreConceptoDbPedia, concepto):
-    with OntoDbPedia:
-        conceptoDbPedia = types.new_class(nombreConceptoDbPedia, (Thing,))
-
+def poblarOnto(coincidencias, keyWords):
+    global mutex
+    global OntoGenerada
     with OntoGenerada:
-        concepto.equivalent_to.append(conceptoDbPedia)
+        for coincidencia in coincidencias:
+
+            claseOrigen = coincidencia["obj"]
+            claseDestino = types.new_class(claseOrigen.name, (Thing,))
+            claseDestino.label = claseOrigen.label
+            claseDestino.equivalent_to.append(claseOrigen)
+
+            for equivalente in coincidencia["equivalentes"]:
+                claseDestino.equivalent_to.append(equivalente)
+
+            for superclase in coincidencia["superclases"]:
+                claseDestino.is_a.append(superclase)
+
+            mutex -= 1
+
+            Enlazador.OntoGenerada = OntoGenerada
+            Enlazador.enlazarConDbPedia(coincidencia["label"], claseDestino)
+            Enlazador.enlazarConConceptosLocales(claseDestino, coincidencia, keyWords)
 
 
 def continuarProceso():
@@ -121,25 +87,21 @@ def continuarProceso():
 
 
 def razonar():
+    global OntoGenerada
     try:
         with OntoGenerada:
             sync_reasoner()
     except Exception:
         util.printException(Exception, "Generador.razonar")
-
-    inconsistentes = list(OntoGenerada.inconsistent_classes())
-    print("Número de clases inconsistentes: " + str(len(inconsistentes)))
-    for i in range(len(inconsistentes)):
-        print(inconsistentes[i])
-
     return OntoGenerada
 
 
-def closeMoK(mainSubject):
+def closeOnto(mainSubject):
     from exploradorRecursos import AdminFuentes
 
-    default_world = AdminFuentes.getMoK()
+    default_world = AdminFuentes.getBDO()
     default_world.get_ontology(mainSubject + "#").destroy()
+    default_world.get_ontology("http://dbpedia.org/resource/").destroy()
     default_world.save()
 #    tempWorld.ontologies.clear()
 #    tempWorld.close()
