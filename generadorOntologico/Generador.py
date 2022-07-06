@@ -35,11 +35,14 @@ def generarOnto(mainSubject, keyWords, coincidencias):
 
         for keyword in keyWords:
             word = keyword["keyword"]
-            clasePrincipal = types.new_class(word, (claseRaiz,))
-            clasePrincipal.label = word
-            keyword["clase"] = clasePrincipal
-            mutex -= 1
-            Enlazador.enlazarConDbPedia(word, clasePrincipal)
+            clasePrincipal = revisarCicloDeHerencia(word, claseRaiz)
+            if clasePrincipal is not None:
+                clasePrincipal.label = word
+                keyword["clase"] = clasePrincipal
+                mutex -= 1
+                Enlazador.enlazarConDbPedia(word, clasePrincipal)
+            else:
+                keyword["clase"] = None
 
     poblarOnto(coincidencias, keyWords)
 
@@ -55,6 +58,11 @@ def generarOnto(mainSubject, keyWords, coincidencias):
     return razonar()
     # return  OntoGenerada
 
+def revisarCicloDeHerencia(word, claseRaiz):
+    try:
+        return types.new_class(word, (claseRaiz,))
+    except:
+        return None
 
 def poblarOnto(coincidencias, keyWords):
     global mutex

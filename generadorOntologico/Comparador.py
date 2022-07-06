@@ -34,7 +34,7 @@ def limpiarCoincidencias(coincidencias, keywords, umbral):
         if coincidencia["similitudAKeywords"] >= 2:
             coincidencia["nivel"] = 2 #Nivel hace referencia a qué tan cerca de la raiz del árbol estará el término
             seleccionados.append(coincidencia)
-        elif coincidencia["similitudAKeywords"] > 1:
+        elif coincidencia["similitudAKeywords"] > 1.125:
             coincidencia["nivel"] = 3
             candidatos.append(coincidencia)
 
@@ -60,7 +60,11 @@ def limpiarCoincidencias(coincidencias, keywords, umbral):
             if valorSimilitud >= 2:
                 candidato["ReferenciadoA"].append(seleccionado)
 
-        similitudASeleccionados /= len(seleccionados)
+        if( len(seleccionados) is not 0):
+            similitudASeleccionados /= len(seleccionados)
+        else:
+            similitudASeleccionados = 0
+
         candidato["similitudASeleccionados"] = similitudASeleccionados
 
         if similitudASeleccionados > mayor:
@@ -81,7 +85,8 @@ def limpiarCoincidencias(coincidencias, keywords, umbral):
             rtn.append(candidato)
             candidatosSeleccionados.append(candidato)
     print("\n\n$$$$$$$$$   CANDIDATOS SELECCIONADOS  $$$$$$$\n\n")
-    util.imprimirCandidatos(candidatosSeleccionados, detalle=True)
+    #util.imprimirCandidatos(candidatosSeleccionados, detalle=True)
+    util.imprimirCandidatos(candidatosSeleccionados)
 
     return rtn
 '''

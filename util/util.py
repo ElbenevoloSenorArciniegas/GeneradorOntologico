@@ -3,6 +3,7 @@ import sys
 from operator import itemgetter
 from tabulate import tabulate
 
+contadorReferenciasDbpedia = 0
 
 def printException(Exception ,msg):
     print("Exception at " + msg)
@@ -79,13 +80,25 @@ def imprimirDetalleCandidatos(arregloClases):
 
 
 def imprimirOntoGenerada(OntoGenerada):
+    global contadorReferenciasDbpedia
     print("\n\n$$$$$$$$$$$$$$$$ ONTOLOGÍA GENERADA $$$$$$$$$$$$$$$$$$$$")
     c = 0
+
     for clase in OntoGenerada.classes():
+        c += 1
+        '''
+        if len(clase.label) == 0:
+            clase.label.append("No label")
         print("\n\n", clase, "' " + clase.label[0] + " '")
         for superclase in clase.is_a:
             print("::::: is_a   ", superclase, "' ", superclase.label, " '")
         for equivalente in clase.equivalent_to:
             print("::::: equivalent_to   ", equivalente, "' ", equivalente.label, " '")
-        c += 1
-    print("\n\n", "Cantidad de clases en la ontología: ", c, "\n\n")
+        '''
+    print("\n\n", "Cantidad de clases en la ontología: ", c,
+          "\n\n", "Cantidad de clases enlazadas desde Dbpedia: ", contadorReferenciasDbpedia,
+          "\n\n")
+
+def addReferenciasDbpedia():
+    global contadorReferenciasDbpedia
+    contadorReferenciasDbpedia += 1

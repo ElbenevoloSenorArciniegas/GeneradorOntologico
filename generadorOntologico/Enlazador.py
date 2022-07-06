@@ -3,7 +3,7 @@ from owlready2 import types, Thing, Ontology
 
 from exploradorRecursos import AdminFuentes
 from generadorOntologico import Generador
-from util import AsyncHttp
+from util import AsyncHttp, util
 
 global OntoGenerada
 OntoDbPedia = Ontology(world=AdminFuentes.getBDO(), base_iri="http://dbpedia.org/resource/").load()
@@ -13,7 +13,7 @@ def enlazarConConceptosLocales(claseDestino, coincidencia, keyWords):
         for keyword in keyWords:
             word = keyword["keyword"]
             valorSimilitudTermino = coincidencia["similitud"][word]
-            if valorSimilitudTermino >= 2:
+            if valorSimilitudTermino >= 2 and keyword["clase"] is not None:
                 clasePrincipal = keyword["clase"]
                 enlazarConceptos(claseDestino, clasePrincipal, referenciarComoEquivalente=False)
     elif coincidencia["nivel"] == 3:
@@ -39,16 +39,20 @@ def procesarRespuesta(response, concepto):
                 nombreConcepto = nombreConcepto[nombreConcepto.rindex("/") + 1:]
 
                 conceptoDbPedia = crearConceptoDbPedia(nombreConcepto)
-                enlazarConceptos(concepto, conceptoDbPedia, referenciarComoEquivalente=True)
+                if conceptoDbPedia is not None:
+                    enlazarConceptos(concepto, conceptoDbPedia, referenciarComoEquivalente=True)
 
     Generador.continuarProceso()
 
 
 def crearConceptoDbPedia(nombreConcepto):
     global OntoDbPedia
-    with OntoDbPedia:
-        conceptoDbPedia = types.new_class(nombreConcepto, (Thing,))
-    return conceptoDbPedia
+    try:
+        with OntoDbPedia:
+            conceptoDbPedia = types.new_class(nombreConcepto, (Thing,))
+        return conceptoDbPedia
+    except:
+        return None
 
 
 def enlazarConceptos(concepto, conceptoAReferenciar, referenciarComoEquivalente):
@@ -57,5 +61,6 @@ def enlazarConceptos(concepto, conceptoAReferenciar, referenciarComoEquivalente)
     with OntoGenerada:
         if referenciarComoEquivalente:
             concepto.equivalent_to.append(conceptoAReferenciar)
+            util.addReferenciasDbpedia()
         else:
             concepto.is_a.append(conceptoAReferenciar)
